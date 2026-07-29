@@ -124,22 +124,28 @@ function renderBreadcrumbHtml(items) {
 function renderToolCard(tool) {
   const category = categoryBySlug.get(tool.category);
   return `
-    <a href="/tools/${tool.slug}/" class="tool-card">
-      <span class="text-2xl" aria-hidden="true">${escapeHtml(tool.icon)}</span>
-      <span class="text-base font-semibold text-text">${escapeHtml(tool.name)}</span>
-      <span class="text-sm text-text-muted">${escapeHtml(tool.description)}</span>
-      <span class="badge mt-auto self-start">${escapeHtml(category.name)}</span>
+    <a href="/tools/${tool.slug}/" class="tool-card group">
+      <span class="tool-card-icon" aria-hidden="true">${escapeHtml(tool.icon)}</span>
+      <span class="tool-card-title">${escapeHtml(tool.name)}</span>
+      <span class="tool-card-description">${escapeHtml(tool.description)}</span>
+      <span class="tool-card-footer">
+        <span class="badge">${escapeHtml(category.name)}</span>
+        <span class="tool-card-arrow" aria-hidden="true">→</span>
+      </span>
     </a>`;
 }
 
 function renderCategoryCard(category) {
   const count = category.toolCount ?? 0;
   return `
-    <a href="/categories/${category.slug}/" class="tool-card">
-      <span class="text-2xl" aria-hidden="true">${escapeHtml(category.icon ?? "🧰")}</span>
-      <span class="text-base font-semibold text-text">${escapeHtml(category.name)}</span>
-      <span class="text-sm text-text-muted">${escapeHtml(category.description)}</span>
-      <span class="badge mt-auto self-start">${count} ${count === 1 ? "tool" : "tools"}</span>
+    <a href="/categories/${category.slug}/" class="tool-card group">
+      <span class="tool-card-icon" aria-hidden="true">${escapeHtml(category.icon ?? "🧰")}</span>
+      <span class="tool-card-title">${escapeHtml(category.name)}</span>
+      <span class="tool-card-description">${escapeHtml(category.description)}</span>
+      <span class="tool-card-footer">
+        <span class="badge">${count} ${count === 1 ? "tool" : "tools"}</span>
+        <span class="tool-card-arrow" aria-hidden="true">→</span>
+      </span>
     </a>`;
 }
 

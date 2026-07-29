@@ -111,6 +111,40 @@ config reads the *color* variables (`theme.extend.colors.primary: 'var(--color-p
 so color utility classes and hand-written component CSS never drift out of
 sync.
 
+**Every semantic color that ever needs an opacity modifier** (`bg-primary/10`,
+`border-danger/40`, the tinted icon badge behind every tool/category card,
+toast variants, status badges) is stored **twice** in `tokens.css`: once as
+the familiar hex string (`--color-primary: #2563eb`, used directly wherever
+plain CSS reads it — `color: var(--color-primary)` in `app.css`'s base
+layer) and once as space-separated R/G/B channels with a `-rgb` suffix
+(`--color-primary-rgb: 37 99 235`). `tailwind.config.js` points its color
+keys at the `-rgb` form, wrapped as `rgb(var(--color-primary-rgb) /
+<alpha-value>)` — Tailwind's documented pattern for opacity-modifiable
+CSS-variable colors. This isn't optional plumbing: a CSS custom property
+holding an opaque hex string can't have an alpha channel blended into it at
+build time, so `bg-primary/10` against a plain `var(--color-primary)`
+**silently compiles to nothing at all** rather than erroring — this had
+been quietly breaking every opacity-modified color in the project (the
+tool-card icon tint, BMI status badges, toast borders) since the tokens
+were first written. Colors that never need opacity (`bg`, `surface`,
+`border`, `text-*`) keep only the plain hex form. If you add a new
+semantic color, add both forms and decide which category it's in.
+
+**Every custom class used only inside `scripts/build.js`'s
+template-rendering functions must have its class name string appear
+somewhere `tailwind.config.js`'s `content` glob actually scans** —
+`scripts/**/*.js` is in that list for exactly this reason. Tailwind's JIT
+purges any class it never sees referenced in a scanned file, including
+your own hand-written `@layer components` rules; `.tool-card` and its
+children (`renderToolCard`/`renderCategoryCard` in `scripts/build.js`)
+were being silently dropped from the compiled CSS from the very first
+build — the class names only ever existed as string literals in a file
+outside the scanned globs, so every "card" on the site was 100% unstyled
+text with an emoji in front of it until this was caught by a direct user
+report that the cards didn't look professional. Worth internalizing: a
+missing/purged custom class doesn't error, it just silently produces
+nothing — screenshots are what catch this, not the build log.
+
 Spacing is the one token category `tailwind.config.js` deliberately does
 **not** remap. An earlier version aliased `theme.extend.spacing["8"]` etc. to
 `--space-8`, but `tokens.css`'s spacing scale uses an "N × 8px" naming

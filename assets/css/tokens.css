@@ -67,18 +67,39 @@
   --duration-slow:   320ms;
   --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
 
-  /* ---- Color — semantic roles, light theme values ---- */
+  /* ---- Color — semantic roles, light theme values ----
+     The -rgb companions (space-separated R G B, no rgb() wrapper) exist
+     alongside the hex value for every color Tailwind utilities apply
+     opacity modifiers to (bg-primary/10, border-danger/40, etc.). Tailwind
+     can't compute a color-with-opacity from an opaque hex string inside a
+     CSS custom property — it needs the raw channels so it can wrap them in
+     rgb(var(--x-rgb) / <alpha-value>) itself; see tailwind.config.js. Kept
+     as a second property, rather than switching --color-primary itself to
+     channel format, so every *plain* `var(--color-primary)` usage (the
+     body/link/focus-ring rules in app.css, for instance) keeps working
+     unchanged as a normal color value. Update both together if a color
+     changes — there's no CSS-native hex-to-channels conversion to keep
+     them in sync automatically. */
   --color-primary:       #2563eb;
+  --color-primary-rgb:   37 99 235;
   --color-primary-hover: #1d4ed8;
+  --color-primary-hover-rgb: 29 78 216;
   --color-primary-fg:    #ffffff;
+  --color-primary-fg-rgb: 255 255 255;
 
   --color-secondary:     #7c3aed;
+  --color-secondary-rgb: 124 58 237;
   --color-accent:        #0ea5e9;
+  --color-accent-rgb:    14 165 233;
 
   --color-success:       #16a34a;
+  --color-success-rgb:   22 163 74;
   --color-warning:       #d97706;
+  --color-warning-rgb:   217 119 6;
   --color-danger:        #dc2626;
+  --color-danger-rgb:    220 38 38;
   --color-info:          #0284c7;
+  --color-info-rgb:      2 132 199;
 
   --color-bg:            #ffffff;
   --color-surface:       #f8fafc;
@@ -103,16 +124,25 @@
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.55), 0 4px 6px -4px rgb(0 0 0 / 0.45);
 
   --color-primary:       #3b82f6;
+  --color-primary-rgb:   59 130 246;
   --color-primary-hover: #60a5fa;
+  --color-primary-hover-rgb: 96 165 250;
   --color-primary-fg:    #0b1220;
+  --color-primary-fg-rgb: 11 18 32;
 
   --color-secondary:     #a78bfa;
+  --color-secondary-rgb: 167 139 250;
   --color-accent:        #38bdf8;
+  --color-accent-rgb:    56 189 248;
 
   --color-success:       #4ade80;
+  --color-success-rgb:   74 222 128;
   --color-warning:       #fbbf24;
+  --color-warning-rgb:   251 191 36;
   --color-danger:        #f87171;
+  --color-danger-rgb:    248 113 113;
   --color-info:          #38bdf8;
+  --color-info-rgb:      56 189 248;
 
   --color-bg:            #0b1220;
   --color-surface:       #111a2c;
@@ -136,16 +166,25 @@
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.55), 0 4px 6px -4px rgb(0 0 0 / 0.45);
 
     --color-primary:       #3b82f6;
+    --color-primary-rgb:   59 130 246;
     --color-primary-hover: #60a5fa;
+    --color-primary-hover-rgb: 96 165 250;
     --color-primary-fg:    #0b1220;
+    --color-primary-fg-rgb: 11 18 32;
 
     --color-secondary:     #a78bfa;
+    --color-secondary-rgb: 167 139 250;
     --color-accent:        #38bdf8;
+    --color-accent-rgb:    56 189 248;
 
     --color-success:       #4ade80;
+    --color-success-rgb:   74 222 128;
     --color-warning:       #fbbf24;
+    --color-warning-rgb:   251 191 36;
     --color-danger:        #f87171;
+    --color-danger-rgb:    248 113 113;
     --color-info:          #38bdf8;
+    --color-info-rgb:      56 189 248;
 
     --color-bg:            #0b1220;
     --color-surface:       #111a2c;

@@ -233,13 +233,50 @@ the reasoning behind the foundation itself.
   routing would fight that goal rather than help it. Not a gap; a
   correction to the original module list.
 - **Shared modules not yet created**: `modal.js`, `favorites.js`,
-  `history.js`, `color.js`, `date.js`, `math.js`, `random.js`, `csv.js`,
-  `json.js`, `table.js`, `dragdrop.js`, `focus.js`, `scroll.js`. Each gets
-  built in the phase where a real tool first needs it — see
-  `docs/CONTRIBUTING.md`'s "never stub a module" rule. A few are likely
-  soon: `random.js` (backing the whole Random category), `date.js`
-  (Date & Time category), `color.js` (once a second color tool needs HSL/
-  CMYK math beyond what `hex-rgb-converter/logic.js` covers).
+  `history.js`, `color.js`, `date.js`, `math.js`, `csv.js`, `json.js`,
+  `table.js`, `dragdrop.js`, `focus.js`, `scroll.js`. (`random.js` was in
+  this list — now shipped, see Phase 2 above.) Each gets built in the
+  phase where a real tool first needs it — see `docs/CONTRIBUTING.md`'s
+  "never stub a module" rule. `date.js` is likely next (Date & Time
+  category has one tool so far); `color.js` once a second color tool
+  needs HSL/CMYK math beyond what `hex-rgb-converter/logic.js` covers.
+
+**Phase 2.5 — shipped (fixed two real, silent CSS build bugs behind a user
+report that cards "didn't look professional"):**
+
+- **`.tool-card` and every class it depends on had been silently absent
+  from the compiled CSS since the very first build.** `tailwind.config.js`'s
+  content glob never scanned `scripts/**/*.js`, and `renderToolCard`/
+  `renderCategoryCard` (in `scripts/build.js`) are the *only* place those
+  class name strings ever appear — Tailwind's JIT purges any custom
+  `@layer components` class it doesn't see referenced in a scanned file,
+  silently, with no build error. Every tool and category card on the site
+  had been rendering as unstyled text with an emoji in front of it the
+  entire time; it read as a design problem, not a build bug, until
+  screenshots were compared against the raw compiled CSS byte-for-byte.
+  Fixed by adding `./scripts/**/*.js` to the content glob.
+- **Opacity-modified custom colors (`bg-primary/10`, `border-danger/40`,
+  …) had been silently compiling to nothing** wherever they were only
+  reachable via `@apply` (once the glob fix above made Tailwind actually
+  try to process them, it surfaced as a hard `hover:border-primary/50`
+  class-does-not-exist build error, rather than the previous silent
+  drop). Root cause: `--color-primary` and friends were stored as opaque
+  hex strings, and Tailwind can't blend an alpha channel into a hex
+  string inside a CSS custom property at build time. Fixed by adding a
+  `-rgb` (space-separated channel) companion token for every color that
+  needs opacity support, and pointing `tailwind.config.js` at
+  `rgb(var(--color-x-rgb) / <alpha-value>)` for those keys — see
+  `docs/ARCHITECTURE.md`'s "Design tokens" section for the full pattern.
+- Redesigned the card component while fixing this (icon in a tinted
+  rounded badge, stronger border/shadow so it doesn't depend on a tinted
+  section background to read as a card, hover lift, footer arrow) —
+  worth doing regardless, but the *reason* cards looked broken was the
+  two bugs above, not the visual design of the previous version.
+- Verified: full 140-test unit suite, all three Playwright functional
+  suites (45 checks total), the 48-combination responsive sweep, plus new
+  targeted checks — hover state, dark mode, BMI status badges, and a
+  toast notification, since the opacity-color fix touches every one of
+  those. All clean.
 
 ## Phase 3 — next up
 

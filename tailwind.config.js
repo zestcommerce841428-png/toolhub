@@ -13,22 +13,41 @@ export default {
     "./pages/**/*.html",
     "./assets/js/**/*.js",
     "./tools/**/*.js",
+    // scripts/build.js constructs class names as string literals when it
+    // renders tool/category cards (renderToolCard, renderCategoryCard,
+    // etc.) rather than reading them from a template file. Tailwind's JIT
+    // purges any class whose name it never sees in a scanned file, so
+    // without this, every class introduced only inside scripts/*.js — the
+    // whole .tool-card family, among others — silently disappears from
+    // the compiled CSS. Found via a real "cards render as unstyled text"
+    // bug: this glob was missing from day one.
+    "./scripts/**/*.js",
   ],
   darkMode: ["selector", '[data-theme="dark"]'],
   theme: {
     extend: {
       colors: {
+        // These use the "-rgb" (space-separated channel) token variants
+        // and Tailwind's `<alpha-value>` placeholder, not the plain hex
+        // tokens — that's what makes bg-primary/10, border-danger/40, etc.
+        // work. A CSS custom property holding an opaque hex string (the
+        // plain --color-primary token, still used directly elsewhere for
+        // exactly this reason) can't have opacity blended into it at
+        // build time; Tailwind needs the raw R/G/B channels to construct
+        // rgb(37 99 235 / 0.1) itself. See tokens.css for why both forms
+        // of each token exist side by side. Found via a real build
+        // failure: `hover:border-primary/50` doesn't compile without this.
         primary: {
-          DEFAULT: "var(--color-primary)",
-          hover: "var(--color-primary-hover)",
-          fg: "var(--color-primary-fg)",
+          DEFAULT: "rgb(var(--color-primary-rgb) / <alpha-value>)",
+          hover: "rgb(var(--color-primary-hover-rgb) / <alpha-value>)",
+          fg: "rgb(var(--color-primary-fg-rgb) / <alpha-value>)",
         },
-        secondary: "var(--color-secondary)",
-        accent: "var(--color-accent)",
-        success: "var(--color-success)",
-        warning: "var(--color-warning)",
-        danger: "var(--color-danger)",
-        info: "var(--color-info)",
+        secondary: "rgb(var(--color-secondary-rgb) / <alpha-value>)",
+        accent: "rgb(var(--color-accent-rgb) / <alpha-value>)",
+        success: "rgb(var(--color-success-rgb) / <alpha-value>)",
+        warning: "rgb(var(--color-warning-rgb) / <alpha-value>)",
+        danger: "rgb(var(--color-danger-rgb) / <alpha-value>)",
+        info: "rgb(var(--color-info-rgb) / <alpha-value>)",
         bg: "var(--color-bg)",
         surface: "var(--color-surface)",
         "surface-raised": "var(--color-surface-raised)",
