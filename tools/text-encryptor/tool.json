@@ -1,0 +1,28 @@
+{
+  "id": "text-encryptor",
+  "name": "Text Encryptor / Decryptor",
+  "slug": "text-encryptor",
+  "category": "security",
+  "description": "Encrypt or decrypt text with a passphrase using real AES-256-GCM encryption and PBKDF2 key derivation, entirely in your browser — nothing is sent or stored.",
+  "keywords": ["text encryption", "aes encryption online", "encrypt text with password", "aes-gcm", "passphrase encryption"],
+  "difficulty": "intermediate",
+  "priority": "high",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🛡️",
+  "related": ["hmac-generator", "password-strength-checker"],
+  "faq": [
+    {
+      "question": "Is this real encryption, or just obfuscation?",
+      "answer": "Real encryption — AES-256-GCM (an authenticated cipher used throughout TLS and modern security software) with a key derived from your passphrase via PBKDF2 at 250,000 iterations, using your browser's native Web Crypto API. It's not a toy substitution cipher or base64 dressed up to look like encryption."
+    },
+    {
+      "question": "What happens if I forget my passphrase?",
+      "answer": "The encrypted text becomes permanently unrecoverable — there is no backdoor, recovery key, or \"forgot password\" flow, by design. That's an inherent property of real encryption, not a limitation specific to this tool."
+    },
+    {
+      "question": "Why does decryption sometimes fail even though I'm sure the passphrase is right?",
+      "answer": "AES-GCM is authenticated, meaning it verifies the ciphertext hasn't been altered as part of decrypting it — so a wrong passphrase and corrupted/tampered ciphertext both fail the same way, with no way to distinguish the two. Double-check for accidental whitespace or a truncated paste in the encrypted text field."
+    }
+  ]
+}

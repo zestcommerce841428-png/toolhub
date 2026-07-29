@@ -1,0 +1,41 @@
+<div>
+  <label for="hmac-message" class="field-label">Message</label>
+  <textarea id="hmac-message" class="field-textarea" rows="6" spellcheck="false" placeholder="Text to sign…"></textarea>
+</div>
+
+<div class="mt-4 grid gap-4 sm:grid-cols-2">
+  <div>
+    <label for="hmac-secret" class="field-label">Secret key</label>
+    <input type="text" id="hmac-secret" class="field-input font-mono" placeholder="your-secret-key" />
+  </div>
+  <div>
+    <label for="hmac-algorithm" class="field-label">Algorithm</label>
+    <select id="hmac-algorithm" class="field-select">
+      <option value="HMAC-SHA1">HMAC-SHA1</option>
+      <option value="HMAC-SHA256" selected>HMAC-SHA256</option>
+      <option value="HMAC-SHA384">HMAC-SHA384</option>
+      <option value="HMAC-SHA512">HMAC-SHA512</option>
+    </select>
+  </div>
+</div>
+
+<div class="mt-4">
+  <label for="hmac-output" class="field-label">HMAC digest</label>
+  <input type="text" id="hmac-output" class="field-input font-mono" readonly />
+</div>
+
+<div class="mt-3 flex flex-wrap gap-2">
+  <button type="button" id="hmac-copy" class="btn-secondary">Copy</button>
+</div>
+
+<section class="prose-tool mt-12">
+  <h2>HMAC vs. a plain hash</h2>
+  <p>
+    A plain hash (like <a href="/tools/sha256-generator/">SHA-256</a>)
+    proves data wasn't corrupted, but anyone can compute one — it doesn't
+    prove who sent it. HMAC combines a secret key with the message so that
+    only someone who knows the key can produce a matching digest, which is
+    what webhook signature verification, signed API requests, and JWT's
+    HS256/384/512 algorithms all rely on.
+  </p>
+</section>

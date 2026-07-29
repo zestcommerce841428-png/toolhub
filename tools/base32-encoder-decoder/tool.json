@@ -1,0 +1,24 @@
+{
+  "id": "base32-encoder-decoder",
+  "name": "Base32 Encoder / Decoder",
+  "slug": "base32-encoder-decoder",
+  "category": "security",
+  "description": "Encode text to Base32 or decode Base32 back to text, per RFC 4648 — the encoding used for TOTP/2FA secret keys and other hand-typed identifiers.",
+  "keywords": ["base32 encoder", "base32 decoder", "base32 online", "totp secret encoding", "rfc 4648"],
+  "difficulty": "beginner",
+  "priority": "normal",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🔤",
+  "related": ["base64-encoder-decoder", "hmac-generator"],
+  "faq": [
+    {
+      "question": "How is Base32 different from Base64?",
+      "answer": "Base32 uses a smaller, 32-character alphabet (A-Z and 2-7 — no lowercase, and it skips 0/1/8/9 to avoid confusion with O/I/B/g), so it's less compact than Base64 but far less error-prone to read or type by hand. That's why TOTP/2FA authenticator apps encode their secret keys in Base32: users occasionally need to manually retype one."
+    },
+    {
+      "question": "Is decoding case-sensitive?",
+      "answer": "No — this decoder accepts both upper and lowercase input (Base32 output is conventionally uppercase, but many real-world tools and users produce or expect lowercase), and tolerates missing \"=\" padding at the end."
+    }
+  ]
+}

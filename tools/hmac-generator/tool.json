@@ -1,0 +1,24 @@
+{
+  "id": "hmac-generator",
+  "name": "HMAC Generator",
+  "slug": "hmac-generator",
+  "category": "security",
+  "description": "Generate an HMAC-SHA1/256/384/512 digest from a message and secret key using your browser's Web Crypto API — for webhook signatures, signed API requests, and testing.",
+  "keywords": ["hmac generator", "hmac sha256", "webhook signature", "hmac calculator", "message authentication code"],
+  "difficulty": "intermediate",
+  "priority": "normal",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🔏",
+  "related": ["sha256-generator", "jwt-decoder"],
+  "faq": [
+    {
+      "question": "What's HMAC used for?",
+      "answer": "Verifying both the integrity and the origin of a message — common uses include webhook payload signatures (e.g. Stripe, GitHub sign their webhook bodies this way), signed API request authentication, and JWT's HS256/HS384/HS512 algorithms. The receiver recomputes the HMAC with the shared secret and checks it matches."
+    },
+    {
+      "question": "Is this computed securely?",
+      "answer": "Yes — via your browser's native Web Crypto API (crypto.subtle.sign with an HMAC key), the same implementation used for real cryptographic operations in the browser, not a hand-rolled reimplementation. Nothing you type is sent anywhere; verified in this tool's test against a real RFC 4231 test vector."
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+<div>
+  <span class="field-label" id="b32-mode-label">Mode</span>
+  <div class="flex gap-2" role="radiogroup" aria-labelledby="b32-mode-label" id="b32-mode-group">
+    <button type="button" role="radio" aria-checked="true" tabindex="0" data-mode="encode" class="btn-primary">Encode</button>
+    <button type="button" role="radio" aria-checked="false" tabindex="-1" data-mode="decode" class="btn-secondary">Decode</button>
+  </div>
+</div>
+
+<div class="mt-4">
+  <label for="b32-input" class="field-label" id="b32-input-label">Text</label>
+  <textarea id="b32-input" class="field-textarea font-mono" rows="6" spellcheck="false"></textarea>
+</div>
+
+<p id="b32-error" class="field-error mt-2 hidden" role="alert"></p>
+
+<div class="mt-4">
+  <label for="b32-output" class="field-label" id="b32-output-label">Base32</label>
+  <textarea id="b32-output" class="field-textarea font-mono" rows="6" readonly spellcheck="false"></textarea>
+</div>
+
+<div class="mt-3 flex flex-wrap gap-2">
+  <button type="button" id="b32-copy" class="btn-secondary">Copy</button>
+  <button type="button" id="b32-swap" class="btn-secondary">Swap ⇄</button>
+</div>
+
+<section class="prose-tool mt-12">
+  <h2>Why Base32 instead of Base64?</h2>
+  <p>
+    Base32 uses a 32-character alphabet (A-Z and 2-7) chosen to be
+    unambiguous when hand-typed or read aloud — no lowercase/uppercase
+    confusion, and it skips 0/1/8/9 to avoid look-alikes with O/I/B/g.
+    That's why authenticator apps encode TOTP/2FA secret keys in Base32
+    rather than Base64: you're far more likely to need to manually type
+    one correctly.
+  </p>
+</section>

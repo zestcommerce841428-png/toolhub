@@ -1,0 +1,50 @@
+<div>
+  <span class="field-label" id="enc-mode-label">Mode</span>
+  <div class="flex gap-2" role="radiogroup" aria-labelledby="enc-mode-label" id="enc-mode-group">
+    <button type="button" role="radio" aria-checked="true" tabindex="0" data-mode="encrypt" class="btn-primary">Encrypt</button>
+    <button type="button" role="radio" aria-checked="false" tabindex="-1" data-mode="decrypt" class="btn-secondary">Decrypt</button>
+  </div>
+</div>
+
+<div class="mt-4">
+  <label for="enc-input" class="field-label" id="enc-input-label">Text to encrypt</label>
+  <textarea id="enc-input" class="field-textarea" rows="6" spellcheck="false"></textarea>
+</div>
+
+<div class="mt-4">
+  <label for="enc-passphrase" class="field-label">Passphrase</label>
+  <input type="password" id="enc-passphrase" class="field-input font-mono" autocomplete="off" />
+</div>
+
+<div class="mt-4">
+  <button type="button" id="enc-run" class="btn-primary">Encrypt</button>
+</div>
+
+<p id="enc-error" class="field-error mt-2 hidden" role="alert"></p>
+
+<div class="mt-4">
+  <label for="enc-output" class="field-label" id="enc-output-label">Result</label>
+  <textarea id="enc-output" class="field-textarea font-mono" rows="6" readonly spellcheck="false"></textarea>
+  <div class="mt-3">
+    <button type="button" id="enc-copy" class="btn-secondary">Copy result</button>
+  </div>
+</div>
+
+<section class="prose-tool mt-12">
+  <h2>How this actually protects your text</h2>
+  <p>
+    Your passphrase never leaves your browser and is never stored: it's
+    run through PBKDF2 (250,000 iterations) with a fresh random salt to
+    derive an AES-256-GCM key, which then encrypts your text with a fresh
+    random IV. Both salt and IV travel with the ciphertext in the output —
+    they don't need to be secret, only the passphrase does. Because AES-GCM
+    is authenticated, decrypting with the wrong passphrase or against
+    altered ciphertext fails outright rather than silently producing
+    corrupted-looking output.
+  </p>
+  <p>
+    <strong>There is no "forgot passphrase" recovery</strong> — if you lose
+    it, the encrypted text is permanently unrecoverable. That's the same
+    tradeoff every real encryption scheme makes.
+  </p>
+</section>

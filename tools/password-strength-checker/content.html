@@ -1,0 +1,45 @@
+<div>
+  <label for="pwstrength-input" class="field-label">Password</label>
+  <div class="flex gap-2">
+    <input type="password" id="pwstrength-input" class="field-input font-mono" autocomplete="off" spellcheck="false" />
+    <button type="button" id="pwstrength-toggle" class="btn-icon border border-border" aria-label="Show password" aria-pressed="false">👁️</button>
+  </div>
+  <p class="field-hint">Checked entirely in your browser — never sent anywhere, not even to this site.</p>
+</div>
+
+<div class="card mt-4">
+  <div class="flex items-center justify-between">
+    <p id="pwstrength-label" class="text-xl font-bold text-text">—</p>
+    <p id="pwstrength-entropy" class="text-sm text-text-muted"></p>
+  </div>
+  <div class="mt-2 h-2 w-full overflow-hidden rounded-full bg-surface">
+    <div id="pwstrength-bar" class="h-full rounded-full transition-all duration-normal" style="width: 0%"></div>
+  </div>
+
+  <dl class="mt-4 grid grid-cols-2 gap-3 text-sm sm:grid-cols-2">
+    <div>
+      <dt class="text-text-muted">Time to crack (offline attack)</dt>
+      <dd id="pwstrength-crack-offline" class="font-mono text-text">—</dd>
+    </div>
+    <div>
+      <dt class="text-text-muted">Time to crack (online, rate-limited)</dt>
+      <dd id="pwstrength-crack-online" class="font-mono text-text">—</dd>
+    </div>
+  </dl>
+
+  <ul id="pwstrength-warnings" class="mt-4 space-y-1 text-sm text-danger"></ul>
+</div>
+
+<section class="prose-tool mt-12">
+  <h2>What "offline" vs. "online" crack time means</h2>
+  <p>
+    <strong>Offline</strong> assumes an attacker already has a copy of a
+    fast, unsalted-equivalent hash and can try billions of guesses per
+    second on dedicated hardware — the realistic worst case after a
+    breach. <strong>Online</strong> assumes guessing through a normal login
+    form with rate limiting, closer to a few guesses per second. The gap
+    between the two is enormous, which is exactly why a leaked password
+    database is so much more dangerous than someone guessing at your login
+    page.
+  </p>
+</section>

@@ -1,0 +1,28 @@
+{
+  "id": "password-strength-checker",
+  "name": "Password Strength Checker",
+  "slug": "password-strength-checker",
+  "category": "security",
+  "description": "Check how strong a password actually is — entropy estimate, weak-pattern detection (common passwords, keyboard walks, sequences), and realistic crack-time estimates.",
+  "keywords": ["password strength checker", "password strength test", "how strong is my password", "password entropy"],
+  "difficulty": "beginner",
+  "priority": "high",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🔒",
+  "related": ["password-generator", "hmac-generator"],
+  "faq": [
+    {
+      "question": "Is my password sent anywhere when I type it here?",
+      "answer": "No — every check runs in your browser's own JavaScript. Nothing you type is transmitted, logged, or stored, and the page works fully offline. That said, it's still good practice to avoid typing a real, currently-in-use password into any tool, this one included, when a similar throwaway example would tell you the same thing about your password's structure."
+    },
+    {
+      "question": "Why does a long password sometimes still show as weak?",
+      "answer": "Raw length and character variety aren't the whole story — this checker also looks for patterns real attackers try first: known leaked passwords, keyboard walks like \"qwerty\", and sequences like \"1234\". A long password built from one of those patterns is guessed almost immediately regardless of its length, so it's scored as weak even though a pure entropy formula alone would rate it higher."
+    },
+    {
+      "question": "What's the difference between the offline and online crack-time estimates?",
+      "answer": "Offline assumes an attacker already has a copy of a fast hash (e.g. after a data breach) and can try billions of guesses per second on dedicated hardware. Online assumes guessing through a rate-limited login form, closer to a handful of guesses per second. The huge gap between the two numbers is why a leaked password database is far more dangerous than someone guessing at a login page."
+    }
+  ]
+}
