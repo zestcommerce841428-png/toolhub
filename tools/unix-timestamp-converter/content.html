@@ -1,0 +1,63 @@
+<div class="card">
+  <h2 class="mb-3 text-sm font-semibold text-text">Timestamp → date</h2>
+  <div class="flex flex-wrap items-end gap-3">
+    <div class="min-w-0 flex-1">
+      <label for="ts-input" class="field-label">Unix timestamp</label>
+      <input type="number" id="ts-input" class="field-input font-mono" step="any" inputmode="numeric" />
+    </div>
+    <div>
+      <label for="ts-unit" class="field-label">Unit</label>
+      <select id="ts-unit" class="field-select w-36">
+        <option value="seconds" selected>Seconds</option>
+        <option value="milliseconds">Milliseconds</option>
+      </select>
+    </div>
+    <button type="button" id="ts-now" class="btn-secondary">Now</button>
+  </div>
+
+  <p id="ts-error" class="field-error mt-2 hidden" role="alert"></p>
+
+  <dl class="mt-4 space-y-2 text-sm">
+    <div class="flex justify-between gap-3">
+      <dt class="text-text-muted">Local time</dt>
+      <dd id="ts-local" class="font-mono text-text">—</dd>
+    </div>
+    <div class="flex justify-between gap-3">
+      <dt class="text-text-muted">UTC</dt>
+      <dd id="ts-utc" class="font-mono text-text">—</dd>
+    </div>
+    <div class="flex justify-between gap-3">
+      <dt class="text-text-muted">ISO 8601</dt>
+      <dd id="ts-iso" class="font-mono text-text">—</dd>
+    </div>
+  </dl>
+</div>
+
+<div class="card mt-6">
+  <h2 class="mb-3 text-sm font-semibold text-text">Date → timestamp</h2>
+  <label for="ts-date-input" class="field-label">Date and time (your local timezone)</label>
+  <input type="datetime-local" id="ts-date-input" class="field-input" step="1" />
+
+  <dl class="mt-4 grid grid-cols-2 gap-4 text-sm">
+    <div>
+      <dt class="text-text-muted">Seconds</dt>
+      <dd id="ts-out-seconds" class="font-mono text-text">—</dd>
+    </div>
+    <div>
+      <dt class="text-text-muted">Milliseconds</dt>
+      <dd id="ts-out-millis" class="font-mono text-text">—</dd>
+    </div>
+  </dl>
+</div>
+
+<section class="prose-tool mt-12">
+  <h2>Seconds vs. milliseconds</h2>
+  <p>
+    Unix timestamps traditionally count seconds since January 1, 1970
+    UTC (used by most server-side languages and Unix tools), while
+    JavaScript's own <code>Date.now()</code> and <code>new Date()</code>
+    use milliseconds — mixing the two up by a factor of 1000 is a very
+    common bug. Double-check the unit selector matches what produced your
+    timestamp.
+  </p>
+</section>

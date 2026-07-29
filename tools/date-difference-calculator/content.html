@@ -1,0 +1,36 @@
+<div class="grid gap-4 sm:grid-cols-2">
+  <div>
+    <label for="datediff-a" class="field-label">First date</label>
+    <input type="date" id="datediff-a" class="field-input" />
+  </div>
+  <div>
+    <label for="datediff-b" class="field-label">Second date</label>
+    <input type="date" id="datediff-b" class="field-input" />
+  </div>
+</div>
+
+<p id="datediff-error" class="field-error mt-2 hidden" role="alert"></p>
+
+<div class="card mt-6" aria-live="polite">
+  <p id="datediff-headline" class="text-2xl font-bold text-text">—</p>
+  <dl class="mt-4 grid grid-cols-2 gap-4 text-sm sm:grid-cols-3">
+    <div>
+      <dt class="text-text-muted">Total days</dt>
+      <dd id="datediff-total-days" class="font-mono text-text">—</dd>
+    </div>
+    <div>
+      <dt class="text-text-muted">Total weeks</dt>
+      <dd id="datediff-total-weeks" class="font-mono text-text">—</dd>
+    </div>
+  </dl>
+</div>
+
+<section class="prose-tool mt-12">
+  <h2>Why order doesn't matter</h2>
+  <p>
+    Enter the two dates in either order — this always identifies which one
+    is earlier and measures forward from there, so "first date" and
+    "second date" are just labels for the two inputs, not a required
+    chronological order.
+  </p>
+</section>

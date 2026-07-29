@@ -1,0 +1,24 @@
+{
+  "id": "unix-timestamp-converter",
+  "name": "Unix Timestamp Converter",
+  "slug": "unix-timestamp-converter",
+  "category": "date-time",
+  "description": "Convert a Unix timestamp to a human-readable date (local time, UTC, and ISO 8601), or a date to a Unix timestamp in seconds or milliseconds.",
+  "keywords": ["unix timestamp converter", "epoch converter", "timestamp to date", "unix time"],
+  "difficulty": "beginner",
+  "priority": "high",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🕐",
+  "related": ["date-difference-calculator", "countdown-timer"],
+  "faq": [
+    {
+      "question": "What is a Unix timestamp?",
+      "answer": "The number of seconds (or, in JavaScript and some other contexts, milliseconds) that have elapsed since January 1, 1970 00:00:00 UTC — the \"Unix epoch.\" It's a timezone-independent way to represent a single moment in time as one number."
+    },
+    {
+      "question": "Why does my timestamp show the wrong date by a factor of 1000?",
+      "answer": "You most likely have the seconds/milliseconds unit selector set wrong for how the timestamp was generated. Most Unix/server-side tools produce seconds; JavaScript's Date.now() and Date.prototype.getTime() produce milliseconds. Toggling the unit selector should fix a date that looks off by exactly that factor."
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "countdown-timer",
+  "name": "Countdown Timer",
+  "slug": "countdown-timer",
+  "category": "date-time",
+  "description": "Count down to any date and time with a live, second-by-second display of days, hours, minutes, and seconds remaining.",
+  "keywords": ["countdown timer", "countdown to date", "event countdown", "days hours minutes seconds until"],
+  "difficulty": "beginner",
+  "priority": "normal",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "⏳",
+  "related": ["date-difference-calculator", "unix-timestamp-converter"],
+  "faq": [
+    {
+      "question": "Does the countdown keep running if I switch tabs or come back later?",
+      "answer": "Yes — it recalculates from your device's current clock and the target time every second, rather than counting down from a fixed starting number, so it's correct whenever you look at it, even after the tab was in the background."
+    },
+    {
+      "question": "What timezone is the target time in?",
+      "answer": "Your device's local timezone — the date/time picker uses your system clock, and the countdown compares against that same local time throughout."
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "business-days-calculator",
+  "name": "Business Days Calculator",
+  "slug": "business-days-calculator",
+  "category": "date-time",
+  "description": "Add or subtract business days from a date, or count business days between two dates — skipping weekends and any holidays you list.",
+  "keywords": ["business days calculator", "working days calculator", "add business days", "weekdays between dates"],
+  "difficulty": "beginner",
+  "priority": "normal",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "💼",
+  "related": ["date-difference-calculator", "countdown-timer"],
+  "faq": [
+    {
+      "question": "Does this know public holidays automatically?",
+      "answer": "No — holiday calendars vary by country, region, and even industry, so there's no single correct built-in list. Add the specific dates that apply to you in the holidays box, and both calculators on this page will exclude them alongside weekends."
+    },
+    {
+      "question": "What happens if I enter a negative number of business days to add?",
+      "answer": "It subtracts instead — moving backward from the start date, skipping weekends and holidays the same way, useful for questions like \"what date was 10 business days before this deadline?\""
+    }
+  ]
+}

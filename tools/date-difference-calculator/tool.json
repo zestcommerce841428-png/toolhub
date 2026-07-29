@@ -1,0 +1,24 @@
+{
+  "id": "date-difference-calculator",
+  "name": "Date Difference Calculator",
+  "slug": "date-difference-calculator",
+  "category": "date-time",
+  "description": "Calculate the exact difference between any two dates in years, months, and days, plus the total number of days and weeks.",
+  "keywords": ["date difference calculator", "days between dates", "date calculator", "how many days between two dates"],
+  "difficulty": "beginner",
+  "priority": "high",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "📆",
+  "related": ["business-days-calculator", "countdown-timer"],
+  "faq": [
+    {
+      "question": "Does it matter which date I put first?",
+      "answer": "No — this always figures out which of the two dates is earlier and measures forward from there, so entering them in either order gives the same result."
+    },
+    {
+      "question": "Why is the years/months/days breakdown different from totalDays / 365?",
+      "answer": "Because calendar months and years have different lengths (28-31 days, leap years), a calendar-aware breakdown (\"6 years, 6 months, 15 days\") isn't the same as dividing the total day count evenly. Both the calendar breakdown and the raw total-day count are shown since each answers a different question."
+    }
+  ]
+}
