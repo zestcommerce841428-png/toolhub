@@ -20,12 +20,28 @@ import { loadCategories, loadTools, loadPages } from "./lib/content.js";
 import { renderTemplate, escapeHtml } from "./lib/template.js";
 import { breadcrumbSchema, faqSchema, softwareApplicationSchema, renderJsonLd } from "./lib/schema.js";
 import { writeFile, copyFile, copyDir } from "./lib/fs-helpers.js";
+import { resolveSiteUrl } from "./lib/site-url.js";
 
 const rootDir = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const publicDir = path.join(rootDir, "public");
 
 const siteConfig = JSON.parse(readFileSync(path.join(rootDir, "site.config.json"), "utf8"));
-const { siteName, siteUrl, tagline, twitterHandle, defaultOgImage } = siteConfig;
+const { siteName, tagline, twitterHandle, defaultOgImage } = siteConfig;
+
+// siteUrl is resolved from the deployment platform's own environment
+// variables at build time, not hardcoded — see scripts/lib/site-url.js for
+// why that's the correct meaning of "auto-detected" for a static site
+// (canonical tags, sitemap.xml, and JSON-LD are pre-rendered files with no
+// server to inspect a request against).
+const { url: siteUrl, source: siteUrlSource, isFallbackPlaceholder } = resolveSiteUrl(rootDir, siteConfig.siteUrl);
+console.log(`[build] Site URL: ${siteUrl}  (source: ${siteUrlSource})`);
+if (isFallbackPlaceholder) {
+  console.warn(
+    "[build] WARNING: no hosting platform detected (Vercel/Netlify/Cloudflare Pages/GitHub Pages) and no SITE_URL " +
+      "env var is set, so canonical URLs, sitemap.xml, and JSON-LD are using site.config.json's fallback value. " +
+      "Set SITE_URL explicitly, or deploy via a supported platform, before treating this build as production output."
+  );
+}
 
 function absoluteUrl(urlPath) {
   return new URL(urlPath, siteUrl).toString();
@@ -165,6 +181,24 @@ function resolveRelatedTools(tool, max = 3) {
   return chosen.slice(0, max);
 }
 
+/**
+ * Renders the whole "Related tools" section, or an empty string when
+ * there's nothing to show (e.g. the only tool in a brand-new category) —
+ * a heading with an empty grid under it reads as broken, not "coming
+ * soon," so the section simply doesn't exist on the page in that case.
+ */
+function renderRelatedToolsSection(tool) {
+  const related = resolveRelatedTools(tool);
+  if (related.length === 0) return "";
+  return `
+      <section aria-labelledby="related-heading" class="mt-12">
+        <h2 id="related-heading" class="mb-4 text-xl font-semibold text-text">Related tools</h2>
+        <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          ${related.map(renderToolCard).join("\n")}
+        </div>
+      </section>`;
+}
+
 // ---------------------------------------------------------------------------
 // Copy static assets
 // ---------------------------------------------------------------------------
@@ -217,7 +251,7 @@ for (const tool of tools) {
       TOOL_DESCRIPTION: escapeHtml(tool.description),
       CONTENT: tool.contentHtml,
       FAQ_HTML: renderFaqHtml(tool.faq),
-      RELATED_TOOLS_HTML: resolveRelatedTools(tool).map(renderToolCard).join("\n"),
+      RELATED_TOOLS_SECTION: renderRelatedToolsSection(tool),
     },
     `tools/${tool.slug}`
   );

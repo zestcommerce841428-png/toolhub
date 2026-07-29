@@ -57,6 +57,45 @@ the reasoning behind the foundation itself.
   reminder to eyeball FAQ examples against the real function output, not
   just prose-review them.
 
+**Phase 1.6 — shipped (site URL auto-detection + a responsive/UI audit):**
+
+- Site URL auto-detection from the hosting platform's build-time env vars
+  (see `docs/ARCHITECTURE.md`, "Site URL resolution"), replacing the
+  hardcoded `site.config.json` value everywhere it matters — canonical
+  tags, sitemap, robots.txt, JSON-LD.
+- A full Playwright viewport sweep (320px through 1920px, every page) to
+  actually verify the "no broken layouts" requirement instead of assuming
+  it from a couple of desktop screenshots. It found three real bugs:
+  1. **Header nav overflow at 768–900px** (up to 141px) — the 6-link nav
+     needs ~526px alone, which doesn't fit next to the logo/search/theme
+     toggle below `lg` (1024px). Fixed by moving the nav's breakpoint from
+     `md` to `lg`, with the compact `<details>` menu covering the gap.
+  2. **A sitewide spacing bug**, found while chasing a smaller header
+     overflow at 320–375px: `tailwind.config.js` aliased its numeric
+     `spacing` keys (`gap-4`, `px-4`, `w-8`, etc.) to `tokens.css`'s
+     `--space-N` custom properties, which use a different convention
+     ("N × 8px") than Tailwind's own ("N × 0.25rem") — silently doubling
+     spacing on every utility using keys 0.5–12 across every page, not
+     just the header. Fixed by not remapping Tailwind's spacing scale at
+     all; `--space-N` remains a separate, valid token set for hand-written
+     CSS. This is the single most impactful fix in this round — see
+     `docs/ARCHITECTURE.md`'s "Design tokens" section.
+  3. **Empty "Related tools" section** on any tool that's currently the
+     only one in its category (Password Generator, JSON Formatter,
+     HEX/RGB Converter, BMI Calculator all were) — a heading over a blank
+     grid. Fixed by omitting the whole section when there's nothing to
+     backfill with; it reappears once a category's second tool ships.
+- Also fixed the underlying flexbox gotcha that made the header's search
+  box unable to shrink properly: text `<input>`s carry a browser-default
+  intrinsic minimum width that a percentage `width` doesn't override on
+  its own. Added `min-w-0` to the shared `.field-input`/`.field-textarea`/
+  `.field-select` classes in `assets/css/app.css` so this can't recur in
+  any future tool that places a form field in a constrained container.
+- Verified with the full 75-test unit suite, the existing 22+9-check
+  Playwright functional regression (all 12 tools, search, theme toggle,
+  keyboard nav), and a fresh 48-combination (12 widths × 4 pages) overflow
+  + nav-visibility sweep — all clean, zero console errors.
+
 ## Deliberately deferred, and why
 
 - **Icons are emoji, not a custom SVG icon system.** The spec calls for
@@ -73,12 +112,16 @@ the reasoning behind the foundation itself.
   the build machine, so Git auto-derived a commit identity from the OS
   account — verify `git config user.name`/`user.email` are what you want
   before pushing anywhere, and `git commit --amend --reset-author` if not.
-- **`site.config.json` has placeholder values** (`siteUrl`, contact email).
-  Every canonical URL, sitemap entry, and JSON-LD `@id` is derived from
-  `siteUrl` at build time, so updating one file before launch fixes every
-  page — but it must be updated before this goes live, or every canonical
-  URL and structured-data block points at a domain that doesn't resolve.
-  Not done yet because it needs a real value only the site owner has.
+- ~~`site.config.json` has a hardcoded placeholder `siteUrl`~~ **Fixed.**
+  `scripts/lib/site-url.js` now resolves the real URL automatically from
+  the hosting platform's own build-time env vars (Vercel/Netlify/
+  Cloudflare Pages/GitHub Pages, or an explicit `SITE_URL` override) — see
+  `docs/ARCHITECTURE.md`'s "Site URL resolution" section. `site.config.json`'s
+  `siteUrl` is now only the last-resort fallback for a local build with
+  none of those present, which still needs a real value if you intend to
+  publish that specific build's output somewhere the resolver can't detect.
+  Contact email in `pages/contact/content.html` is still a placeholder —
+  that one can't be auto-detected from anything; update it directly.
 - ~~No CI~~ **Partially done.** `.github/workflows/ci.yml` runs `npm test`
   and `npm run build` on every push/PR, so a malformed `tool.json`, a
   missing `tool.css`/`tool.js`, or a broken template placeholder now fails

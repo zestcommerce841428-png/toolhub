@@ -93,14 +93,50 @@ one JSON file, one HTML fragment, one JS module, optionally one CSS file. No
 step requires touching shared code, which is what makes 1,500 of these
 tractable for one team over ten years.
 
+The "Related Tools" section backfills from other tools in the same category
+when a tool's own `related` list is short or empty — but when a category
+has only one tool (true for four of the five categories as of this
+writing), there's nothing to backfill with. `renderRelatedToolsSection` in
+`scripts/build.js` omits the entire section, not just the cards, in that
+case: a heading over an empty grid reads as a broken page, not an early
+one. It reappears automatically once a category's second tool ships.
+
 ## Design tokens
 
 All spacing, color, radius, shadow, and animation values live once, in
 `assets/css/tokens.css`, as CSS custom properties on an 8px base grid
 (`--space-1: 0.5rem` … ), exposed in both a light and dark palette selected
 via `[data-theme]` on `<html>`, defaulting to `prefers-color-scheme`. Tailwind
-config reads these same variables (`theme.extend.colors.primary: 'var(--color-primary)'`)
-so utility classes and hand-written component CSS never drift out of sync.
+config reads the *color* variables (`theme.extend.colors.primary: 'var(--color-primary)'`)
+so color utility classes and hand-written component CSS never drift out of
+sync.
+
+Spacing is the one token category `tailwind.config.js` deliberately does
+**not** remap. An earlier version aliased `theme.extend.spacing["8"]` etc. to
+`--space-8`, but `tokens.css`'s spacing scale uses an "N × 8px" naming
+convention (`--space-8` = 64px) that collides with Tailwind's own numeric
+scale, where `8` already means `8 × 0.25rem` (32px) — the meaning every
+`gap-4`/`px-4`/`w-8`/etc. across every template and tool assumes. Aliasing
+them silently doubled a large fraction of the site's spacing. Found via a
+Playwright viewport sweep that traced a header overflow back to this file;
+see `tailwind.config.js`'s comment for the full explanation. The `--space-N`
+custom properties remain valid as a standalone reference scale for
+hand-written CSS — they just don't drive Tailwind's utilities.
+
+## Site URL resolution — "auto-detected," precisely defined
+
+Canonical `<link>` tags, `sitemap.xml`, `robots.txt`, and every JSON-LD
+`url`/`@id` are pre-rendered into static files at build time (that's the
+whole point of the architecture above), so there is no request happening
+that a real URL could be detected *from* — a static file can't inspect a
+`Host` header. "Auto-detected" therefore means: pulled automatically from
+whichever hosting platform is running the build, not hardcoded in a
+committed config file. `scripts/lib/site-url.js` resolves it in order —
+`SITE_URL` env var (explicit override) → Vercel → Netlify → Cloudflare
+Pages → GitHub Pages (via `GITHUB_REPOSITORY`, or a committed `CNAME` for a
+custom domain) → `site.config.json`'s `siteUrl` as a last resort, logged
+as a warning since that's normally only hit on a local build with none of
+the above env vars present. `npm run build` prints which source it used.
 
 ## Shared JS modules (`assets/js/core/`)
 

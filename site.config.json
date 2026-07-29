@@ -4,5 +4,5 @@
   "tagline": "Fast, private, browser-based tools. No sign-up, no tracking, nothing ever leaves your device.",
   "twitterHandle": "@toolhub",
   "defaultOgImage": "/assets/images/og-default.png",
-  "_comment": "siteUrl is a placeholder — update to the real production domain before deploying. It drives every canonical URL, sitemap entry, and JSON-LD @id in the build output."
+  "_comment": "siteUrl here is only the LAST-RESORT fallback used when scripts/lib/site-url.js can't detect a real one — see that file. The build auto-detects the actual URL from SITE_URL / Vercel / Netlify / Cloudflare Pages / GitHub Pages env vars, in that order, so this placeholder is normally never used once deployed on a supported platform. It still needs a real value for any build run outside of those (e.g. a local `npm run build` you intend to publish elsewhere)."
 }

@@ -2,17 +2,38 @@
   <div class="mx-auto flex max-w-7xl items-center gap-3 px-4 py-3 sm:px-6 lg:px-8">
     <a href="/" class="flex shrink-0 items-center gap-2 text-lg font-bold text-text">
       <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-fg" aria-hidden="true">TH</span>
-      <span>ToolHub</span>
+      <span class="hidden sm:inline">ToolHub</span>
     </a>
 
-    <nav aria-label="Primary" class="hidden md:block">
+    <!--
+      Nav only appears once there's genuinely room for it. At 6 category
+      links it measures ~526px alone, which doesn't fit next to the logo,
+      search box, and theme toggle below ~1024px — verified empirically
+      (scripts/../tests didn't cover this; a Playwright viewport sweep
+      did). Below lg, the <details> menu at the end of this header covers
+      the same links compactly. Don't lower this breakpoint without
+      re-running that sweep.
+    -->
+    <nav aria-label="Primary" class="hidden lg:block">
       <ul class="flex items-center gap-1">
         {{CATEGORY_NAV_LINKS}}
         <li><a class="rounded-md px-3 py-2 text-sm font-medium text-text-muted hover:bg-surface hover:text-text" href="/categories/">All categories</a></li>
       </ul>
     </nav>
 
-    <div class="relative ml-auto w-full max-w-xs">
+    <!--
+      A fixed min-width (rather than min-w-0) overrides the flex default
+      of min-width:auto — which would otherwise refuse to shrink this box
+      below its content's natural width and overflow the header on narrow
+      screens — while still keeping the search box from shrinking down to
+      a useless sliver. 110px comfortably fits alongside the logo/theme
+      toggle/hamburger even at a 320px viewport (verified with a
+      Playwright viewport sweep). The .field-input class itself also
+      carries min-w-0, which is the separate fix for a browser-default
+      intrinsic minimum width text inputs specifically carry — see
+      assets/css/app.css.
+    -->
+    <div class="relative ml-auto w-full min-w-[110px] max-w-xs">
       <label for="site-search-input" class="sr-only">Search tools</label>
       <input
         id="site-search-input"
@@ -29,13 +50,13 @@
       type="button"
       id="theme-toggle-button"
       data-theme-toggle
-      class="btn-icon border border-border"
+      class="btn-icon shrink-0 border border-border"
     >
       <span aria-hidden="true" data-theme-icon-light>🌙</span>
       <span aria-hidden="true" data-theme-icon-dark class="hidden">☀️</span>
     </button>
 
-    <details class="relative md:hidden">
+    <details class="relative shrink-0 lg:hidden">
       <summary class="btn-icon list-none border border-border" aria-label="Open menu">☰</summary>
       <nav aria-label="Primary" class="absolute right-0 z-50 mt-2 w-56 rounded-lg border border-border bg-surface-raised p-2 shadow-lg">
         <ul class="flex flex-col">

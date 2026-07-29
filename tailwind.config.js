@@ -38,18 +38,17 @@ export default {
         "text-muted": "var(--color-text-muted)",
         "text-subtle": "var(--color-text-subtle)",
       },
-      spacing: {
-        "0.5": "var(--space-0-5)",
-        "1": "var(--space-1)",
-        "2": "var(--space-2)",
-        "3": "var(--space-3)",
-        "4": "var(--space-4)",
-        "5": "var(--space-5)",
-        "6": "var(--space-6)",
-        "8": "var(--space-8)",
-        "10": "var(--space-10)",
-        "12": "var(--space-12)",
-      },
+      // NOTE: deliberately not overriding Tailwind's numeric spacing scale.
+      // tokens.css's --space-N custom properties use an "N x 8px" naming
+      // convention for hand-written CSS/JS, which collides with Tailwind's
+      // own numeric spacing keys — Tailwind's "8" already means 8 x 0.25rem
+      // (32px) everywhere a class like `gap-4`/`px-4`/`w-8` is used across
+      // every template and tool. Aliasing spacing["8"] to --space-8 (64px)
+      // here previously made every one of those utilities render at roughly
+      // 2x its intended size sitewide — found via a Playwright viewport
+      // sweep that traced a header overflow back to this file. The
+      // --space-N tokens remain valid as a standalone scale for hand-written
+      // CSS (see tokens.css); they just don't drive Tailwind's own utilities.
       fontFamily: {
         sans: "var(--font-sans)",
         mono: "var(--font-mono)",
