@@ -1,0 +1,28 @@
+{
+  "id": "temperature-converter",
+  "name": "Temperature Converter",
+  "slug": "temperature-converter",
+  "category": "unit-converters",
+  "description": "Convert temperature between Celsius, Fahrenheit, Kelvin, and Rankine instantly, with impossible-value detection below absolute zero.",
+  "keywords": ["temperature converter", "celsius to fahrenheit", "fahrenheit to celsius", "kelvin converter", "c to f"],
+  "difficulty": "beginner",
+  "priority": "high",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🌡️",
+  "related": ["length-converter", "weight-converter"],
+  "faq": [
+    {
+      "question": "Why is temperature different from a normal unit converter?",
+      "answer": "Length and weight scales all share a common zero point (0 m is \"no length\" in every unit), so conversion is just multiplication. Celsius and Fahrenheit have different zero points — 0°C is 32°F, not 0°F — so conversion needs both a scaling factor and an offset, not just a factor."
+    },
+    {
+      "question": "What are Kelvin and Rankine?",
+      "answer": "Both are absolute scales, where 0 means absolute zero — the coldest physically possible temperature — rather than an arbitrary reference point like water freezing. Kelvin uses Celsius-sized degrees (used throughout science); Rankine uses Fahrenheit-sized degrees (occasionally used in older US engineering contexts)."
+    },
+    {
+      "question": "Why does entering a very negative number sometimes show an error?",
+      "answer": "Nothing can be colder than absolute zero (-273.15°C / -459.67°F / 0 K), so a value that would convert to below that is flagged as physically impossible rather than silently shown as, say, a negative Kelvin reading."
+    }
+  ]
+}

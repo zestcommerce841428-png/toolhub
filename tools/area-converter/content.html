@@ -1,0 +1,39 @@
+<div class="grid gap-4 sm:grid-cols-[1fr_auto_1fr]">
+  <div>
+    <label for="area-value" class="field-label">Value</label>
+    <input type="number" id="area-value" class="field-input" value="1" step="any" inputmode="decimal" />
+    <label for="area-from" class="field-label mt-3">From</label>
+    <select id="area-from" class="field-select"></select>
+  </div>
+
+  <div class="flex items-end justify-center pb-2 sm:pb-0 sm:pt-8">
+    <button type="button" id="area-swap" class="btn-icon border border-border" aria-label="Swap units">⇄</button>
+  </div>
+
+  <div>
+    <label for="area-result" class="field-label">Result</label>
+    <input type="text" id="area-result" class="field-input font-mono" readonly />
+    <label for="area-to" class="field-label mt-3">To</label>
+    <select id="area-to" class="field-select"></select>
+  </div>
+</div>
+
+<div class="mt-3">
+  <button type="button" id="area-copy" class="btn-secondary">Copy result</button>
+</div>
+
+<div class="card mt-8">
+  <h2 class="mb-3 text-sm font-semibold text-text">All units</h2>
+  <dl id="area-all-units" class="grid grid-cols-2 gap-x-4 gap-y-3 text-sm sm:grid-cols-4"></dl>
+</div>
+
+<section class="prose-tool mt-12">
+  <h2>How this converter works</h2>
+  <p>
+    Every unit is defined by its exact area in square meters, so a
+    conversion between any two goes through square meters internally.
+    Land-area units (hectares, acres) are included alongside the everyday
+    ones since they're a common source of confusion — a hectare is exactly
+    10,000 m², an acre about 4,047 m².
+  </p>
+</section>

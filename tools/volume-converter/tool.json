@@ -1,0 +1,24 @@
+{
+  "id": "volume-converter",
+  "name": "Volume Converter",
+  "slug": "volume-converter",
+  "category": "unit-converters",
+  "description": "Convert volume between milliliters, liters, cubic meters, US cups/pints/quarts/gallons, imperial gallons, and cubic feet instantly.",
+  "keywords": ["volume converter", "liters to gallons", "ml to cups", "cubic meters converter", "gallons to liters"],
+  "difficulty": "beginner",
+  "priority": "normal",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🧪",
+  "related": ["weight-converter", "length-converter"],
+  "faq": [
+    {
+      "question": "Why are there two kinds of gallon?",
+      "answer": "The US gallon (3.785411784 L) and the imperial (UK) gallon (4.54609 L) are genuinely different sizes — an imperial gallon is about 20% larger. Recipes, fuel economy figures, and container sizes all depend on which one applies, so both are listed separately rather than picking one as \"the\" gallon."
+    },
+    {
+      "question": "Are the US cup/tablespoon/teaspoon here the cooking measurements or the exact legal US customary units?",
+      "answer": "The exact US customary definitions (used for the underlying math), which match standard US measuring cups/spoons closely enough for any practical recipe use — the tiny fractional differences from some countries' \"metric cup\" (250 mL exactly) or \"metric tablespoon\" (15 mL exactly) conventions are not the units used here."
+    }
+  ]
+}

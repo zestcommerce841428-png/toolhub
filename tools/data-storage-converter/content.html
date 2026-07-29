@@ -1,0 +1,41 @@
+<div class="grid gap-4 sm:grid-cols-[1fr_auto_1fr]">
+  <div>
+    <label for="data-value" class="field-label">Value</label>
+    <input type="number" id="data-value" class="field-input" value="1" step="any" inputmode="decimal" />
+    <label for="data-from" class="field-label mt-3">From</label>
+    <select id="data-from" class="field-select"></select>
+  </div>
+
+  <div class="flex items-end justify-center pb-2 sm:pb-0 sm:pt-8">
+    <button type="button" id="data-swap" class="btn-icon border border-border" aria-label="Swap units">⇄</button>
+  </div>
+
+  <div>
+    <label for="data-result" class="field-label">Result</label>
+    <input type="text" id="data-result" class="field-input font-mono" readonly />
+    <label for="data-to" class="field-label mt-3">To</label>
+    <select id="data-to" class="field-select"></select>
+  </div>
+</div>
+
+<div class="mt-3">
+  <button type="button" id="data-copy" class="btn-secondary">Copy result</button>
+</div>
+
+<div class="card mt-8">
+  <h2 class="mb-3 text-sm font-semibold text-text">All units</h2>
+  <dl id="data-all-units" class="grid grid-cols-2 gap-x-4 gap-y-3 text-sm sm:grid-cols-4"></dl>
+</div>
+
+<section class="prose-tool mt-12">
+  <h2>KB vs. KiB — why both exist here</h2>
+  <p>
+    Storage manufacturers advertise capacity in decimal units (1 GB = 1000³
+    bytes), while operating systems traditionally report free space in
+    binary units (which many still label "GB" but actually mean 1024³
+    bytes, more precisely called a GiB). That mismatch is exactly why a
+    "1 TB" drive shows up as roughly 931 GB in your file manager. This
+    converter keeps the two conventions as separate, explicitly labeled
+    units so the ambiguity can't sneak into your result.
+  </p>
+</section>

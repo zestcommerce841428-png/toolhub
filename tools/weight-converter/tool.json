@@ -1,0 +1,24 @@
+{
+  "id": "weight-converter",
+  "name": "Weight Converter",
+  "slug": "weight-converter",
+  "category": "unit-converters",
+  "description": "Convert weight and mass between milligrams, grams, kilograms, metric tons, ounces, pounds, stone, and US tons instantly.",
+  "keywords": ["weight converter", "mass converter", "kg to lb", "pounds to kg", "oz to grams"],
+  "difficulty": "beginner",
+  "priority": "normal",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "⚖️",
+  "related": ["length-converter", "volume-converter"],
+  "faq": [
+    {
+      "question": "How accurate are these conversions?",
+      "answer": "Every unit is defined by its internationally standardized exact factor in kilograms (a pound is defined as exactly 0.45359237 kg, for instance), so results are as accurate as floating-point arithmetic allows."
+    },
+    {
+      "question": "Is a US ton the same as a metric ton?",
+      "answer": "No — a US (short) ton is 2,000 pounds (907.18474 kg), while a metric ton is exactly 1,000 kg (about 2,204.6 pounds). The UK \"long ton\" (2,240 lb) is a third, different unit not included here since it's rarely used outside historical/UK-specific contexts."
+    }
+  ]
+}

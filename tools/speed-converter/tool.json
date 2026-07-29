@@ -1,0 +1,24 @@
+{
+  "id": "speed-converter",
+  "name": "Speed Converter",
+  "slug": "speed-converter",
+  "category": "unit-converters",
+  "description": "Convert speed between meters per second, kilometers per hour, miles per hour, knots, and feet per second instantly.",
+  "keywords": ["speed converter", "kph to mph", "mph to kph", "knots to mph", "m/s to km/h"],
+  "difficulty": "beginner",
+  "priority": "normal",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🚀",
+  "related": ["length-converter", "temperature-converter"],
+  "faq": [
+    {
+      "question": "What's a knot?",
+      "answer": "A knot is one nautical mile per hour (about 1.852 km/h), used in aviation, maritime navigation, and weather reports (e.g. wind speed). It's not the same as a regular mph, though the two are close enough to be confused at a glance."
+    },
+    {
+      "question": "How accurate are these conversions?",
+      "answer": "Every unit is defined by its exact factor in meters per second, so results are as accurate as floating-point arithmetic allows."
+    }
+  ]
+}

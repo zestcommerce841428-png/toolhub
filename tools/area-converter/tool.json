@@ -1,0 +1,24 @@
+{
+  "id": "area-converter",
+  "name": "Area Converter",
+  "slug": "area-converter",
+  "category": "unit-converters",
+  "description": "Convert area between square millimeters, square meters, hectares, square kilometers, square feet, acres, square miles, and more instantly.",
+  "keywords": ["area converter", "square meters to square feet", "acres to hectares", "sq ft to sq m", "hectares to acres"],
+  "difficulty": "beginner",
+  "priority": "normal",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "📐",
+  "related": ["length-converter", "volume-converter"],
+  "faq": [
+    {
+      "question": "How big is a hectare or an acre, intuitively?",
+      "answer": "A hectare (10,000 m²) is roughly the size of a large sports stadium including its grounds — about 2.47 acres. An acre (4,046.86 m²) is close to the size of a standard American football field including both end zones."
+    },
+    {
+      "question": "How accurate are these conversions?",
+      "answer": "Every unit is defined by its exact factor in square meters, derived from the exact length definitions (e.g. 1 acre = 4,840 square yards exactly), so results are as accurate as floating-point arithmetic allows."
+    }
+  ]
+}

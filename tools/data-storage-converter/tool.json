@@ -1,0 +1,24 @@
+{
+  "id": "data-storage-converter",
+  "name": "Data Storage Converter",
+  "slug": "data-storage-converter",
+  "category": "unit-converters",
+  "description": "Convert file and storage sizes between bits, bytes, and both decimal (KB/MB/GB/TB) and binary (KiB/MiB/GiB/TiB) units — correctly, without conflating the two.",
+  "keywords": ["data storage converter", "gb to gib", "bytes converter", "kb to mb", "storage size converter"],
+  "difficulty": "beginner",
+  "priority": "normal",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "💾",
+  "related": ["length-converter", "weight-converter"],
+  "faq": [
+    {
+      "question": "Why does my \"1 TB\" drive show up as ~931 GB in my operating system?",
+      "answer": "The drive is advertised using decimal terabytes (1 TB = 1,000,000,000,000 bytes), while most operating systems report free space in binary units — 931 GiB (which they often mislabel \"GB\") — because 1 TB of decimal bytes is only about 0.909 TiB. Nothing is missing; it's the same number of bytes described two different ways."
+    },
+    {
+      "question": "Which should I use — decimal or binary?",
+      "answer": "Use decimal (KB/MB/GB/TB) when matching a manufacturer's advertised capacity or network transfer rate. Use binary (KiB/MiB/GiB/TiB) when matching what your operating system or RAM specifications report, since memory has always been addressed in power-of-two units."
+    }
+  ]
+}
