@@ -1,0 +1,32 @@
+{
+  "id": "word-counter",
+  "name": "Word Counter",
+  "slug": "word-counter",
+  "category": "text",
+  "description": "Count words, characters, sentences, and paragraphs in real time, with estimated reading and speaking time.",
+  "keywords": ["word counter", "character counter", "count words", "text length", "reading time calculator"],
+  "difficulty": "beginner",
+  "priority": "high",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "📝",
+  "related": ["case-converter"],
+  "faq": [
+    {
+      "question": "Does this word counter send my text anywhere?",
+      "answer": "No. Everything is counted locally in your browser using JavaScript — your text is never uploaded or transmitted, even while you're typing."
+    },
+    {
+      "question": "How is reading time calculated?",
+      "answer": "Reading time is estimated at 200 words per minute, a commonly used average adult silent-reading speed. Speaking time is estimated at 130 words per minute."
+    },
+    {
+      "question": "How are sentences counted?",
+      "answer": "A sentence is counted at each run of '.', '!', or '?' that ends a chunk of text, so abbreviations followed by more text in the same sentence can occasionally be over-counted — treat the sentence count as a close estimate rather than an exact grammatical parse."
+    },
+    {
+      "question": "What counts as a paragraph?",
+      "answer": "Any block of text separated by one or more blank lines counts as one paragraph."
+    }
+  ]
+}

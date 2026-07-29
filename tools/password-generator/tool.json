@@ -1,0 +1,28 @@
+{
+  "id": "password-generator",
+  "name": "Password Generator",
+  "slug": "password-generator",
+  "category": "security",
+  "description": "Generate strong, random passwords using your browser's cryptographically secure random number generator — nothing is transmitted or stored.",
+  "keywords": ["password generator", "random password", "strong password", "secure password generator"],
+  "difficulty": "beginner",
+  "priority": "high",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🔐",
+  "related": [],
+  "faq": [
+    {
+      "question": "How random is the password this generates?",
+      "answer": "Passwords are generated using the Web Crypto API's crypto.getRandomValues(), a cryptographically secure pseudo-random number generator built into your browser — the same class of randomness used for cryptographic keys, not Math.random(), which is not safe for this purpose. Character selection uses rejection sampling to avoid modulo bias."
+    },
+    {
+      "question": "Are generated passwords sent anywhere or logged?",
+      "answer": "No. Generation happens entirely in your browser; ToolHub has no backend to send a password to, and nothing is written to storage or logged."
+    },
+    {
+      "question": "Why does it guarantee at least one character from each selected category?",
+      "answer": "Many account systems require a mix of character types. This generator seeds one character from every category you've enabled, then fills the rest of the length from the combined pool and shuffles — so the requirement is met without making the arrangement predictable."
+    }
+  ]
+}

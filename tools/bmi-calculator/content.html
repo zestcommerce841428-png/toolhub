@@ -1,0 +1,65 @@
+<div>
+  <span class="field-label" id="bmi-unit-label">Units</span>
+  <div class="flex gap-2" role="radiogroup" aria-labelledby="bmi-unit-label" id="bmi-unit-group">
+    <button type="button" role="radio" aria-checked="true" tabindex="0" data-unit="metric" class="btn-primary">Metric (cm, kg)</button>
+    <button type="button" role="radio" aria-checked="false" tabindex="-1" data-unit="imperial" class="btn-secondary">Imperial (ft/in, lb)</button>
+  </div>
+</div>
+
+<div class="mt-5 grid gap-4 sm:grid-cols-2">
+  <div data-unit-fields="metric">
+    <label for="bmi-height-cm" class="field-label">Height (cm)</label>
+    <input type="number" id="bmi-height-cm" class="field-input" min="1" step="0.1" value="170" inputmode="decimal" />
+  </div>
+  <div data-unit-fields="metric">
+    <label for="bmi-weight-kg" class="field-label">Weight (kg)</label>
+    <input type="number" id="bmi-weight-kg" class="field-input" min="1" step="0.1" value="70" inputmode="decimal" />
+  </div>
+
+  <div data-unit-fields="imperial" hidden>
+    <span class="field-label">Height</span>
+    <div class="flex gap-2">
+      <div class="flex-1">
+        <label for="bmi-height-ft" class="sr-only">Feet</label>
+        <input type="number" id="bmi-height-ft" class="field-input" min="0" step="1" value="5" inputmode="numeric" placeholder="ft" />
+      </div>
+      <div class="flex-1">
+        <label for="bmi-height-in" class="sr-only">Inches</label>
+        <input type="number" id="bmi-height-in" class="field-input" min="0" max="11" step="1" value="7" inputmode="numeric" placeholder="in" />
+      </div>
+    </div>
+  </div>
+  <div data-unit-fields="imperial" hidden>
+    <label for="bmi-weight-lb" class="field-label">Weight (lb)</label>
+    <input type="number" id="bmi-weight-lb" class="field-input" min="1" step="0.1" value="154" inputmode="decimal" />
+  </div>
+</div>
+
+<p id="bmi-error" class="field-error hidden" role="alert"></p>
+
+<div class="card mt-6" aria-live="polite">
+  <p class="text-sm text-text-muted">Your BMI</p>
+  <p id="bmi-value" class="text-4xl font-bold text-text">—</p>
+  <p id="bmi-category" class="badge mt-2"></p>
+
+  <div class="mt-4 h-2 w-full overflow-hidden rounded-full bg-surface" role="presentation">
+    <div id="bmi-scale-marker" class="h-full w-1 rounded-full bg-text transition-all duration-normal" style="margin-left: 0%"></div>
+  </div>
+  <div class="mt-1 flex justify-between text-xs text-text-subtle">
+    <span>Underweight</span>
+    <span>Normal</span>
+    <span>Overweight</span>
+    <span>Obese</span>
+  </div>
+</div>
+
+<section class="prose-tool mt-12">
+  <h2>Understanding your result</h2>
+  <p>
+    BMI is a screening tool, not a diagnosis. Using the WHO adult
+    thresholds: under 18.5 is Underweight, 18.5–24.9 is Normal weight,
+    25–29.9 is Overweight, and 30+ is Obese. It doesn't account for muscle
+    mass, bone density, age, or sex, so talk to a healthcare provider for
+    guidance specific to you.
+  </p>
+</section>

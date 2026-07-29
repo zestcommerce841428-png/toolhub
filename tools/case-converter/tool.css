@@ -1,0 +1,3 @@
+/* Case Converter relies entirely on the shared component classes in
+   assets/css/app.css (.btn-primary / .btn-secondary swap for the active
+   radio state) — no tool-specific styling needed yet. */

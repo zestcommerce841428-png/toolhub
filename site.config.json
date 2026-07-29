@@ -1,0 +1,8 @@
+{
+  "siteName": "ToolHub",
+  "siteUrl": "https://example-toolhub.invalid",
+  "tagline": "Fast, private, browser-based tools. No sign-up, no tracking, nothing ever leaves your device.",
+  "twitterHandle": "@toolhub",
+  "defaultOgImage": "/assets/images/og-default.png",
+  "_comment": "siteUrl is a placeholder — update to the real production domain before deploying. It drives every canonical URL, sitemap entry, and JSON-LD @id in the build output."
+}

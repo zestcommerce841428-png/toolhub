@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <script>{{THEME_BOOTSTRAP_SCRIPT}}</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{PAGE_TITLE}}</title>
+  <meta name="description" content="{{META_DESCRIPTION}}" />
+  <link rel="canonical" href="{{CANONICAL_URL}}" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="{{SITE_NAME}}" />
+  <meta property="og:title" content="{{OG_TITLE}}" />
+  <meta property="og:description" content="{{META_DESCRIPTION}}" />
+  <meta property="og:url" content="{{CANONICAL_URL}}" />
+  <meta property="og:image" content="{{OG_IMAGE}}" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="{{TWITTER_HANDLE}}" />
+  <meta name="twitter:title" content="{{OG_TITLE}}" />
+  <meta name="twitter:description" content="{{META_DESCRIPTION}}" />
+
+  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#2563eb" />
+
+  <link rel="stylesheet" href="/assets/css/tokens.css" />
+  <link rel="stylesheet" href="/assets/css/main.css" />
+
+  {{JSON_LD}}
+</head>
+<body class="min-h-screen bg-bg text-text">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  {{HEADER}}
+
+  <main id="main-content" class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <nav aria-label="Breadcrumb" class="mb-4">
+      <ol class="breadcrumb-list">
+        {{BREADCRUMB_HTML}}
+      </ol>
+    </nav>
+
+    <header class="mb-8 max-w-3xl">
+      <h1 class="text-3xl font-bold tracking-tight text-text sm:text-4xl">{{CATEGORY_NAME}}</h1>
+      <p class="mt-2 text-base text-text-muted">{{CATEGORY_DESCRIPTION}}</p>
+      <p class="mt-1 text-sm text-text-subtle">{{TOOL_COUNT}}</p>
+    </header>
+
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {{TOOL_CARDS_HTML}}
+    </div>
+  </main>
+
+  {{FOOTER}}
+
+  <script type="module" src="/assets/js/app.js"></script>
+</body>
+</html>

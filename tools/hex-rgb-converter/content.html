@@ -1,0 +1,56 @@
+<div class="grid gap-6 sm:grid-cols-[auto_minmax(0,1fr)] sm:items-start">
+  <div class="flex flex-col items-center gap-2">
+    <div
+      id="color-swatch"
+      class="h-24 w-24 rounded-xl border border-border shadow-sm sm:h-32 sm:w-32"
+      style="background-color: #2563eb"
+      aria-hidden="true"
+    ></div>
+    <label for="color-picker" class="text-xs text-text-muted">Pick visually</label>
+    <input type="color" id="color-picker" value="#2563eb" class="h-9 w-16 cursor-pointer rounded border border-border bg-transparent" />
+  </div>
+
+  <div class="grid gap-4">
+    <div>
+      <label for="hex-input" class="field-label">HEX</label>
+      <div class="flex gap-2">
+        <input type="text" id="hex-input" class="field-input font-mono" value="#2563eb" spellcheck="false" autocomplete="off" />
+        <button type="button" id="hex-copy" class="btn-secondary shrink-0">Copy</button>
+      </div>
+      <p id="hex-error" class="field-error hidden" role="alert"></p>
+    </div>
+
+    <div>
+      <span class="field-label">RGB</span>
+      <div class="grid grid-cols-3 gap-2">
+        <div>
+          <label for="rgb-r" class="sr-only">Red (0–255)</label>
+          <input type="number" id="rgb-r" class="field-input" min="0" max="255" value="37" />
+        </div>
+        <div>
+          <label for="rgb-g" class="sr-only">Green (0–255)</label>
+          <input type="number" id="rgb-g" class="field-input" min="0" max="255" value="99" />
+        </div>
+        <div>
+          <label for="rgb-b" class="sr-only">Blue (0–255)</label>
+          <input type="number" id="rgb-b" class="field-input" min="0" max="255" value="235" />
+        </div>
+      </div>
+      <div class="mt-2 flex gap-2">
+        <input type="text" id="rgb-output" class="field-input font-mono" readonly value="rgb(37, 99, 235)" />
+        <button type="button" id="rgb-copy" class="btn-secondary shrink-0">Copy</button>
+      </div>
+      <p id="rgb-error" class="field-error hidden" role="alert"></p>
+    </div>
+  </div>
+</div>
+
+<section class="prose-tool mt-12">
+  <h2>HEX and RGB are the same color, two notations</h2>
+  <p>
+    HEX (e.g. <code>#2563eb</code>) and RGB (e.g. <code>rgb(37, 99, 235)</code>)
+    both describe a color as three 0–255 red/green/blue values — HEX just
+    encodes each value in base-16. Edit either format, or the color picker,
+    and the others update immediately.
+  </p>
+</section>

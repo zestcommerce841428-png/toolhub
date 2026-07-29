@@ -1,0 +1,72 @@
+<div class="card">
+  <label for="password-output" class="field-label">Generated password</label>
+  <div class="flex gap-2">
+    <input
+      id="password-output"
+      type="text"
+      class="field-input font-mono text-lg tracking-wide"
+      readonly
+      aria-describedby="password-strength"
+    />
+    <button type="button" id="password-copy" class="btn-secondary shrink-0">Copy</button>
+    <button type="button" id="password-regenerate" class="btn-primary shrink-0">Generate</button>
+  </div>
+
+  <div class="mt-3">
+    <div class="h-2 w-full overflow-hidden rounded-full bg-surface" role="presentation">
+      <div id="password-strength-bar" class="h-full w-0 rounded-full bg-danger transition-all duration-normal"></div>
+    </div>
+    <p id="password-strength" class="mt-1.5 text-sm text-text-muted" role="status" aria-live="polite">Strength: —</p>
+  </div>
+</div>
+
+<div class="card mt-4">
+  <h2 class="mb-4 text-sm font-semibold text-text">Options</h2>
+
+  <div class="mb-5">
+    <div class="flex items-center justify-between">
+      <label for="password-length" class="field-label mb-0">Length</label>
+      <output for="password-length" id="password-length-value" class="text-sm font-semibold text-text">16</output>
+    </div>
+    <input type="range" id="password-length" min="6" max="64" value="16" class="mt-2 w-full accent-primary" />
+  </div>
+
+  <fieldset class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+    <legend class="sr-only">Character types</legend>
+    <label class="flex items-center gap-2 text-sm text-text">
+      <input type="checkbox" id="opt-lowercase" checked class="h-4 w-4 rounded border-border accent-primary" />
+      Lowercase (a–z)
+    </label>
+    <label class="flex items-center gap-2 text-sm text-text">
+      <input type="checkbox" id="opt-uppercase" checked class="h-4 w-4 rounded border-border accent-primary" />
+      Uppercase (A–Z)
+    </label>
+    <label class="flex items-center gap-2 text-sm text-text">
+      <input type="checkbox" id="opt-numbers" checked class="h-4 w-4 rounded border-border accent-primary" />
+      Numbers (0–9)
+    </label>
+    <label class="flex items-center gap-2 text-sm text-text">
+      <input type="checkbox" id="opt-symbols" checked class="h-4 w-4 rounded border-border accent-primary" />
+      Symbols (!@#$…)
+    </label>
+  </fieldset>
+
+  <label class="mt-4 flex items-center gap-2 text-sm text-text">
+    <input type="checkbox" id="opt-exclude-ambiguous" class="h-4 w-4 rounded border-border accent-primary" />
+    Exclude ambiguous characters (l, 1, I, 0, O)
+  </label>
+
+  <p id="password-options-error" class="field-error hidden" role="alert"></p>
+</div>
+
+<section class="prose-tool mt-12">
+  <h2>Why use a generated password?</h2>
+  <p>
+    A password reused across sites, or based on a memorable word, is far
+    easier to guess or crack than a long, random string. This generator
+    uses your browser's cryptographically secure random number generator
+    (not <code>Math.random()</code>) and guarantees at least one character
+    from every type you've selected, so the result is both unpredictable
+    and compatible with most sites' password rules.
+  </p>
+</section>

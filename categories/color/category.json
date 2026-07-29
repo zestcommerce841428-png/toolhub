@@ -1,0 +1,7 @@
+{
+  "id": "color",
+  "name": "Color Tools",
+  "slug": "color",
+  "description": "Convert, preview, and pick colors in HEX, RGB, HSL, and more.",
+  "icon": "🎨"
+}

@@ -1,0 +1,7 @@
+{
+  "id": "text",
+  "name": "Text Tools",
+  "slug": "text",
+  "description": "Count, transform, clean, and analyze text — instantly, without uploading anything.",
+  "icon": "📝"
+}

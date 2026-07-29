@@ -1,0 +1,28 @@
+{
+  "id": "hex-rgb-converter",
+  "name": "HEX to RGB Converter",
+  "slug": "hex-rgb-converter",
+  "category": "color",
+  "description": "Convert colors between HEX and RGB instantly, with a live preview and a native color picker — no uploads, fully client-side.",
+  "keywords": ["hex to rgb", "rgb to hex", "color converter", "hex color", "rgb color"],
+  "difficulty": "beginner",
+  "priority": "high",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🎨",
+  "related": [],
+  "faq": [
+    {
+      "question": "Does this support shorthand HEX like #f0c?",
+      "answer": "Yes — 3-digit shorthand (#f0c), 4-digit with alpha (#f0cf), 6-digit (#ff00cc), and 8-digit with alpha (#ff00ccff) are all accepted and normalized."
+    },
+    {
+      "question": "Why doesn't the color picker show my alpha value?",
+      "answer": "The browser's built-in color picker (<input type=\"color\">) only supports opaque 6-digit HEX colors — it's a platform limitation, not this tool's. The HEX and RGB text fields still support alpha; only the visual picker doesn't."
+    },
+    {
+      "question": "What RGB value ranges are valid?",
+      "answer": "Each of red, green, and blue must be a whole number from 0 to 255."
+    }
+  ]
+}

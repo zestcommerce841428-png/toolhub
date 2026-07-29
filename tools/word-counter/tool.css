@@ -1,0 +1,3 @@
+/* Word Counter has no styling needs beyond the shared component classes in
+   assets/css/app.css — this file exists so the tool page's <link> never
+   404s, and stays here as the natural place for any tool-specific tweaks. */

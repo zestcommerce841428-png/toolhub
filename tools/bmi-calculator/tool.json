@@ -1,0 +1,28 @@
+{
+  "id": "bmi-calculator",
+  "name": "BMI Calculator",
+  "slug": "bmi-calculator",
+  "category": "calculators",
+  "description": "Calculate your Body Mass Index in metric or imperial units, with the standard WHO weight-status categories explained.",
+  "keywords": ["bmi calculator", "body mass index", "bmi chart", "healthy weight calculator"],
+  "difficulty": "beginner",
+  "priority": "high",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "⚖️",
+  "related": [],
+  "faq": [
+    {
+      "question": "What is BMI?",
+      "answer": "Body Mass Index is weight in kilograms divided by height in meters squared (kg/m²). It's a quick screening measure, not a diagnosis — it doesn't distinguish muscle from fat, so it can be misleading for very muscular or very lean people, older adults, and children."
+    },
+    {
+      "question": "What do the BMI categories mean?",
+      "answer": "Using the WHO adult thresholds: under 18.5 is Underweight, 18.5–24.9 is Normal weight, 25–29.9 is Overweight, and 30 or above is Obese. These ranges are population-level guidance, not individual medical advice."
+    },
+    {
+      "question": "Is this calculation done on a server?",
+      "answer": "No — it's a single arithmetic formula computed instantly in your browser. No health data you enter here is transmitted or stored anywhere."
+    }
+  ]
+}

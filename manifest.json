@@ -1,0 +1,18 @@
+{
+  "name": "ToolHub — Free Browser Tools",
+  "short_name": "ToolHub",
+  "description": "Fast, private, browser-based tools. No sign-up, no tracking, nothing ever leaves your device.",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "icons": [
+    {
+      "src": "/assets/icons/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

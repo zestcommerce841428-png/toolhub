@@ -1,0 +1,65 @@
+<div class="grid gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
+  <div>
+    <label for="word-counter-input" class="field-label">Your text</label>
+    <textarea
+      id="word-counter-input"
+      class="field-textarea"
+      rows="16"
+      placeholder="Type or paste your text here…"
+      spellcheck="true"
+    ></textarea>
+
+    <div class="mt-3 flex flex-wrap gap-2">
+      <button type="button" id="word-counter-copy" class="btn-secondary">Copy text</button>
+      <button type="button" id="word-counter-download" class="btn-secondary">Download .txt</button>
+      <button type="button" id="word-counter-clear" class="btn-ghost">Clear</button>
+    </div>
+
+    <p id="word-counter-status" class="sr-only" role="status" aria-live="polite"></p>
+  </div>
+
+  <aside class="card h-fit" aria-labelledby="word-counter-stats-heading">
+    <h2 id="word-counter-stats-heading" class="mb-3 text-sm font-semibold text-text">Statistics</h2>
+    <dl class="grid grid-cols-2 gap-x-4 gap-y-4 text-sm">
+      <div>
+        <dt class="text-text-muted">Words</dt>
+        <dd id="stat-words" class="text-xl font-semibold text-text">0</dd>
+      </div>
+      <div>
+        <dt class="text-text-muted">Characters</dt>
+        <dd id="stat-characters" class="text-xl font-semibold text-text">0</dd>
+      </div>
+      <div>
+        <dt class="text-text-muted">Chars (no spaces)</dt>
+        <dd id="stat-characters-no-spaces" class="text-xl font-semibold text-text">0</dd>
+      </div>
+      <div>
+        <dt class="text-text-muted">Sentences</dt>
+        <dd id="stat-sentences" class="text-xl font-semibold text-text">0</dd>
+      </div>
+      <div>
+        <dt class="text-text-muted">Paragraphs</dt>
+        <dd id="stat-paragraphs" class="text-xl font-semibold text-text">0</dd>
+      </div>
+      <div>
+        <dt class="text-text-muted">Reading time</dt>
+        <dd id="stat-reading-time" class="text-xl font-semibold text-text">0 sec</dd>
+      </div>
+      <div class="col-span-2">
+        <dt class="text-text-muted">Speaking time</dt>
+        <dd id="stat-speaking-time" class="text-xl font-semibold text-text">0 sec</dd>
+      </div>
+    </dl>
+  </aside>
+</div>
+
+<section class="prose-tool mt-12">
+  <h2>How this word counter works</h2>
+  <p>
+    Statistics update as you type, computed entirely in your browser.
+    Reading time assumes 200 words per minute (a typical adult silent
+    reading speed); speaking time assumes 130 words per minute (a
+    comfortable spoken pace). Paragraphs are counted as blocks of text
+    separated by a blank line.
+  </p>
+</section>

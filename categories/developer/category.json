@@ -1,0 +1,7 @@
+{
+  "id": "developer",
+  "name": "Developer Tools",
+  "slug": "developer",
+  "description": "Format, validate, and debug code and data — JSON, XML, and more — entirely client-side.",
+  "icon": "💻"
+}

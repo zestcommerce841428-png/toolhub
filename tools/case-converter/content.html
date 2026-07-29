@@ -1,0 +1,40 @@
+<div>
+  <label for="case-converter-input" class="field-label">Your text</label>
+  <textarea
+    id="case-converter-input"
+    class="field-textarea"
+    rows="8"
+    placeholder="Type or paste your text here…"
+  ></textarea>
+</div>
+
+<div class="mt-4">
+  <span class="field-label" id="case-mode-label">Case style</span>
+  <div class="flex flex-wrap gap-2" role="radiogroup" aria-labelledby="case-mode-label" id="case-mode-group">
+    <button type="button" role="radio" aria-checked="true" tabindex="0" data-mode="uppercase" class="btn-primary">UPPERCASE</button>
+    <button type="button" role="radio" aria-checked="false" tabindex="-1" data-mode="lowercase" class="btn-secondary">lowercase</button>
+    <button type="button" role="radio" aria-checked="false" tabindex="-1" data-mode="title" class="btn-secondary">Title Case</button>
+    <button type="button" role="radio" aria-checked="false" tabindex="-1" data-mode="sentence" class="btn-secondary">Sentence case</button>
+    <button type="button" role="radio" aria-checked="false" tabindex="-1" data-mode="toggle" class="btn-secondary">tOGGLE cASE</button>
+    <button type="button" role="radio" aria-checked="false" tabindex="-1" data-mode="capitalize" class="btn-secondary">Capitalize Words</button>
+  </div>
+</div>
+
+<div class="mt-6">
+  <label for="case-converter-output" class="field-label">Result</label>
+  <textarea id="case-converter-output" class="field-textarea" rows="8" readonly></textarea>
+  <div class="mt-3 flex flex-wrap gap-2">
+    <button type="button" id="case-converter-copy" class="btn-secondary">Copy result</button>
+    <button type="button" id="case-converter-download" class="btn-secondary">Download .txt</button>
+    <button type="button" id="case-converter-clear" class="btn-ghost">Clear</button>
+  </div>
+</div>
+
+<section class="prose-tool mt-12">
+  <h2>About case conversion</h2>
+  <p>
+    Pick a case style and start typing — the result updates live. Switching
+    styles re-applies the new style to whatever you've already typed, so
+    you can compare options without retyping anything.
+  </p>
+</section>

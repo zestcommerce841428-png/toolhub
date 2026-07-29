@@ -1,0 +1,4 @@
+/* HEX/RGB Converter relies on the shared component classes in assets/css/app.css.
+   #color-swatch's background-color is set dynamically by tool.js — that's
+   inherently data-driven inline styling (the whole point of the tool),
+   not a stand-in for real CSS. */

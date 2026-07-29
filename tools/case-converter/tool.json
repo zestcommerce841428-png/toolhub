@@ -1,0 +1,28 @@
+{
+  "id": "case-converter",
+  "name": "Case Converter",
+  "slug": "case-converter",
+  "category": "text",
+  "description": "Convert text to UPPERCASE, lowercase, Title Case, Sentence case, tOGGLE cASE, or Capitalized Words instantly.",
+  "keywords": ["case converter", "uppercase", "lowercase", "title case", "sentence case", "toggle case", "capitalize words"],
+  "difficulty": "beginner",
+  "priority": "high",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🔤",
+  "related": ["word-counter"],
+  "faq": [
+    {
+      "question": "What's the difference between Title Case and Capitalize Words?",
+      "answer": "Title Case first lowercases the whole string, then capitalizes the first letter of every word — so 'hELLO wORLD' becomes 'Hello World'. Capitalize Words only uppercases the first letter of each word and leaves the rest of each word untouched — so 'hELLO wORLD' becomes 'HELLO wORLD'."
+    },
+    {
+      "question": "Does Sentence case handle abbreviations correctly?",
+      "answer": "It capitalizes the first letter after '.', '!', or '?' followed by whitespace, which covers the vast majority of normal writing but can occasionally misfire after abbreviations like 'e.g.' — review the result for text with heavy abbreviation use."
+    },
+    {
+      "question": "Is my text uploaded anywhere?",
+      "answer": "No — the conversion happens instantly in your browser with plain JavaScript string methods. Nothing is sent to a server."
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+<footer class="mt-16 border-t border-border bg-surface">
+  <div class="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 md:grid-cols-4 lg:px-8">
+    <div class="md:col-span-2">
+      <a href="/" class="flex items-center gap-2 text-lg font-bold text-text">
+        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-fg" aria-hidden="true">TH</span>
+        <span>ToolHub</span>
+      </a>
+      <p class="mt-3 max-w-sm text-sm text-text-muted">
+        Fast, private, browser-based tools. Every tool on this site runs
+        entirely on your device — nothing you type or upload is ever sent
+        to a server.
+      </p>
+    </div>
+
+    <div>
+      <h2 class="text-sm font-semibold text-text">Categories</h2>
+      <ul class="mt-3 space-y-2 text-sm">
+        {{FOOTER_CATEGORY_LINKS}}
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="text-sm font-semibold text-text">Company</h2>
+      <ul class="mt-3 space-y-2 text-sm">
+        <li><a class="text-text-muted hover:text-text" href="/about/">About</a></li>
+        <li><a class="text-text-muted hover:text-text" href="/privacy/">Privacy</a></li>
+        <li><a class="text-text-muted hover:text-text" href="/terms/">Terms</a></li>
+        <li><a class="text-text-muted hover:text-text" href="/contact/">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-4 text-xs text-text-subtle sm:flex-row sm:px-6 lg:px-8">
+      <p>&copy; <span id="current-year">2026</span> ToolHub. All tools run locally in your browser.</p>
+      <p>No accounts. No tracking. No analytics.</p>
+    </div>
+  </div>
+</footer>

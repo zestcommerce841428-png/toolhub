@@ -1,0 +1,28 @@
+{
+  "id": "json-formatter",
+  "name": "JSON Formatter",
+  "slug": "json-formatter",
+  "category": "developer",
+  "description": "Format, validate, and minify JSON with clear, line-and-column error messages — all in your browser.",
+  "keywords": ["json formatter", "json validator", "json beautifier", "json minifier", "format json", "pretty print json"],
+  "difficulty": "beginner",
+  "priority": "high",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🧾",
+  "related": [],
+  "faq": [
+    {
+      "question": "Is my JSON uploaded to a server?",
+      "answer": "No. Parsing and formatting use the browser's built-in JSON.parse and JSON.stringify — your data never leaves your device, which matters if you're pasting real API responses or config with sensitive values."
+    },
+    {
+      "question": "Why does it say my JSON is invalid when it looks fine?",
+      "answer": "Common causes are trailing commas, single quotes instead of double quotes, or unquoted object keys — none of which are valid in strict JSON even though they're valid in JavaScript object literals. The error message includes the line and column where parsing failed."
+    },
+    {
+      "question": "What does 'minify' do?",
+      "answer": "It re-serializes your JSON with no extra whitespace, producing the smallest valid representation of the same data — useful for shipping config or API payloads."
+    }
+  ]
+}

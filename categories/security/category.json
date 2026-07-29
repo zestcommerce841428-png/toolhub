@@ -1,0 +1,7 @@
+{
+  "id": "security",
+  "name": "Security Tools",
+  "slug": "security",
+  "description": "Generate strong passwords, hashes, and tokens — all computed locally in your browser, never transmitted.",
+  "icon": "🔒"
+}

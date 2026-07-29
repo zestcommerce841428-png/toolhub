@@ -1,0 +1,43 @@
+<div class="flex flex-wrap items-end gap-3">
+  <div>
+    <label for="json-indent" class="field-label">Indent</label>
+    <select id="json-indent" class="field-select w-32">
+      <option value="2" selected>2 spaces</option>
+      <option value="4">4 spaces</option>
+      <option value="tab">Tab</option>
+    </select>
+  </div>
+  <div class="flex flex-wrap gap-2">
+    <button type="button" id="json-format" class="btn-primary">Format</button>
+    <button type="button" id="json-minify" class="btn-secondary">Minify</button>
+    <button type="button" id="json-copy" class="btn-secondary">Copy</button>
+    <button type="button" id="json-download" class="btn-secondary">Download .json</button>
+    <button type="button" id="json-clear" class="btn-ghost">Clear</button>
+  </div>
+</div>
+
+<div class="mt-4">
+  <label for="json-input" class="field-label">JSON</label>
+  <textarea
+    id="json-input"
+    class="field-textarea"
+    rows="18"
+    spellcheck="false"
+    placeholder='{"example": "Paste or type JSON here…"}'
+  ></textarea>
+</div>
+
+<div id="json-status" class="mt-3 rounded-lg border px-3 py-2 text-sm" role="status" aria-live="polite">
+  Paste or type JSON above, then choose Format or Minify.
+</div>
+
+<section class="prose-tool mt-12">
+  <h2>Formatting vs. minifying</h2>
+  <p>
+    <strong>Format</strong> re-indents your JSON for readability. <strong>Minify</strong>
+    strips all non-essential whitespace to produce the smallest valid
+    representation of the same data. Both operations first fully parse your
+    JSON, so if there's a syntax error, you'll get its exact line and
+    column instead of a silently mangled result.
+  </p>
+</section>
