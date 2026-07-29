@@ -1,0 +1,64 @@
+<div class="grid gap-4 lg:grid-cols-3">
+  <div class="card">
+    <h2 class="mb-3 text-sm font-semibold text-text">X% of Y</h2>
+    <div class="flex flex-wrap items-end gap-2">
+      <div class="min-w-0 flex-1">
+        <label for="pct-of-percent" class="field-label">Percent</label>
+        <input type="number" id="pct-of-percent" class="field-input" value="20" step="any" inputmode="decimal" />
+      </div>
+      <span class="pb-2 text-text-muted">% of</span>
+      <div class="min-w-0 flex-1">
+        <label for="pct-of-base" class="field-label">Number</label>
+        <input type="number" id="pct-of-base" class="field-input" value="50" step="any" inputmode="decimal" />
+      </div>
+    </div>
+    <p class="mt-3 text-sm text-text-muted">Result</p>
+    <p id="pct-of-result" class="text-2xl font-bold text-text">—</p>
+  </div>
+
+  <div class="card">
+    <h2 class="mb-3 text-sm font-semibold text-text">X is what % of Y?</h2>
+    <div class="flex flex-wrap items-end gap-2">
+      <div class="min-w-0 flex-1">
+        <label for="pct-what-part" class="field-label">Part</label>
+        <input type="number" id="pct-what-part" class="field-input" value="10" step="any" inputmode="decimal" />
+      </div>
+      <span class="pb-2 text-text-muted">of</span>
+      <div class="min-w-0 flex-1">
+        <label for="pct-what-whole" class="field-label">Whole</label>
+        <input type="number" id="pct-what-whole" class="field-input" value="50" step="any" inputmode="decimal" />
+      </div>
+    </div>
+    <p class="mt-3 text-sm text-text-muted">Result</p>
+    <p id="pct-what-result" class="text-2xl font-bold text-text">—</p>
+  </div>
+
+  <div class="card">
+    <h2 class="mb-3 text-sm font-semibold text-text">% change from X to Y</h2>
+    <div class="flex flex-wrap items-end gap-2">
+      <div class="min-w-0 flex-1">
+        <label for="pct-change-from" class="field-label">From</label>
+        <input type="number" id="pct-change-from" class="field-input" value="50" step="any" inputmode="decimal" />
+      </div>
+      <span class="pb-2 text-text-muted">to</span>
+      <div class="min-w-0 flex-1">
+        <label for="pct-change-to" class="field-label">To</label>
+        <input type="number" id="pct-change-to" class="field-input" value="65" step="any" inputmode="decimal" />
+      </div>
+    </div>
+    <p class="mt-3 text-sm text-text-muted">Result</p>
+    <p id="pct-change-result" class="text-2xl font-bold text-text">—</p>
+  </div>
+</div>
+
+<section class="prose-tool mt-12">
+  <h2>Three different questions</h2>
+  <p>
+    These look similar but answer different questions: the first finds a
+    portion of a number, the second finds what portion one number is of
+    another, and the third finds how much a number grew or shrank in
+    percentage terms. Mixing them up is a common source of "that math
+    doesn't add up" mistakes — e.g. a 20% increase followed by a 20%
+    decrease does not return you to the original number.
+  </p>
+</section>

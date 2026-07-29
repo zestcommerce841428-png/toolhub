@@ -1,0 +1,47 @@
+<div class="grid gap-4 sm:grid-cols-3">
+  <div>
+    <label for="si-principal" class="field-label">Principal</label>
+    <input type="number" id="si-principal" class="field-input" value="10000" min="0" step="any" inputmode="decimal" />
+  </div>
+  <div>
+    <label for="si-rate" class="field-label">Annual interest rate (%)</label>
+    <input type="number" id="si-rate" class="field-input" value="5" min="0" step="any" inputmode="decimal" />
+  </div>
+  <div>
+    <span class="field-label">Time period</span>
+    <div class="flex gap-2">
+      <input type="number" id="si-time" class="field-input" value="2" min="0" step="any" inputmode="decimal" />
+      <select id="si-time-unit" class="field-select w-32">
+        <option value="years" selected>Years</option>
+        <option value="months">Months</option>
+        <option value="days">Days</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="card mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
+  <div>
+    <p class="text-sm text-text-muted">Interest earned</p>
+    <p id="si-interest" class="text-2xl font-bold text-text">—</p>
+  </div>
+  <div>
+    <p class="text-sm text-text-muted">Total amount</p>
+    <p id="si-total" class="text-2xl font-bold text-primary">—</p>
+  </div>
+  <div>
+    <p class="text-sm text-text-muted">Principal</p>
+    <p id="si-principal-echo" class="text-2xl font-bold text-text">—</p>
+  </div>
+</div>
+
+<section class="prose-tool mt-12">
+  <h2>Simple vs. compound interest</h2>
+  <p>
+    Simple interest is calculated only on the original principal for the
+    entire period — it doesn't earn interest on previously earned interest,
+    unlike <a href="/tools/compound-interest-calculator/">compound
+    interest</a>. It's the formula behind most short-term loans, car loans,
+    and some bonds: <code>Interest = Principal × Rate × Time / 100</code>.
+  </p>
+</section>

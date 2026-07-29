@@ -1,0 +1,24 @@
+{
+  "id": "discount-calculator",
+  "name": "Discount Calculator",
+  "slug": "discount-calculator",
+  "category": "calculators",
+  "description": "Calculate the final price after a discount (or stacked discounts), the amount you save, and work backward from a sale price to find the original.",
+  "keywords": ["discount calculator", "sale price calculator", "percent off calculator", "stacked discount", "original price calculator"],
+  "difficulty": "beginner",
+  "priority": "high",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🏷️",
+  "related": ["percentage-calculator", "markup-calculator"],
+  "faq": [
+    {
+      "question": "Why isn't \"20% off, then 10% off\" the same as 30% off?",
+      "answer": "Because the second discount is calculated on the already-reduced price, not the original. $100 with 20% off is $80; taking a further 10% off that $80 removes $8, not $10 — an effective 28% off overall, not 30%. This calculator applies each discount in sequence, the same way a store's register does, and shows the real effective percentage."
+    },
+    {
+      "question": "How does the reverse calculator work?",
+      "answer": "Given the price you actually paid and the discount percentage, it solves finalPrice = originalPrice × (1 − discount/100) for originalPrice — useful for figuring out what something cost before a sale, or checking that a discount was applied correctly."
+    }
+  ]
+}

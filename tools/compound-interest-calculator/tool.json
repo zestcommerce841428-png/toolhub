@@ -1,0 +1,24 @@
+{
+  "id": "compound-interest-calculator",
+  "name": "Compound Interest Calculator",
+  "slug": "compound-interest-calculator",
+  "category": "calculators",
+  "description": "Calculate compound interest with annual, semi-annual, quarterly, monthly, or daily compounding, including the effective annual rate (APY).",
+  "keywords": ["compound interest calculator", "apy calculator", "investment growth calculator", "compound interest formula"],
+  "difficulty": "intermediate",
+  "priority": "high",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "📈",
+  "related": ["simple-interest-calculator", "loan-emi-calculator"],
+  "faq": [
+    {
+      "question": "What's the difference between the nominal rate and the APY?",
+      "answer": "The nominal (annual percentage) rate is the rate you enter — the stated yearly rate before compounding is applied. The effective annual rate (APY) accounts for how often that rate compounds: a 5% nominal rate compounded monthly yields about 5.116% over a year, because each month's interest starts earning its own interest. The more frequent the compounding, the larger the gap between nominal rate and APY."
+    },
+    {
+      "question": "What formula does this use?",
+      "answer": "A = P(1 + r/n)^(n×t) — P is the principal, r is the annual rate as a decimal, n is the number of compounding periods per year, and t is time in years. Interest earned is simply the final amount A minus the principal P."
+    }
+  ]
+}

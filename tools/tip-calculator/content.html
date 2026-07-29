@@ -1,0 +1,51 @@
+<div class="grid gap-4 sm:grid-cols-2">
+  <div>
+    <label for="tip-bill" class="field-label">Bill amount</label>
+    <input type="number" id="tip-bill" class="field-input" value="50" min="0" step="any" inputmode="decimal" />
+  </div>
+  <div>
+    <label for="tip-people" class="field-label">Split between</label>
+    <input type="number" id="tip-people" class="field-input" value="1" min="1" step="1" inputmode="numeric" />
+  </div>
+</div>
+
+<div class="mt-4">
+  <label for="tip-percent" class="field-label">Tip percent: <span id="tip-percent-value">18</span>%</label>
+  <input type="range" id="tip-percent" min="0" max="40" step="1" value="18" class="w-full accent-primary" />
+  <div class="mt-2 flex flex-wrap gap-2">
+    <button type="button" class="btn-secondary" data-tip-preset="10">10%</button>
+    <button type="button" class="btn-secondary" data-tip-preset="15">15%</button>
+    <button type="button" class="btn-secondary" data-tip-preset="18">18%</button>
+    <button type="button" class="btn-secondary" data-tip-preset="20">20%</button>
+    <button type="button" class="btn-secondary" data-tip-preset="25">25%</button>
+  </div>
+</div>
+
+<div class="card mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
+  <div>
+    <p class="text-sm text-text-muted">Tip amount</p>
+    <p id="tip-amount" class="text-xl font-bold text-text">—</p>
+  </div>
+  <div>
+    <p class="text-sm text-text-muted">Total bill</p>
+    <p id="tip-total" class="text-xl font-bold text-text">—</p>
+  </div>
+  <div>
+    <p class="text-sm text-text-muted">Tip / person</p>
+    <p id="tip-per-person-tip" class="text-xl font-bold text-text">—</p>
+  </div>
+  <div>
+    <p class="text-sm text-text-muted">Total / person</p>
+    <p id="tip-per-person-total" class="text-xl font-bold text-primary">—</p>
+  </div>
+</div>
+
+<section class="prose-tool mt-12">
+  <h2>A note on tip etiquette</h2>
+  <p>
+    Tipping norms vary widely by country and context — this tool just does
+    the arithmetic. In the US, 15–20% on the pre-tax bill is a common
+    baseline for sit-down restaurant service; many other countries tip
+    little or nothing since service is already included in the price.
+  </p>
+</section>

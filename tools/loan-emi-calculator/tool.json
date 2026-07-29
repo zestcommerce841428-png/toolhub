@@ -1,0 +1,28 @@
+{
+  "id": "loan-emi-calculator",
+  "name": "Loan / EMI Calculator",
+  "slug": "loan-emi-calculator",
+  "category": "calculators",
+  "description": "Calculate your monthly loan payment (EMI), total interest, and total repayment using the standard reducing-balance formula, with a full amortization schedule.",
+  "keywords": ["emi calculator", "loan calculator", "mortgage calculator", "monthly payment calculator", "amortization schedule"],
+  "difficulty": "intermediate",
+  "priority": "high",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🏦",
+  "related": ["compound-interest-calculator", "simple-interest-calculator"],
+  "faq": [
+    {
+      "question": "What is EMI?",
+      "answer": "EMI (Equated Monthly Installment) is the fixed amount you pay every month toward a loan, covering both principal and interest. It's calculated with the reducing-balance formula EMI = P × r × (1+r)ⁿ / ((1+r)ⁿ − 1), the same math behind mortgages, auto loans, and most installment loans."
+    },
+    {
+      "question": "Why does the interest portion of my payment shrink over time?",
+      "answer": "Interest each month is charged only on the remaining balance, which shrinks with every payment. Since the total EMI stays fixed, the portion covering interest shrinks while the portion paying down principal grows — visible month-by-month in the amortization schedule."
+    },
+    {
+      "question": "Does this include taxes, insurance, or fees?",
+      "answer": "No — this calculates the pure principal-and-interest payment from the loan amount, rate, and term you enter. Real mortgage payments often bundle property tax and insurance escrow on top of this; check with your lender for the all-in figure."
+    }
+  ]
+}

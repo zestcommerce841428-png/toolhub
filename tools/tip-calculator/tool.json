@@ -1,0 +1,24 @@
+{
+  "id": "tip-calculator",
+  "name": "Tip Calculator",
+  "slug": "tip-calculator",
+  "category": "calculators",
+  "description": "Calculate a tip amount and split the total bill evenly between any number of people, with quick presets for common tip percentages.",
+  "keywords": ["tip calculator", "gratuity calculator", "bill splitter", "split the bill", "restaurant tip"],
+  "difficulty": "beginner",
+  "priority": "high",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🧾",
+  "related": ["percentage-calculator", "discount-calculator"],
+  "faq": [
+    {
+      "question": "Does this tip on the pre-tax or post-tax total?",
+      "answer": "Whatever you enter as the bill amount — this tool doesn't separate tax from the bill automatically. In the US, tipping on the pre-tax subtotal is the more common convention; enter that amount if you want to follow it."
+    },
+    {
+      "question": "How does splitting work with an uneven number of people?",
+      "answer": "The total (bill + tip) is divided evenly across everyone entered — it doesn't account for people ordering different amounts. For itemized splitting where everyone pays for what they actually ordered, you'd need to total each person's items separately first."
+    }
+  ]
+}

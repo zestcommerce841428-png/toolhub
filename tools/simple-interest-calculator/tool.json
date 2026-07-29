@@ -1,0 +1,24 @@
+{
+  "id": "simple-interest-calculator",
+  "name": "Simple Interest Calculator",
+  "slug": "simple-interest-calculator",
+  "category": "calculators",
+  "description": "Calculate simple interest and total repayment amount from a principal, annual rate, and time period in years, months, or days.",
+  "keywords": ["simple interest calculator", "interest calculator", "principal interest rate time", "loan interest calculator"],
+  "difficulty": "beginner",
+  "priority": "normal",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🧮",
+  "related": ["compound-interest-calculator", "loan-emi-calculator"],
+  "faq": [
+    {
+      "question": "What's the formula used here?",
+      "answer": "Interest = Principal × Rate × Time / 100, where Rate is the annual percentage rate and Time is in years (a time period entered in months or days is converted to a fractional year first — e.g. 6 months becomes 0.5 years)."
+    },
+    {
+      "question": "When is simple interest used instead of compound interest?",
+      "answer": "Simple interest is common for short-term loans, auto loans, and some bonds, where interest is charged only on the original principal. Most savings accounts, credit cards, and mortgages instead use compound interest, where interest also accrues on previously earned interest — see the Compound Interest Calculator for that case."
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+  <div>
+    <label for="ci-principal" class="field-label">Principal</label>
+    <input type="number" id="ci-principal" class="field-input" value="10000" min="0" step="any" inputmode="decimal" />
+  </div>
+  <div>
+    <label for="ci-rate" class="field-label">Annual interest rate (%)</label>
+    <input type="number" id="ci-rate" class="field-input" value="5" min="0" step="any" inputmode="decimal" />
+  </div>
+  <div>
+    <label for="ci-years" class="field-label">Years</label>
+    <input type="number" id="ci-years" class="field-input" value="10" min="0" step="any" inputmode="decimal" />
+  </div>
+  <div>
+    <label for="ci-compounding" class="field-label">Compounding frequency</label>
+    <select id="ci-compounding" class="field-select"></select>
+  </div>
+</div>
+
+<div class="card mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
+  <div>
+    <p class="text-sm text-text-muted">Final amount</p>
+    <p id="ci-total" class="text-2xl font-bold text-primary">—</p>
+  </div>
+  <div>
+    <p class="text-sm text-text-muted">Interest earned</p>
+    <p id="ci-interest" class="text-2xl font-bold text-text">—</p>
+  </div>
+  <div>
+    <p class="text-sm text-text-muted">Effective annual rate (APY)</p>
+    <p id="ci-apy" class="text-2xl font-bold text-text">—</p>
+  </div>
+</div>
+
+<section class="prose-tool mt-12">
+  <h2>Why compounding frequency matters</h2>
+  <p>
+    A 5% annual rate compounded monthly earns slightly more than 5%
+    compounded annually, because interest starts earning its own interest
+    sooner — that "effective" rate is the APY shown above. The formula is
+    <code>A = P(1 + r/n)ⁿᵗ</code>, where P is principal, r is the annual
+    rate as a decimal, n is compounds per year, and t is time in years.
+  </p>
+</section>

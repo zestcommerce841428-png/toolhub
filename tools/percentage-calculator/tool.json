@@ -1,0 +1,24 @@
+{
+  "id": "percentage-calculator",
+  "name": "Percentage Calculator",
+  "slug": "percentage-calculator",
+  "category": "calculators",
+  "description": "Calculate a percentage of a number, what percent one number is of another, or the percent change between two numbers — three calculators in one, updating live.",
+  "keywords": ["percentage calculator", "percent of", "percent change", "what percent", "percentage increase"],
+  "difficulty": "beginner",
+  "priority": "high",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "💯",
+  "related": ["discount-calculator", "tip-calculator"],
+  "faq": [
+    {
+      "question": "Why does a 20% increase then a 20% decrease not return the original number?",
+      "answer": "Because each percentage is calculated on a different base. Increasing 50 by 20% gives 60; decreasing 60 by 20% gives 48, not 50 — the second 20% is 20% of the larger number. This is a very common source of confusion, and exactly why the \"% change\" calculator here always shows the actual result rather than assuming it."
+    },
+    {
+      "question": "What's the difference between the second and third calculators?",
+      "answer": "\"X is what % of Y\" answers a static question about proportion (10 out of 50 is 20%). \"% change from X to Y\" answers a question about growth or shrinkage between two values over time or between two states (going from 50 to 65 is a 30% increase) — the two calculations use the same numbers differently and aren't interchangeable."
+    }
+  ]
+}
