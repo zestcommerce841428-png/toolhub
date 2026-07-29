@@ -19,8 +19,9 @@ import path from "node:path";
 import { loadCategories, loadTools, loadPages } from "./lib/content.js";
 import { renderTemplate, escapeHtml } from "./lib/template.js";
 import { breadcrumbSchema, faqSchema, softwareApplicationSchema, renderJsonLd } from "./lib/schema.js";
-import { writeFile, copyFile, copyDir } from "./lib/fs-helpers.js";
+import { writeFile, copyFile, copyDir, copyDirWithJsTransform } from "./lib/fs-helpers.js";
 import { resolveSiteUrl } from "./lib/site-url.js";
+import { minifyHtmlString, minifyJsString } from "./lib/minify.js";
 
 const rootDir = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const publicDir = path.join(rootDir, "public");
@@ -74,6 +75,7 @@ const categoryTemplate = readTemplate("category.template.html");
 const homeTemplate = readTemplate("home.template.html");
 const pageTemplate = readTemplate("page.template.html");
 const themeBootstrapScript = readFileSync(path.join(templatesDir, "partials", "theme-bootstrap.js"), "utf8");
+const faviconLinks = readFileSync(path.join(templatesDir, "partials", "favicon-links.html"), "utf8");
 
 let headerPartial = readFileSync(path.join(templatesDir, "partials", "header.html"), "utf8");
 let footerPartial = readFileSync(path.join(templatesDir, "partials", "footer.html"), "utf8");
@@ -199,18 +201,31 @@ function renderRelatedToolsSection(tool) {
       </section>`;
 }
 
+/** Minifies `html` and writes it — every generated page goes through here so none can accidentally ship unminified. */
+async function writeMinifiedHtml(filePath, html, context) {
+  writeFile(filePath, await minifyHtmlString(html, context));
+}
+
+/** Minifies a JS file (if it exists) and writes the result to `destPath`. */
+async function copyMinifiedJs(sourcePath, destPath) {
+  if (!existsSync(sourcePath)) return;
+  const code = readFileSync(sourcePath, "utf8");
+  writeFile(destPath, await minifyJsString(code, path.relative(rootDir, sourcePath)));
+}
+
 // ---------------------------------------------------------------------------
 // Copy static assets
 // ---------------------------------------------------------------------------
 
 copyFile(path.join(rootDir, "assets/css/tokens.css"), path.join(publicDir, "assets/css/tokens.css"));
-copyDir(path.join(rootDir, "assets/js"), path.join(publicDir, "assets/js"));
+await copyDirWithJsTransform(path.join(rootDir, "assets/js"), path.join(publicDir, "assets/js"), minifyJsString);
 copyDir(path.join(rootDir, "assets/icons"), path.join(publicDir, "assets/icons"));
 copyDir(path.join(rootDir, "assets/images"), path.join(publicDir, "assets/images"));
 copyDir(path.join(rootDir, "assets/fonts"), path.join(publicDir, "assets/fonts"));
 copyDir(path.join(rootDir, "assets/animations"), path.join(publicDir, "assets/animations"));
 copyFile(path.join(rootDir, "manifest.json"), path.join(publicDir, "manifest.json"));
-copyFile(path.join(rootDir, "sw.js"), path.join(publicDir, "sw.js"));
+await copyMinifiedJs(path.join(rootDir, "sw.js"), path.join(publicDir, "sw.js"));
+copyFile(path.join(rootDir, "browserconfig.xml"), path.join(publicDir, "browserconfig.xml"));
 
 // ---------------------------------------------------------------------------
 // Render tool pages
@@ -242,6 +257,7 @@ for (const tool of tools) {
       SITE_NAME: escapeHtml(siteName),
       TWITTER_HANDLE: escapeHtml(twitterHandle),
       THEME_BOOTSTRAP_SCRIPT: themeBootstrapScript,
+      FAVICON_LINKS: faviconLinks,
       HEADER: headerPartial,
       FOOTER: footerPartial,
       JSON_LD: jsonLd,
@@ -256,13 +272,13 @@ for (const tool of tools) {
     `tools/${tool.slug}`
   );
 
-  writeFile(path.join(publicDir, "tools", tool.slug, "index.html"), html);
+  await writeMinifiedHtml(path.join(publicDir, "tools", tool.slug, "index.html"), html, `tools/${tool.slug}`);
   copyFile(path.join(rootDir, "tools", tool.slug, "tool.css"), path.join(publicDir, "tools", tool.slug, "tool.css"));
-  copyFile(path.join(rootDir, "tools", tool.slug, "tool.js"), path.join(publicDir, "tools", tool.slug, "tool.js"));
+  await copyMinifiedJs(path.join(rootDir, "tools", tool.slug, "tool.js"), path.join(publicDir, "tools", tool.slug, "tool.js"));
   // logic.js is optional: only tools with non-trivial, unit-tested pure
-  // logic split it out of tool.js (see docs/CONTRIBUTING.md). copyFile is a
-  // silent no-op when the source file doesn't exist.
-  copyFile(path.join(rootDir, "tools", tool.slug, "logic.js"), path.join(publicDir, "tools", tool.slug, "logic.js"));
+  // logic split it out of tool.js (see docs/CONTRIBUTING.md). copyMinifiedJs
+  // is a silent no-op when the source file doesn't exist.
+  await copyMinifiedJs(path.join(rootDir, "tools", tool.slug, "logic.js"), path.join(publicDir, "tools", tool.slug, "logic.js"));
 }
 
 // ---------------------------------------------------------------------------
@@ -292,6 +308,7 @@ for (const category of categories) {
       SITE_NAME: escapeHtml(siteName),
       TWITTER_HANDLE: escapeHtml(twitterHandle),
       THEME_BOOTSTRAP_SCRIPT: themeBootstrapScript,
+      FAVICON_LINKS: faviconLinks,
       HEADER: headerPartial,
       FOOTER: footerPartial,
       JSON_LD: jsonLd,
@@ -307,7 +324,7 @@ for (const category of categories) {
     `categories/${category.slug}`
   );
 
-  writeFile(path.join(publicDir, "categories", category.slug, "index.html"), html);
+  await writeMinifiedHtml(path.join(publicDir, "categories", category.slug, "index.html"), html, `categories/${category.slug}`);
 }
 
 {
@@ -333,9 +350,11 @@ for (const category of categories) {
       META_DESCRIPTION: "Browse every ToolHub category — text, developer, security, color, and calculator tools that run entirely in your browser.",
       CANONICAL_URL: canonicalUrl,
       OG_TITLE: "All categories",
+      OG_IMAGE: absoluteUrl(defaultOgImage),
       SITE_NAME: escapeHtml(siteName),
       TWITTER_HANDLE: escapeHtml(twitterHandle),
       THEME_BOOTSTRAP_SCRIPT: themeBootstrapScript,
+      FAVICON_LINKS: faviconLinks,
       HEADER: headerPartial,
       FOOTER: footerPartial,
       JSON_LD: jsonLd,
@@ -345,7 +364,7 @@ for (const category of categories) {
     "categories/index"
   );
 
-  writeFile(path.join(publicDir, "categories", "index.html"), html);
+  await writeMinifiedHtml(path.join(publicDir, "categories", "index.html"), html, "categories/index");
 }
 
 // ---------------------------------------------------------------------------
@@ -369,9 +388,11 @@ for (const page of pages) {
       META_DESCRIPTION: escapeHtml(page.description),
       CANONICAL_URL: canonicalUrl,
       OG_TITLE: escapeHtml(page.title),
+      OG_IMAGE: absoluteUrl(defaultOgImage),
       SITE_NAME: escapeHtml(siteName),
       TWITTER_HANDLE: escapeHtml(twitterHandle),
       THEME_BOOTSTRAP_SCRIPT: themeBootstrapScript,
+      FAVICON_LINKS: faviconLinks,
       HEADER: headerPartial,
       FOOTER: footerPartial,
       JSON_LD: jsonLd,
@@ -381,7 +402,7 @@ for (const page of pages) {
     `pages/${page.slug}`
   );
 
-  writeFile(path.join(publicDir, page.slug, "index.html"), html);
+  await writeMinifiedHtml(path.join(publicDir, page.slug, "index.html"), html, `pages/${page.slug}`);
 }
 
 // ---------------------------------------------------------------------------
@@ -412,6 +433,7 @@ for (const page of pages) {
       SITE_NAME: escapeHtml(siteName),
       TWITTER_HANDLE: escapeHtml(twitterHandle),
       THEME_BOOTSTRAP_SCRIPT: themeBootstrapScript,
+      FAVICON_LINKS: faviconLinks,
       HEADER: headerPartial,
       FOOTER: footerPartial,
       JSON_LD: jsonLd,
@@ -423,7 +445,7 @@ for (const page of pages) {
     "home"
   );
 
-  writeFile(path.join(publicDir, "index.html"), html);
+  await writeMinifiedHtml(path.join(publicDir, "index.html"), html, "home");
 }
 
 // ---------------------------------------------------------------------------
@@ -489,7 +511,7 @@ const offlineHtml = `<!doctype html>
 </body>
 </html>
 `;
-writeFile(path.join(publicDir, "offline.html"), offlineHtml);
+await writeMinifiedHtml(path.join(publicDir, "offline.html"), offlineHtml, "offline");
 
 // ---------------------------------------------------------------------------
 // Summary

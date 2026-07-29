@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="toolhubMaskableTitle">
+  <title id="toolhubMaskableTitle">ToolHub</title>
+  <!--
+    Maskable PWA icon per the W3C spec: the background must be a full-bleed
+    fill (no rounded corners of its own — the OS applies whatever mask
+    shape it wants, circle/squircle/rounded-square) and the meaningful
+    content (the "TH" mark) must stay inside the ~80%-diameter safe zone
+    centered on the canvas, or it gets clipped by aggressive masks.
+  -->
+  <defs>
+    <linearGradient id="markGradientMaskable" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="55%" stop-color="#2563eb" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#markGradientMaskable)" />
+  <text
+    x="256"
+    y="300"
+    text-anchor="middle"
+    font-family="-apple-system, Segoe UI, Roboto, Arial, sans-serif"
+    font-size="176"
+    font-weight="800"
+    letter-spacing="-4"
+    fill="#ffffff"
+  >TH</text>
+</svg>

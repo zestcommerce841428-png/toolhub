@@ -159,6 +159,40 @@ that once, then does in-memory scoring (name match > keyword match >
 description match) — no server, no third-party search service, fast enough
 client-side at 1,500 entries (~200KB of JSON) without pagination tricks.
 
+## Brand assets and the icon-generation script
+
+`assets/icons/icon-mark.svg` and `icon-mark-maskable.svg` are the two
+master vector sources for every favicon/app-icon size the site ships —
+`assets/icons/og-source.svg` is a third, purpose-built for the 1200×630
+social share image rather than a squeezed-in icon. `npm run generate:icons`
+(`scripts/generate-icons.mjs`) rasterizes these into every size referenced
+by `templates/partials/favicon-links.html`, `manifest.json`, and
+`browserconfig.xml`, using `sharp`. This is a maintenance script, not part
+of `npm run build` — it only needs to run when the logo changes, and its
+PNG output is committed to `assets/icons/`/`assets/images/` like any other
+static asset. `favicon.ico` is packed by a small hand-written encoder in
+that same script rather than a dependency: the modern ICO format is just a
+tiny header wrapping PNG bytes, and the obvious dependency for it
+(`to-ico`) pulls in a `jimp` → `request` chain with a dozen known
+vulnerabilities through long-unmaintained transitive packages — not an
+acceptable trade for one file format.
+
+## Minification
+
+`scripts/lib/minify.js` wraps `html-minifier-terser` (HTML) and `terser`
+(JS), both build-time-only devDependencies. Every generated page passes
+through HTML minification right before it's written; every JS file headed
+for `public/` — `assets/js/**`, each tool's `tool.js`/`logic.js`, `sw.js` —
+passes through JS minification (`copyDirWithJsTransform` / `copyMinifiedJs`
+in `scripts/lib/fs-helpers.js` and `scripts/build.js`) instead of a raw
+file copy. Terser runs in `module: true` mode so ESM `import`/`export`
+statements survive intact rather than being treated as a script. The HTML
+minifier's `minifyJS` option only touches `<script>` tags with an absent
+or JS-recognized `type`, so `<script type="application/ld+json">`
+(structured data) is correctly left alone — minifying JSON-LD as if it
+were JavaScript would corrupt it. CSS doesn't need a separate step here;
+it's already minified by Tailwind's own `--minify` flag.
+
 ## Accessibility & SEO, enforced structurally, not by discipline alone
 
 Rather than relying on every future tool author to remember WCAG and schema

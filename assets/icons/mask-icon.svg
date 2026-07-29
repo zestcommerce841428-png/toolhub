@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="toolhubMaskTitle">
+  <title id="toolhubMaskTitle">ToolHub</title>
+  <!--
+    Safari's "pinned tab" / mask-icon format: a single-color silhouette on
+    a transparent background. Safari uses only the shape's alpha channel
+    as a mask and recolors it (usually black, or the color set via
+    <link rel="mask-icon" color="...">) — any fill color here is just a
+    sane default for tools that don't understand the mask semantics.
+  -->
+  <text
+    x="256"
+    y="326"
+    text-anchor="middle"
+    font-family="-apple-system, Segoe UI, Roboto, Arial, sans-serif"
+    font-size="248"
+    font-weight="800"
+    letter-spacing="-6"
+    fill="#000000"
+  >TH</text>
+</svg>

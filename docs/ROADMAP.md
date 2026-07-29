@@ -96,17 +96,49 @@ the reasoning behind the foundation itself.
   keyboard nav), and a fresh 48-combination (12 widths × 4 pages) overflow
   + nav-visibility sweep — all clean, zero console errors.
 
+**Phase 1.7 — shipped (brand icon system + production minification):**
+
+- Full brand/favicon icon set generated from two hand-authored master SVGs
+  (`assets/icons/icon-mark.svg`, `icon-mark-maskable.svg`) via
+  `npm run generate:icons` (`scripts/generate-icons.mjs`, using `sharp`):
+  16/32/48/96px favicons + `favicon.ico`, four Apple touch icon sizes,
+  the full PWA manifest set (192/256/384/512, plus maskable 192/512), four
+  Windows tile sizes with `browserconfig.xml`, a Safari `mask-icon.svg`,
+  and a designed 1200×630 Open Graph/Twitter share image
+  (`assets/images/og-default.png`, generated from `og-source.svg`) — which
+  was previously referenced in every page's meta tags but didn't actually
+  exist as a file. The header/footer wordmark badge and `favicon.svg` were
+  also updated to the same blue→navy gradient so the mark is visually
+  identical everywhere it appears, rather than a flat-color badge next to
+  a gradient favicon. `to-ico` was evaluated and rejected for the `.ico`
+  step — it pulls in `jimp` → `request` → 12 known vulnerabilities (5
+  critical) via long-abandoned transitive dependencies; wrote a ~40-line
+  dependency-free ICO packer instead (the format is just a small header
+  wrapping PNG bytes).
+- Production minification: every generated HTML page now goes through
+  `html-minifier-terser`, and every shipped JS file (`assets/js/**`, each
+  tool's `tool.js`/`logic.js`, `sw.js`) through `terser`, both as build-time
+  devDependencies (same category as `tailwindcss` — nothing ships to the
+  browser). JSON-LD `<script>` blocks are correctly left untouched (verified
+  explicitly, since minifying structured data as JS would corrupt it), and
+  terser runs in `module: true` mode so ESM `import`/`export` survive
+  minification intact. CSS was already minified via Tailwind's own
+  `--minify` flag. Verified with the full 75-test unit suite plus a fresh
+  Playwright pass (22+9 functional checks, 48-combination responsive sweep)
+  against the minified output specifically, not just the unminified source.
+
 ## Deliberately deferred, and why
 
-- **Icons are emoji, not a custom SVG icon system.** The spec calls for
-  "Icon Tokens" / "Shared icons." Emoji are genuinely fine for a Phase 1 of
-  6 tools — they're crisp at any size, need zero asset pipeline, and are
-  accessible by default. They stop being fine well before tool #1,500,
-  where visual consistency across a huge catalog starts to matter and
-  brand identity does too. **Do this before scaling past ~50 tools**: build
-  an SVG sprite (`assets/icons/sprite.svg`) with one symbol per tool/
-  category, referenced via `<use>`, and switch `tool.json.icon` from an
-  emoji string to a sprite symbol id.
+- **Per-tool icons (the emoji shown on each tool card, e.g. 📝) are still
+  emoji, not part of the SVG icon system above** — that system covers the
+  site's own brand/favicon identity, a separate concern from each tool's
+  catalog icon. Emoji are genuinely fine for a catalog of 12 tools — crisp
+  at any size, zero asset pipeline, accessible by default. They stop being
+  fine well before tool #1,500, where visual consistency across a huge
+  catalog starts to matter. **Do this before scaling past ~50 tools**:
+  build an SVG sprite (`assets/icons/tool-sprite.svg`) with one symbol per
+  tool/category, referenced via `<use>`, and switch `tool.json.icon` from
+  an emoji string to a sprite symbol id.
 - ~~No Git repository~~ **Done.** Initialized and committed
   (`0112e53`). Note: no global `user.name`/`user.email` was configured on
   the build machine, so Git auto-derived a commit identity from the OS

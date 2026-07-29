@@ -11,9 +11,13 @@
     "build": "npm run clean && npm run build:site && npm run build:css",
     "watch:css": "tailwindcss -i ./assets/css/app.css -o ./public/assets/css/main.css --watch",
     "serve": "node scripts/serve.js",
+    "generate:icons": "node scripts/generate-icons.mjs",
     "test": "node --test"
   },
   "devDependencies": {
-    "tailwindcss": "^3.4.13"
+    "html-minifier-terser": "^7.2.0",
+    "sharp": "^0.35.3",
+    "tailwindcss": "^3.4.13",
+    "terser": "^5.49.0"
   }
 }
