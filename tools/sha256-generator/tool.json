@@ -1,0 +1,29 @@
+{
+  "id": "sha256-generator",
+  "name": "SHA-256 Hash Generator",
+  "slug": "sha256-generator",
+  "category": "developer",
+  "description": "Generate the SHA-256 hash of any text instantly using your browser's built-in Web Crypto API — the standard choice for checksums, commit hashes, and general security use.",
+  "keywords": ["sha256 generator", "sha-256 hash", "sha256 online", "hash text", "checksum generator"],
+  "difficulty": "beginner",
+  "priority": "high",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🔐",
+  "related": ["sha512-generator", "sha1-generator", "md5-generator"],
+  "faq": [
+    {
+      "question": "Why SHA-256 instead of MD5 or SHA-1?",
+      "answer": "SHA-256 has no known practical collision or preimage attacks, unlike MD5 and SHA-1, which is why it's the current standard for TLS certificates, Git's newer object hashing, Bitcoin's proof-of-work, and password-hashing building blocks (used inside PBKDF2/bcrypt-style schemes, not applied directly to passwords)."
+
+    },
+    {
+      "question": "How is this computed?",
+      "answer": "Via your browser's native Web Crypto API (crypto.subtle.digest) — the same implementation your browser uses for TLS internally, not a hand-rolled reimplementation, so results are fast and match every other correct SHA-256 implementation exactly."
+    },
+    {
+      "question": "Should I hash passwords with this before storing them?",
+      "answer": "No. A single fast SHA-256 pass is unsuitable for password storage because it's too fast — an attacker with a leaked hash can try billions of guesses per second. Use a purpose-built, deliberately slow algorithm (bcrypt, scrypt, Argon2) on the server for that; this tool is for checksums and general-purpose hashing, not password storage."
+    }
+  ]
+}

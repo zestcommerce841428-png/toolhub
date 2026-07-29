@@ -1,0 +1,24 @@
+{
+  "id": "sha512-generator",
+  "name": "SHA-512 Hash Generator",
+  "slug": "sha512-generator",
+  "category": "developer",
+  "description": "Generate the SHA-512 hash of any text instantly using your browser's built-in Web Crypto API — a wider digest than SHA-256 for extra collision margin.",
+  "keywords": ["sha512 generator", "sha-512 hash", "sha512 online", "hash text", "checksum generator"],
+  "difficulty": "beginner",
+  "priority": "normal",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🔐",
+  "related": ["sha256-generator", "sha1-generator", "md5-generator"],
+  "faq": [
+    {
+      "question": "SHA-256 vs. SHA-512 — which should I use?",
+      "answer": "Both are currently secure with no known practical attacks. SHA-512 produces a wider 512-bit digest and, on 64-bit hardware, is often computed faster than SHA-256 despite being larger, since it works on 64-bit words natively. SHA-256 remains more common simply by convention (e.g. most TLS certificates). Either is a reasonable default for new work."
+    },
+    {
+      "question": "How is this computed?",
+      "answer": "Via your browser's native Web Crypto API (crypto.subtle.digest) — the same implementation your browser uses for TLS internally, not a hand-rolled reimplementation."
+    }
+  ]
+}

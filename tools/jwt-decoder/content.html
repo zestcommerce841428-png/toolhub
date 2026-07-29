@@ -1,0 +1,46 @@
+<div>
+  <label for="jwt-input" class="field-label">JWT</label>
+  <textarea
+    id="jwt-input"
+    class="field-textarea"
+    rows="6"
+    spellcheck="false"
+    placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.SIGNATURE"
+  ></textarea>
+</div>
+
+<div id="jwt-error" class="mt-2 min-h-[1.25rem] text-sm text-danger" role="status" aria-live="polite"></div>
+
+<div class="mt-4 grid gap-4 lg:grid-cols-2">
+  <div class="card">
+    <h2 class="mb-2 text-sm font-semibold text-text">Header</h2>
+    <pre id="jwt-header" class="overflow-x-auto whitespace-pre-wrap break-all font-mono text-sm text-text-muted">—</pre>
+  </div>
+  <div class="card">
+    <h2 class="mb-2 text-sm font-semibold text-text">Payload</h2>
+    <pre id="jwt-payload" class="overflow-x-auto whitespace-pre-wrap break-all font-mono text-sm text-text-muted">—</pre>
+    <dl id="jwt-claims" class="mt-3 space-y-1 text-xs text-text-subtle"></dl>
+  </div>
+</div>
+
+<div class="card mt-4">
+  <h2 class="mb-3 text-sm font-semibold text-text">Verify signature (optional)</h2>
+  <label for="jwt-secret" class="field-label">Secret (for HS256 / HS384 / HS512 tokens)</label>
+  <div class="flex flex-wrap gap-2">
+    <input type="text" id="jwt-secret" class="field-input font-mono" placeholder="your-256-bit-secret" />
+    <button type="button" id="jwt-verify" class="btn-primary shrink-0">Verify</button>
+  </div>
+  <p id="jwt-verify-result" class="mt-2 text-sm" aria-live="polite"></p>
+</div>
+
+<section class="prose-tool mt-12">
+  <h2>What this decodes</h2>
+  <p>
+    A JWT is three base64url-encoded parts separated by dots: a header
+    (algorithm + token type), a payload (claims), and a signature. The
+    header and payload are never encrypted — anyone can decode them without
+    a secret, which this tool does automatically. The signature is what
+    actually proves the token wasn't tampered with, which is what the
+    optional verification step checks for HMAC-signed tokens.
+  </p>
+</section>

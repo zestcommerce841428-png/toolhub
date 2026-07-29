@@ -1,0 +1,24 @@
+{
+  "id": "url-encoder-decoder",
+  "name": "URL Encoder / Decoder",
+  "slug": "url-encoder-decoder",
+  "category": "developer",
+  "description": "Percent-encode or decode text for safe use in URLs and query strings, with both strict component and form-field (+ for space) modes.",
+  "keywords": ["url encoder", "url decoder", "percent encoding", "encodeURIComponent", "uri encode"],
+  "difficulty": "beginner",
+  "priority": "normal",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🔗",
+  "related": ["query-string-parser", "slug-generator"],
+  "faq": [
+    {
+      "question": "What's the difference between \"Component\" and \"Form field\" mode?",
+      "answer": "Component mode uses strict percent-encoding (encodeURIComponent), where a space becomes %20 — correct for a single value you're inserting into a URL path or query string by hand. Form field mode additionally turns spaces into + instead of %20, matching how browsers encode application/x-www-form-urlencoded form submissions and query strings you copy from an address bar. Decoding the wrong mode against the wrong kind of string is a common source of literal + characters showing up where a space should be."
+    },
+    {
+      "question": "Why would decoding fail?",
+      "answer": "Percent-encoded text must use exactly two hex digits after every %. A stray % (from text that was never actually encoded, or was double-encoded incorrectly) will fail to decode — the error message points at that being the likely cause."
+    }
+  ]
+}

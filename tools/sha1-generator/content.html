@@ -1,0 +1,30 @@
+<div>
+  <label for="sha1-input" class="field-label">Text</label>
+  <textarea id="sha1-input" class="field-textarea" rows="8" spellcheck="false" placeholder="Type or paste text to hash…"></textarea>
+</div>
+
+<div class="mt-3">
+  <label class="flex items-center gap-2 text-sm text-text">
+    <input type="checkbox" id="sha1-uppercase" class="h-4 w-4 rounded border-border accent-primary" />
+    Uppercase output
+  </label>
+</div>
+
+<div class="mt-4">
+  <label for="sha1-output" class="field-label">SHA-1 hash</label>
+  <input type="text" id="sha1-output" class="field-input font-mono" readonly />
+</div>
+
+<div class="mt-3 flex flex-wrap gap-2">
+  <button type="button" id="sha1-copy" class="btn-secondary">Copy hash</button>
+</div>
+
+<section class="prose-tool mt-12">
+  <h2>About SHA-1</h2>
+  <p>
+    SHA-1 produces a fixed 160-bit (40 hex character) digest. It's
+    deprecated for security-sensitive use since practical collision attacks
+    were demonstrated in 2017, but it's still relevant for compatibility
+    with older systems and non-adversarial checksums.
+  </p>
+</section>

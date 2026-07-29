@@ -1,0 +1,28 @@
+{
+  "id": "md5-generator",
+  "name": "MD5 Hash Generator",
+  "slug": "md5-generator",
+  "category": "developer",
+  "description": "Generate the MD5 checksum of any text instantly, entirely in your browser — useful for cache keys, file-integrity spot checks, and legacy system compatibility.",
+  "keywords": ["md5 generator", "md5 hash", "checksum generator", "md5 online", "hash text"],
+  "difficulty": "beginner",
+  "priority": "normal",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🔐",
+  "related": ["sha256-generator", "sha1-generator", "sha512-generator"],
+  "faq": [
+    {
+      "question": "Is MD5 secure?",
+      "answer": "No — MD5 is cryptographically broken. Collisions (two different inputs producing the same hash) can be generated deliberately, so MD5 must never be used for passwords, digital signatures, or anything security-critical. It's still widely used for non-adversarial checksums: verifying a download wasn't corrupted, deduplicating files, or generating a cache key. Use SHA-256 or SHA-512 for anything security-sensitive."
+    },
+    {
+      "question": "Why does the same text always produce the same hash?",
+      "answer": "MD5 is deterministic — the same input bytes always produce the same 128-bit output. That's what makes it useful as a checksum: hash a file before and after a transfer, and if the hashes match, the bytes are (almost certainly) identical."
+    },
+    {
+      "question": "Does this match the MD5 output of command-line tools like md5sum?",
+      "answer": "Yes, as long as the input bytes match. This tool hashes the UTF-8 encoding of whatever text you type, which is what md5sum would hash if you piped the same text to it without a trailing newline."
+    }
+  ]
+}

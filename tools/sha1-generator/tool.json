@@ -1,0 +1,24 @@
+{
+  "id": "sha1-generator",
+  "name": "SHA-1 Hash Generator",
+  "slug": "sha1-generator",
+  "category": "developer",
+  "description": "Generate the SHA-1 hash of any text instantly using your browser's built-in Web Crypto API — nothing you type ever leaves your device.",
+  "keywords": ["sha1 generator", "sha-1 hash", "sha1 online", "hash text", "checksum"],
+  "difficulty": "beginner",
+  "priority": "normal",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🔐",
+  "related": ["sha256-generator", "sha512-generator", "md5-generator"],
+  "faq": [
+    {
+      "question": "Is SHA-1 secure?",
+      "answer": "Not anymore for adversarial use — practical collision attacks against SHA-1 were demonstrated in 2017 (the \"SHAttered\" attack), so it's deprecated for digital signatures and TLS certificates. It's still fine for non-adversarial checksums and is required for compatibility with older systems (e.g. Git's historical object hashing) that haven't migrated. Prefer SHA-256 for new security-sensitive work."
+    },
+    {
+      "question": "How is this computed?",
+      "answer": "Via your browser's native Web Crypto API (crypto.subtle.digest), the same implementation browsers use internally for TLS — not a hand-rolled reimplementation, so it's fast and matches every other correct SHA-1 implementation byte-for-byte."
+    }
+  ]
+}

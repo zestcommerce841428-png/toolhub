@@ -1,0 +1,30 @@
+<div>
+  <label for="sha256-input" class="field-label">Text</label>
+  <textarea id="sha256-input" class="field-textarea" rows="8" spellcheck="false" placeholder="Type or paste text to hash…"></textarea>
+</div>
+
+<div class="mt-3">
+  <label class="flex items-center gap-2 text-sm text-text">
+    <input type="checkbox" id="sha256-uppercase" class="h-4 w-4 rounded border-border accent-primary" />
+    Uppercase output
+  </label>
+</div>
+
+<div class="mt-4">
+  <label for="sha256-output" class="field-label">SHA-256 hash</label>
+  <input type="text" id="sha256-output" class="field-input font-mono" readonly />
+</div>
+
+<div class="mt-3 flex flex-wrap gap-2">
+  <button type="button" id="sha256-copy" class="btn-secondary">Copy hash</button>
+</div>
+
+<section class="prose-tool mt-12">
+  <h2>About SHA-256</h2>
+  <p>
+    SHA-256 produces a fixed 256-bit (64 hex character) digest and is part
+    of the SHA-2 family. It has no known practical collision attacks, which
+    is why it's the default choice for TLS certificates, code signing, and
+    general-purpose integrity checks today.
+  </p>
+</section>

@@ -1,0 +1,28 @@
+{
+  "id": "jwt-decoder",
+  "name": "JWT Decoder",
+  "slug": "jwt-decoder",
+  "category": "developer",
+  "description": "Decode a JSON Web Token's header and payload instantly, and optionally verify an HS256/HS384/HS512 signature against a secret — entirely in your browser.",
+  "keywords": ["jwt decoder", "json web token", "jwt verify", "decode jwt", "jwt debugger"],
+  "difficulty": "intermediate",
+  "priority": "normal",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🪪",
+  "related": ["sha256-generator", "base64-encoder-decoder"],
+  "faq": [
+    {
+      "question": "Is it safe to paste a real JWT and secret here?",
+      "answer": "Every operation runs entirely in your browser using the Web Crypto API — nothing is sent anywhere, and this page works fully offline. That said, treat production secrets carefully in general: prefer testing with a non-production token/secret pair when you can."
+    },
+    {
+      "question": "Why can't this verify RS256/ES256 tokens?",
+      "answer": "Those are asymmetric algorithms — verifying them needs the issuer's public key, not a shared secret, and safely pasting/handling a public key for arbitrary tokens is a different (and riskier to get subtly wrong) feature than this tool covers. Verification here is limited to the HMAC family (HS256/HS384/HS512), where \"verify\" is simply \"recompute the signature with the same secret and compare\" — decoding the header/payload, however, works for every JWT regardless of algorithm, since that part is never encrypted, only base64url-encoded."
+    },
+    {
+      "question": "The signature says invalid but I'm sure the secret is right — why?",
+      "answer": "Double-check there's no extra whitespace or a trailing newline pasted into the secret field, and that the token's \"alg\" header actually matches one of HS256/HS384/HS512 (shown in the decoded header) — verifying an RS256 token against a \"secret\" will always report invalid, since that's not how asymmetric signing works."
+    }
+  ]
+}

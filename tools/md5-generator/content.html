@@ -1,0 +1,31 @@
+<div>
+  <label for="md5-input" class="field-label">Text</label>
+  <textarea id="md5-input" class="field-textarea" rows="8" spellcheck="false" placeholder="Type or paste text to hash…"></textarea>
+</div>
+
+<div class="mt-3">
+  <label class="flex items-center gap-2 text-sm text-text">
+    <input type="checkbox" id="md5-uppercase" class="h-4 w-4 rounded border-border accent-primary" />
+    Uppercase output
+  </label>
+</div>
+
+<div class="mt-4">
+  <label for="md5-output" class="field-label">MD5 hash</label>
+  <input type="text" id="md5-output" class="field-input font-mono" readonly />
+</div>
+
+<div class="mt-3 flex flex-wrap gap-2">
+  <button type="button" id="md5-copy" class="btn-secondary">Copy hash</button>
+</div>
+
+<section class="prose-tool mt-12">
+  <h2>About MD5</h2>
+  <p>
+    MD5 produces a fixed 128-bit (32 hex character) digest from any amount
+    of input text. It's fast and collision-prone by modern standards, which
+    is exactly why it's still handy for non-adversarial checksums — cache
+    keys, deduplication, spot-checking a download — but wrong for anything
+    where someone might deliberately try to fake a match.
+  </p>
+</section>
