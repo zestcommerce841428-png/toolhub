@@ -1,0 +1,7 @@
+{
+  "id": "date-time",
+  "name": "Date & Time Tools",
+  "slug": "date-time",
+  "description": "Calculate ages, durations, and dates without opening a spreadsheet.",
+  "icon": "📅"
+}

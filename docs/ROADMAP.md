@@ -127,6 +127,54 @@ the reasoning behind the foundation itself.
   Playwright pass (22+9 functional checks, 48-combination responsive sweep)
   against the minified output specifically, not just the unminified source.
 
+**Phase 2 — shipped (all 12 planned categories now exist; 19 tools total):**
+
+- Added the 7 previously-unrepresented categories from the original catalog
+  target — Unit Converters, Ecommerce, SEO, Web Utilities, File & Data,
+  Date & Time, Random — each with one fully-realized tool proving the
+  pattern extends cleanly: Length Converter, SKU Generator, Meta Tag
+  Generator, UUID Generator, Base64 Encoder/Decoder, Age Calculator, and
+  Random Number Generator. Site total: 5 → 12 categories, 12 → 19 tools.
+  Each new tool picked a UI shape not yet covered (dropdown-driven
+  conversion, form-to-code-snippet generation, native date-input math,
+  encode/decode direction toggle, constrained-random list output) rather
+  than repeating an existing pattern, so the breadth of proven patterns
+  grew along with the category count.
+- Extracted `assets/js/core/random.js` (`secureRandomInt`, `secureShuffle`,
+  `secureChoice`) out of `password-generator/logic.js`'s private
+  implementation once a second tool (`uuid-generator`) needed the same
+  capability — exactly the moment `docs/ARCHITECTURE.md` said this module
+  would get built. `password-generator` was refactored to use the shared
+  version (all its existing tests still pass unmodified, since they assert
+  behavior, not implementation). Two more tools (`random-number-generator`,
+  `sku-generator`) now use it too — three real call sites justified the
+  shared module, versus the CONTRIBUTING.md-documented `logic.js`-sharing
+  pattern, which was the right choice here since the *randomness
+  primitive* is shared, not the tool-specific logic built on top of it.
+- **Redesigned the header nav from inline category links to a single
+  "Categories" dropdown**, found necessary while regression-testing the
+  new categories: the inline-nav approach (added in the earlier spacing-
+  bug fix round, tuned for 5–6 categories) overflowed again at 1024–1100px
+  the moment a 7th–12th category existed, because a header can only fit so
+  many inline text links no matter where the breakpoint is set. A
+  fixed-width dropdown trigger (`<details>`, the same pattern already used
+  for the old mobile menu) scales to any category count without needing
+  another breakpoint tuned to today's count — the dropdown now also
+  doubles as the mobile menu, so there's one nav implementation instead of
+  two. This should be the last time category count forces a header change
+  before the 1,500-tool target.
+- Found and fixed a real timezone bug while writing `age-calculator`'s
+  tests: `nextBirthdayDate.toISOString().slice(0, 10)` converts a
+  local-midnight `Date` to UTC first, which silently shifts the displayed
+  date back by one day in any timezone ahead of UTC. Fixed with a
+  local-getters-based formatter instead of `toISOString`. Caught by the
+  unit tests before this ever reached a browser.
+- Verified: 140 unit tests (up from 75), the original 22-check functional
+  suite, the 9-check case-family suite (with its "12 tools" assertion
+  updated to 19 — a stale expectation, not a bug), a new 14-check suite
+  covering all 7 new tools, and a fresh 48-combination responsive sweep —
+  all clean, zero console errors, against the actual minified build.
+
 ## Deliberately deferred, and why
 
 - **Per-tool icons (the emoji shown on each tool card, e.g. 📝) are still
@@ -193,33 +241,34 @@ the reasoning behind the foundation itself.
   (Date & Time category), `color.js` (once a second color tool needs HSL/
   CMYK math beyond what `hex-rgb-converter/logic.js` covers).
 
-## Phase 2 — next up
+## Phase 3 — next up
 
 Following the category weights from the original catalog target
 (Text 100, Developer 150, Color 60, Unit Converters 120, Calculators 150,
 Ecommerce 150, SEO 150, Security 120, Web Utilities 120, File & Data 150,
-Date & Time 80, Random 100 ≈ 1,450 tools total):
+Date & Time 80, Random 100 ≈ 1,450 tools total). Current: 19/1,450.
 
 1. ~~Fix the deferred items above that are cheap now and expensive
    later~~ **Git init and CI (test+build) done.** Still open: real
    `site.config.json` values (needs the site owner), Lighthouse CI.
-2. Round out the 5 existing categories closer to their target counts,
-   reusing the `logic.js`-sharing pattern from `CONTRIBUTING.md`
-   wherever a tool is a thin variant of one already built — **proven**:
-   Uppercase/Lowercase/Title Case/Sentence Case/Toggle Case/Capitalize
-   Words now ship as six thin wrappers around `case-converter/logic.js`
-   (Text is at 8/100 tools). Same pattern applies well to, e.g., SHA-256/
-   SHA-512/MD5 generators as thin wrappers around a new `hash-generator`
-   family, once Security's first hash tool exists to wrap.
-3. Add the categories not yet represented: Unit Converters, Ecommerce,
-   SEO, Web Utilities, File & Data, Date & Time, Random — one
-   `category.json` plus a first tool each, proving the pattern extends
-   cleanly before batch-producing the rest.
-4. Build the SVG icon sprite once there are enough tools that emoji
-   inconsistency actually shows.
+2. ~~Add the categories not yet represented~~ **Done — all 12 planned
+   categories exist**, each with at least one working tool. No more
+   categories to stand up; from here it's depth within each one.
+3. Round out every category toward its target count, reusing the
+   `logic.js`-sharing pattern from `CONTRIBUTING.md` wherever a tool is a
+   thin variant of one already built — **proven twice now**: the six
+   case-conversion tools sharing `case-converter/logic.js`, and
+   `random-number-generator`/`sku-generator`/`uuid-generator` sharing the
+   extracted `assets/js/core/random.js`. Same pattern applies well to,
+   e.g., SHA-256/SHA-512/MD5 generators as thin wrappers around a new
+   `hash-generator` family, or Weight/Temperature/Volume converters
+   sharing `length-converter`'s unit-table structure.
+4. Build the SVG icon sprite once there are enough *tool-catalog* icons
+   (the emoji shown on tool cards, not the favicon/brand system — see
+   above) that inconsistency actually shows, roughly ~50 tools.
 5. Formalize automated browser testing (jsdom or `tests/e2e/`, per above).
 
-## Phase 3+ — scale-out
+## Phase 4+ — scale-out
 
 Once the pattern is proven across all planned categories: batch-add
 remaining tools in category-sized batches (each batch = one reviewable

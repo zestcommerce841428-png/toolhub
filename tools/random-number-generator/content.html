@@ -1,0 +1,41 @@
+<div class="card">
+  <div class="grid grid-cols-2 gap-4 sm:grid-cols-4">
+    <div>
+      <label for="rng-min" class="field-label">Min</label>
+      <input type="number" id="rng-min" class="field-input" value="1" step="1" />
+    </div>
+    <div>
+      <label for="rng-max" class="field-label">Max</label>
+      <input type="number" id="rng-max" class="field-input" value="100" step="1" />
+    </div>
+    <div>
+      <label for="rng-count" class="field-label">Count</label>
+      <input type="number" id="rng-count" class="field-input" value="5" min="1" max="1000" step="1" />
+    </div>
+    <div class="flex items-end pb-2">
+      <label class="flex items-center gap-2 text-sm text-text">
+        <input type="checkbox" id="rng-unique" class="h-4 w-4 rounded border-border accent-primary" />
+        No duplicates
+      </label>
+    </div>
+  </div>
+  <button type="button" id="rng-generate" class="btn-primary mt-4">Generate</button>
+  <p id="rng-error" class="field-error hidden" role="alert"></p>
+</div>
+
+<div class="card mt-4">
+  <h2 class="mb-3 text-sm font-semibold text-text">Result</h2>
+  <div id="rng-output" class="flex flex-wrap gap-2" aria-live="polite"></div>
+  <div class="mt-4 flex flex-wrap gap-2">
+    <button type="button" id="rng-copy" class="btn-secondary">Copy as list</button>
+  </div>
+</div>
+
+<section class="prose-tool mt-12">
+  <h2>About this generator</h2>
+  <p>
+    Numbers are drawn using your browser's cryptographically secure random
+    number generator, with rejection sampling so every value in your
+    chosen range is equally likely to appear.
+  </p>
+</section>

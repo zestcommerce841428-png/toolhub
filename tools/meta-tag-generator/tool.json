@@ -1,0 +1,28 @@
+{
+  "id": "meta-tag-generator",
+  "name": "Meta Tag Generator",
+  "slug": "meta-tag-generator",
+  "category": "seo",
+  "description": "Generate title, meta description, canonical, Open Graph, and Twitter Card tags, with length guidance for each field.",
+  "keywords": ["meta tag generator", "open graph generator", "twitter card generator", "seo meta tags"],
+  "difficulty": "beginner",
+  "priority": "high",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🏷️",
+  "related": [],
+  "faq": [
+    {
+      "question": "Why does it warn about title and description length?",
+      "answer": "Search engines truncate titles and descriptions past a certain pixel width, which roughly maps to about 50–60 characters for titles and 120–160 for descriptions. The guidance updates as you type so you can see when you're getting close to the cutoff."
+    },
+    {
+      "question": "What's the difference between the Open Graph and Twitter tags?",
+      "answer": "Open Graph tags (og:*) control how Facebook, LinkedIn, and most other platforms render a shared link's preview card. Twitter/X reads its own twitter:* tags first and falls back to Open Graph tags if they're missing — this tool generates both so every platform gets a proper preview."
+    },
+    {
+      "question": "Is any of this sent to a server to generate?",
+      "answer": "No — it's template-based string generation that runs entirely in your browser as you type."
+    }
+  ]
+}

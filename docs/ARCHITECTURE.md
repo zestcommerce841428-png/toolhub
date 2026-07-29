@@ -142,14 +142,30 @@ the above env vars present. `npm run build` prints which source it used.
 
 Each module is a small ES module, no globals, no side effects on import
 (except `theme.js`, which must run pre-paint to avoid a flash of wrong theme).
-Phase 1 ships: `clipboard.js`, `download.js`, `storage.js`, `validator.js`,
-`toast.js`, `theme.js`, `search.js`, `keyboard.js`, `utility.js`. Modules not
-yet needed by a shipped tool (`modal.js`, `router.js`, `favorites.js`,
-`history.js`, `color.js`, `date.js`, `math.js`, `csv.js`, `json.js`, …) are
-intentionally **not stubbed out** — an empty or fake module is worse than no
-module, since it would silently pass review while doing nothing. They are
-tracked in `ROADMAP.md` and get created in the phase where a real tool first
-needs them.
+Shipped so far: `clipboard.js`, `download.js`, `storage.js`, `validator.js`,
+`toast.js`, `theme.js`, `search.js`, `keyboard.js`, `utility.js`, and
+`random.js` (secure random primitives — `secureRandomInt`, `secureShuffle`,
+`secureChoice` — extracted from `password-generator/logic.js` once a
+second tool, `uuid-generator`, needed the same capability; a third and
+fourth, `random-number-generator` and `sku-generator`, now use it too).
+Modules not yet needed by a shipped tool (`modal.js`, `router.js`,
+`favorites.js`, `history.js`, `color.js`, `date.js`, `math.js`, `csv.js`,
+`json.js`, …) are intentionally **not stubbed out** — an empty or fake
+module is worse than no module, since it would silently pass review while
+doing nothing. They are tracked in `ROADMAP.md` and get created in the
+phase where a real tool first needs them.
+
+**Gotcha for anyone adding a `logic.js` that needs a core module**:
+`tool.js` files import core modules by absolute path (`/assets/js/core/
+random.js`), which only resolves correctly in a browser (relative to the
+site root). `logic.js` files are also imported directly by
+`tests/unit/*.test.js` under plain Node, where a leading `/` resolves as a
+*filesystem*-absolute path instead and breaks — so any `logic.js` that
+needs a core module must import it with a relative path
+(`../../assets/js/core/random.js`), never the absolute form. Verified this
+still resolves correctly once copied into `public/tools/<slug>/logic.js`,
+since `assets/js/core/` and `tools/<slug>/` are copied to `public/` at the
+same relative depth.
 
 ## Search
 

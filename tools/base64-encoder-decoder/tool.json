@@ -1,0 +1,28 @@
+{
+  "id": "base64-encoder-decoder",
+  "name": "Base64 Encoder/Decoder",
+  "slug": "base64-encoder-decoder",
+  "category": "file-data",
+  "description": "Encode text to Base64 or decode Base64 back to text, with full UTF-8 support — instantly, in your browser.",
+  "keywords": ["base64 encoder", "base64 decoder", "encode base64", "decode base64", "base64 converter"],
+  "difficulty": "beginner",
+  "priority": "high",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🔢",
+  "related": [],
+  "faq": [
+    {
+      "question": "Does this handle emoji and non-English text correctly?",
+      "answer": "Yes — text is UTF-8 encoded before Base64 encoding (via TextEncoder/TextDecoder), so accented characters, emoji, and non-Latin scripts round-trip correctly. A naive browser btoa()/atob() call alone only handles single-byte characters and mangles anything else."
+    },
+    {
+      "question": "What happens if I try to decode invalid Base64?",
+      "answer": "You'll get a clear error message instead of garbled output — the decoder validates the input before attempting to convert it."
+    },
+    {
+      "question": "Is my text uploaded anywhere?",
+      "answer": "No — encoding and decoding both happen entirely in your browser. Nothing is sent to a server."
+    }
+  ]
+}

@@ -123,7 +123,18 @@ DOM wiring only: grab elements by id, wire events, call into `logic.js`,
 update the DOM. Import shared behavior from `assets/js/core/*` rather than
 reimplementing it — `clipboard.js` for Copy buttons, `download.js` for
 Download buttons, `toast.js` for transient feedback, `storage.js` for any
-persisted preference. See `docs/ARCHITECTURE.md` for the full module list.
+persisted preference, `random.js` for anything needing unpredictable
+values. See `docs/ARCHITECTURE.md` for the full module list. Import these
+with an absolute path: `import { secureRandomInt } from "/assets/js/core/random.js";`
+
+**If `logic.js` itself needs a core module** (not just `tool.js`), the
+import path must be *relative* instead — `../../assets/js/core/random.js`,
+not `/assets/js/core/random.js`. `logic.js` files are imported directly by
+`tests/unit/*.test.js` under plain Node, where a leading `/` resolves as a
+filesystem-absolute path and breaks; a relative path resolves correctly
+both there and once copied into `public/tools/<slug>/logic.js`. See
+`tools/uuid-generator/logic.js` or `tools/sku-generator/logic.js` for a
+working example.
 
 ### 6. Register it and build
 

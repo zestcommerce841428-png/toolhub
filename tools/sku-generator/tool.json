@@ -1,0 +1,28 @@
+{
+  "id": "sku-generator",
+  "name": "SKU Generator",
+  "slug": "sku-generator",
+  "category": "ecommerce",
+  "description": "Build a structured SKU from a category code, product name, and variant — with an optional random suffix for uniqueness.",
+  "keywords": ["sku generator", "product code generator", "stock keeping unit", "inventory code generator"],
+  "difficulty": "beginner",
+  "priority": "high",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🏷️",
+  "related": [],
+  "faq": [
+    {
+      "question": "How is the SKU built?",
+      "answer": "Each field you fill in (category code, product name, variant) is uppercased, stripped of anything that isn't a letter or number, and truncated to a reasonable length, then joined with your chosen separator. An optional random numeric suffix at the end helps keep otherwise-identical SKUs unique."
+    },
+    {
+      "question": "Is the random suffix actually unique?",
+      "answer": "It's drawn from your browser's cryptographically secure random number generator, so a 4-digit suffix has a 1-in-10,000 chance of colliding with another SKU generated the same way — fine for most small catalogs, but for guaranteed uniqueness at scale you'll still want to check against your actual product database."
+    },
+    {
+      "question": "Does this follow a specific SKU standard?",
+      "answer": "No — there's no universal SKU standard; every retailer defines their own format. This tool gives you a consistent, structured pattern to start from, which you can adapt to match your own conventions."
+    }
+  ]
+}

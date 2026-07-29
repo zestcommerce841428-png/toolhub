@@ -1,0 +1,7 @@
+{
+  "id": "file-data",
+  "name": "File & Data Tools",
+  "slug": "file-data",
+  "description": "Encode, decode, and convert between file and data formats — all processed locally in your browser.",
+  "icon": "🗂️"
+}

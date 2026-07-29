@@ -1,0 +1,28 @@
+{
+  "id": "length-converter",
+  "name": "Length Converter",
+  "slug": "length-converter",
+  "category": "unit-converters",
+  "description": "Convert length between millimeters, centimeters, meters, kilometers, inches, feet, yards, and miles instantly.",
+  "keywords": ["length converter", "unit converter", "cm to inches", "meters to feet", "km to miles"],
+  "difficulty": "beginner",
+  "priority": "high",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "📏",
+  "related": [],
+  "faq": [
+    {
+      "question": "How accurate are these conversions?",
+      "answer": "Every unit is defined by its exact SI conversion factor (e.g. 1 inch = 0.0254 meters exactly), so results are as accurate as floating-point arithmetic allows — displayed rounded to a readable number of decimal places."
+    },
+    {
+      "question": "Can I convert between any two units, not just to meters?",
+      "answer": "Yes — pick any \"From\" and \"To\" unit; the conversion goes through meters internally but you never see that step. The table below also shows your value converted into every supported unit at once."
+    },
+    {
+      "question": "Is this calculation done on a server?",
+      "answer": "No — it's plain JavaScript arithmetic that runs instantly in your browser. Nothing is sent anywhere."
+    }
+  ]
+}

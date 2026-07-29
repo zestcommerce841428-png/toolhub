@@ -1,10 +1,15 @@
 /**
  * Cryptographically-random password generation. Uses the Web Crypto API
- * (globalThis.crypto.getRandomValues) rather than Math.random(), which is
- * not designed to be unpredictable and must never back a security tool.
- * globalThis.crypto is also available in modern Node, so this file is
- * testable directly with node:test — no browser shim required.
+ * (via assets/js/core/random.js) rather than Math.random(), which is not
+ * designed to be unpredictable and must never back a security tool.
  */
+// Relative, not "/assets/..." like tool.js files use — this file is also
+// imported directly by tests/unit/*.test.js under Node, where a leading
+// "/" resolves as a filesystem-absolute path, not site-root-relative like
+// a browser does. The relative path still resolves correctly once this
+// file is copied to public/tools/password-generator/logic.js, since
+// assets/js/core/ is copied to public/assets/js/core/ at the same depth.
+import { secureRandomInt, secureShuffle } from "../../assets/js/core/random.js";
 
 const CHAR_SETS = {
   lowercase: "abcdefghijklmnopqrstuvwxyz",
@@ -15,34 +20,6 @@ const CHAR_SETS = {
 
 // Characters that are easy to misread in most fonts: 1/l/I, 0/O, etc.
 const AMBIGUOUS_CHARS = new Set("il1IlL0Oo");
-
-/**
- * Returns a cryptographically secure random integer in [0, maxExclusive),
- * using rejection sampling so the result is uniformly distributed (a plain
- * `randomByte % maxExclusive` would bias low values whenever maxExclusive
- * doesn't evenly divide 256).
- */
-function secureRandomInt(maxExclusive) {
-  if (maxExclusive <= 0) throw new RangeError("maxExclusive must be positive");
-  const maxValidByte = 256 - (256 % maxExclusive);
-  const bytes = new Uint8Array(1);
-  let value;
-  do {
-    globalThis.crypto.getRandomValues(bytes);
-    value = bytes[0];
-  } while (value >= maxValidByte);
-  return value % maxExclusive;
-}
-
-/** Fisher-Yates shuffle using the same secure randomness source. */
-function secureShuffle(array) {
-  const result = [...array];
-  for (let i = result.length - 1; i > 0; i--) {
-    const j = secureRandomInt(i + 1);
-    [result[i], result[j]] = [result[j], result[i]];
-  }
-  return result;
-}
 
 /**
  * @typedef {object} PasswordOptions
@@ -89,10 +66,10 @@ export function generatePassword(options) {
   }
 
   // Guarantee one character from every selected category...
-  const guaranteed = pools.map((pool) => pool[secureRandomInt(pool.length)]);
+  const guaranteed = pools.map((pool) => pool[secureRandomInt(0, pool.length - 1)]);
   // ...then fill the remaining length from the combined pool...
   const remainingCount = options.length - guaranteed.length;
-  const filler = Array.from({ length: remainingCount }, () => combinedPool[secureRandomInt(combinedPool.length)]);
+  const filler = Array.from({ length: remainingCount }, () => combinedPool[secureRandomInt(0, combinedPool.length - 1)]);
   // ...and shuffle so the guaranteed characters aren't always first.
   const password = secureShuffle([...guaranteed, ...filler]).join("");
 

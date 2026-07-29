@@ -1,0 +1,28 @@
+{
+  "id": "uuid-generator",
+  "name": "UUID Generator",
+  "slug": "uuid-generator",
+  "category": "web-utilities",
+  "description": "Generate cryptographically random UUID v4 identifiers — one at a time or in bulk — entirely in your browser.",
+  "keywords": ["uuid generator", "guid generator", "uuid v4", "random uuid", "unique id generator"],
+  "difficulty": "beginner",
+  "priority": "high",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🆔",
+  "related": ["random-number-generator"],
+  "faq": [
+    {
+      "question": "What version of UUID does this generate?",
+      "answer": "Version 4 — 122 random bits (the remaining 6 bits are fixed by the UUID v4 spec to mark the version and variant), generated with the Web Crypto API's crypto.getRandomValues(), not Math.random(). Collisions are astronomically unlikely: about a 50% chance after generating a billion billion of them."
+    },
+    {
+      "question": "Can I generate more than one at a time?",
+      "answer": "Yes — set the count field up to 100 and every UUID generates in one batch, ready to copy as a list."
+    },
+    {
+      "question": "Are the generated UUIDs sent anywhere or logged?",
+      "answer": "No — generation happens entirely in your browser. ToolHub has no backend to send them to."
+    }
+  ]
+}

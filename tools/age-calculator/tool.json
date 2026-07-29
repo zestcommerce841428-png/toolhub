@@ -1,0 +1,28 @@
+{
+  "id": "age-calculator",
+  "name": "Age Calculator",
+  "slug": "age-calculator",
+  "category": "date-time",
+  "description": "Calculate exact age in years, months, and days from a birth date, plus a countdown to the next birthday.",
+  "keywords": ["age calculator", "date of birth calculator", "how old am i", "birthday countdown"],
+  "difficulty": "beginner",
+  "priority": "high",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🎂",
+  "related": [],
+  "faq": [
+    {
+      "question": "How is the years/months/days breakdown calculated?",
+      "answer": "It's calendar-aware, not just a division of total days — it counts whole elapsed years and months first, using each month's actual length, so someone born on January 31 turns a year older correctly even though not every month has 31 days."
+    },
+    {
+      "question": "Can I calculate age as of a date other than today?",
+      "answer": "Yes — the \"as of\" date defaults to today but can be changed to calculate age (or the age someone will be) on any other date."
+    },
+    {
+      "question": "Is my birth date sent anywhere?",
+      "answer": "No — the calculation is a handful of date subtractions that run entirely in your browser. Nothing is transmitted or stored."
+    }
+  ]
+}

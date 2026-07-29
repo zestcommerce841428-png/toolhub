@@ -1,0 +1,28 @@
+{
+  "id": "random-number-generator",
+  "name": "Random Number Generator",
+  "slug": "random-number-generator",
+  "category": "random",
+  "description": "Generate cryptographically random whole numbers within a range, one at a time or many at once, with or without duplicates.",
+  "keywords": ["random number generator", "random integer generator", "number picker", "dice roller"],
+  "difficulty": "beginner",
+  "priority": "high",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🎲",
+  "related": ["uuid-generator"],
+  "faq": [
+    {
+      "question": "How random are these numbers?",
+      "answer": "Each number is drawn using the Web Crypto API's crypto.getRandomValues() with rejection sampling, so every value in your range is equally likely — not the biased Math.random() % range approach many simple generators use."
+    },
+    {
+      "question": "What does \"no duplicates\" do?",
+      "answer": "When enabled, each generated number is guaranteed unique within that batch — useful for picking several distinct items (like raffle numbers) from a range. It requires the range to contain at least as many values as you're generating."
+    },
+    {
+      "question": "Is this suitable for anything beyond casual use, like a giveaway drawing?",
+      "answer": "The randomness source (crypto.getRandomValues) is cryptographically strong, which is more than sufficient for games, giveaways, and sampling. For regulated gambling applications, use a certified random number generator instead."
+    }
+  ]
+}

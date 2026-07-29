@@ -1,0 +1,7 @@
+{
+  "id": "random",
+  "name": "Random Generators",
+  "slug": "random",
+  "description": "Cryptographically random numbers, picks, and more — generated locally, never predictable.",
+  "icon": "🎲"
+}

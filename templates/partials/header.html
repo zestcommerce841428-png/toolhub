@@ -6,20 +6,31 @@
     </a>
 
     <!--
-      Nav only appears once there's genuinely room for it. At 6 category
-      links it measures ~526px alone, which doesn't fit next to the logo,
-      search box, and theme toggle below ~1024px — verified empirically
-      (scripts/../tests didn't cover this; a Playwright viewport sweep
-      did). Below lg, the <details> menu at the end of this header covers
-      the same links compactly. Don't lower this breakpoint without
-      re-running that sweep.
+      One dropdown, every screen size — not an inline link per category.
+      An earlier version rendered every category as its own top-level nav
+      link, which needed a breakpoint tuned to however many categories
+      existed at the time (5, then 6) and broke again the moment the
+      catalog grew past that (12 categories overflowed at both the old
+      and a re-tuned breakpoint — verified by a Playwright viewport
+      sweep). A fixed-width trigger button scales to any category count
+      without ever needing another breakpoint adjustment, which matters
+      for a catalog aimed at 1,500 tools across many more categories than
+      exist today. The dropdown itself doubles as the mobile menu, so
+      there's only one nav implementation to maintain, not two.
     -->
-    <nav aria-label="Primary" class="hidden lg:block">
-      <ul class="flex items-center gap-1">
-        {{CATEGORY_NAV_LINKS}}
-        <li><a class="rounded-md px-3 py-2 text-sm font-medium text-text-muted hover:bg-surface hover:text-text" href="/categories/">All categories</a></li>
-      </ul>
-    </nav>
+    <details class="relative shrink-0">
+      <summary class="btn-secondary list-none" aria-haspopup="true">
+        <span aria-hidden="true">🗂️</span>
+        <span class="hidden sm:inline">Categories</span>
+        <span aria-hidden="true">▾</span>
+      </summary>
+      <nav aria-label="Categories" class="absolute left-0 z-50 mt-2 w-64 max-h-[70vh] overflow-auto rounded-lg border border-border bg-surface-raised p-2 shadow-lg">
+        <ul class="flex flex-col">
+          {{CATEGORY_NAV_LINKS}}
+          <li><a class="block rounded-md px-3 py-2 text-sm font-semibold text-primary hover:bg-surface" href="/categories/">All categories</a></li>
+        </ul>
+      </nav>
+    </details>
 
     <!--
       A fixed min-width (rather than min-w-0) overrides the flex default
@@ -55,15 +66,5 @@
       <span aria-hidden="true" data-theme-icon-light>🌙</span>
       <span aria-hidden="true" data-theme-icon-dark class="hidden">☀️</span>
     </button>
-
-    <details class="relative shrink-0 lg:hidden">
-      <summary class="btn-icon list-none border border-border" aria-label="Open menu">☰</summary>
-      <nav aria-label="Primary" class="absolute right-0 z-50 mt-2 w-56 rounded-lg border border-border bg-surface-raised p-2 shadow-lg">
-        <ul class="flex flex-col">
-          {{CATEGORY_NAV_LINKS_MOBILE}}
-          <li><a class="block rounded-md px-3 py-2 text-sm font-medium text-text-muted hover:bg-surface hover:text-text" href="/categories/">All categories</a></li>
-        </ul>
-      </nav>
-    </details>
   </div>
 </header>

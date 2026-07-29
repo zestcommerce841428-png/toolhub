@@ -84,14 +84,10 @@ let footerPartial = readFileSync(path.join(templatesDir, "partials", "footer.htm
 // Render the header/footer chrome once — identical on every page.
 // ---------------------------------------------------------------------------
 
-const desktopCategoryLinks = categories
-  .map(
-    (category) =>
-      `<li><a class="rounded-md px-3 py-2 text-sm font-medium text-text-muted hover:bg-surface hover:text-text" href="/categories/${category.slug}/">${escapeHtml(category.name)}</a></li>`
-  )
-  .join("\n");
-
-const mobileCategoryLinks = categories
+// One list, used by the header's single categories dropdown (see
+// templates/partials/header.html for why it's one dropdown rather than
+// per-category inline nav links).
+const headerCategoryLinks = categories
   .map(
     (category) =>
       `<li><a class="block rounded-md px-3 py-2 text-sm font-medium text-text-muted hover:bg-surface hover:text-text" href="/categories/${category.slug}/">${escapeHtml(category.name)}</a></li>`
@@ -105,9 +101,7 @@ const footerCategoryLinks = categories
   )
   .join("\n");
 
-headerPartial = headerPartial
-  .replace("{{CATEGORY_NAV_LINKS}}", desktopCategoryLinks)
-  .replace("{{CATEGORY_NAV_LINKS_MOBILE}}", mobileCategoryLinks);
+headerPartial = headerPartial.replace("{{CATEGORY_NAV_LINKS}}", headerCategoryLinks);
 footerPartial = footerPartial.replace("{{FOOTER_CATEGORY_LINKS}}", footerCategoryLinks);
 
 // ---------------------------------------------------------------------------

@@ -1,0 +1,52 @@
+<div class="grid gap-4 sm:grid-cols-3">
+  <div>
+    <label for="sku-category" class="field-label">Category code</label>
+    <input type="text" id="sku-category" class="field-input" placeholder="ELEC" maxlength="20" />
+  </div>
+  <div>
+    <label for="sku-product" class="field-label">Product name</label>
+    <input type="text" id="sku-product" class="field-input" placeholder="Wireless Mouse" maxlength="60" />
+  </div>
+  <div>
+    <label for="sku-variant" class="field-label">Variant (optional)</label>
+    <input type="text" id="sku-variant" class="field-input" placeholder="Black" maxlength="30" />
+  </div>
+</div>
+
+<div class="mt-4 grid gap-4 sm:grid-cols-3">
+  <div>
+    <label for="sku-separator" class="field-label">Separator</label>
+    <select id="sku-separator" class="field-select">
+      <option value="-" selected>Hyphen (-)</option>
+      <option value="_">Underscore (_)</option>
+      <option value="">None</option>
+    </select>
+  </div>
+  <div>
+    <label for="sku-suffix-length" class="field-label">Random suffix digits</label>
+    <input type="number" id="sku-suffix-length" class="field-input" value="4" min="0" max="10" step="1" />
+  </div>
+</div>
+
+<div class="card mt-6">
+  <p class="text-sm text-text-muted">Generated SKU</p>
+  <div class="flex flex-wrap items-center gap-2">
+    <p id="sku-output" class="font-mono text-2xl font-bold text-text">—</p>
+  </div>
+  <p id="sku-error" class="field-error hidden" role="alert"></p>
+  <div class="mt-4 flex flex-wrap gap-2">
+    <button type="button" id="sku-copy" class="btn-secondary">Copy</button>
+    <button type="button" id="sku-regenerate" class="btn-primary">New random suffix</button>
+  </div>
+</div>
+
+<section class="prose-tool mt-12">
+  <h2>Tips for a good SKU scheme</h2>
+  <p>
+    A useful SKU is short, human-scannable, and encodes just enough
+    information to identify a product at a glance — category and a
+    recognizable product abbreviation are usually enough; save fine detail
+    (exact color, batch, warehouse) for your inventory system rather than
+    the code itself.
+  </p>
+</section>

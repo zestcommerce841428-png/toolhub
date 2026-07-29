@@ -1,0 +1,37 @@
+<div>
+  <span class="field-label" id="base64-mode-label">Mode</span>
+  <div class="flex gap-2" role="radiogroup" aria-labelledby="base64-mode-label" id="base64-mode-group">
+    <button type="button" role="radio" aria-checked="true" tabindex="0" data-mode="encode" class="btn-primary">Encode text → Base64</button>
+    <button type="button" role="radio" aria-checked="false" tabindex="-1" data-mode="decode" class="btn-secondary">Decode Base64 → text</button>
+  </div>
+</div>
+
+<div class="mt-4">
+  <label for="base64-input" class="field-label" id="base64-input-label">Text</label>
+  <textarea id="base64-input" class="field-textarea" rows="8" placeholder="Type or paste your text here…"></textarea>
+</div>
+
+<div class="mt-4 flex justify-center">
+  <button type="button" id="base64-swap" class="btn-icon border border-border" aria-label="Swap input and output, and switch mode">⇅</button>
+</div>
+
+<div class="mt-4">
+  <label for="base64-output" class="field-label" id="base64-output-label">Base64</label>
+  <textarea id="base64-output" class="field-textarea font-mono" rows="8" readonly></textarea>
+  <p id="base64-error" class="field-error hidden" role="alert"></p>
+  <div class="mt-3 flex flex-wrap gap-2">
+    <button type="button" id="base64-copy" class="btn-secondary">Copy result</button>
+    <button type="button" id="base64-download" class="btn-secondary">Download</button>
+    <button type="button" id="base64-clear" class="btn-ghost">Clear</button>
+  </div>
+</div>
+
+<section class="prose-tool mt-12">
+  <h2>What is Base64?</h2>
+  <p>
+    Base64 represents arbitrary binary data as plain ASCII text, using 64
+    printable characters — commonly used to embed data in places that only
+    accept text, like URLs, JSON, or HTML. It isn't encryption: anyone can
+    decode it back to the original text just as easily as this tool does.
+  </p>
+</section>
