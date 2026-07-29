@@ -1,0 +1,24 @@
+{
+  "id": "dice-roller",
+  "name": "Dice Roller",
+  "slug": "dice-roller",
+  "category": "random",
+  "description": "Roll any number of dice with any number of sides (d4 through d100), with a running total and session statistics — using cryptographically secure randomness.",
+  "keywords": ["dice roller", "roll dice online", "d20 roller", "virtual dice", "random dice generator"],
+  "difficulty": "beginner",
+  "priority": "normal",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🎲",
+  "related": ["random-number-generator", "random-picker"],
+  "faq": [
+    {
+      "question": "Are the rolls actually fair?",
+      "answer": "Yes — each die uses crypto.getRandomValues() with rejection sampling, the same secure-randomness approach as every generator on this site, so every side has a genuinely equal chance rather than relying on Math.random(), which offers no such guarantee."
+    },
+    {
+      "question": "What do the session stats track?",
+      "answer": "Every individual die result rolled since your last reset (not just the most recent roll) — the count, minimum, maximum, and running average across all of them, useful for spot-checking that a die \"feels\" fair over many rolls."
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "random-picker",
+  "name": "Random Picker",
+  "slug": "random-picker",
+  "category": "random",
+  "description": "Randomly pick one or more winners from a list, or split the whole list into evenly-sized random teams — fair, secure randomness for raffles, giveaways, and team assignments.",
+  "keywords": ["random picker", "random name picker", "raffle picker", "random team generator", "pick a winner"],
+  "difficulty": "beginner",
+  "priority": "high",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🎯",
+  "related": ["dice-roller", "random-number-generator"],
+  "faq": [
+    {
+      "question": "Can the same person be picked twice as a winner?",
+      "answer": "No — \"Pick winners\" draws without replacement, so each item in your list can be picked at most once, the same way names are drawn from a hat one at a time."
+    },
+    {
+      "question": "How are teams balanced?",
+      "answer": "The list is shuffled first, then dealt out round-robin across the requested number of teams — so team sizes differ by at most one when your list doesn't divide evenly, and which specific people end up together is fully randomized."
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "random-string-generator",
+  "name": "Random String Generator",
+  "slug": "random-string-generator",
+  "category": "random",
+  "description": "Generate cryptographically secure random strings of any length, from letters, digits, symbols, or your own custom character set.",
+  "keywords": ["random string generator", "random text generator", "random characters", "generate random string"],
+  "difficulty": "beginner",
+  "priority": "normal",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🎲",
+  "related": ["password-generator", "uuid-generator"],
+  "faq": [
+    {
+      "question": "How is this different from the Password Generator?",
+      "answer": "This is general-purpose: any length, any character pool (including your own custom characters), with no strength meter or guaranteed per-category coverage. The Password Generator is purpose-built for passwords — it guarantees at least one character from each selected category and reports an entropy/strength estimate, which isn't always what you want for, say, generating random test IDs or codes."
+    },
+    {
+      "question": "Is the randomness actually secure?",
+      "answer": "Yes — every character is drawn using the Web Crypto API's crypto.getRandomValues() with rejection sampling to avoid modulo bias, the same secure-randomness approach used throughout this site, never the predictable Math.random()."
+    }
+  ]
+}

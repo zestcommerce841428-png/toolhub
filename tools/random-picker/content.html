@@ -1,0 +1,40 @@
+<div>
+  <label for="picker-items" class="field-label">Items (one per line)</label>
+  <textarea id="picker-items" class="field-textarea" rows="8" placeholder="Alice&#10;Bob&#10;Carol&#10;Dave&#10;Eve"></textarea>
+</div>
+
+<div class="card mt-4">
+  <h2 class="mb-3 text-sm font-semibold text-text">Pick winners</h2>
+  <div class="flex flex-wrap items-end gap-3">
+    <div>
+      <label for="picker-count" class="field-label">How many to pick</label>
+      <input type="number" id="picker-count" class="field-input w-24" value="1" min="1" step="1" />
+    </div>
+    <button type="button" id="picker-pick" class="btn-primary">Pick</button>
+  </div>
+  <p id="picker-pick-error" class="field-error mt-2 hidden" role="alert"></p>
+  <div id="picker-pick-result" class="mt-3 flex flex-wrap gap-2"></div>
+</div>
+
+<div class="card mt-4">
+  <h2 class="mb-3 text-sm font-semibold text-text">Split into teams</h2>
+  <div class="flex flex-wrap items-end gap-3">
+    <div>
+      <label for="picker-teams" class="field-label">Number of teams</label>
+      <input type="number" id="picker-teams" class="field-input w-24" value="2" min="1" step="1" />
+    </div>
+    <button type="button" id="picker-split" class="btn-primary">Split</button>
+  </div>
+  <p id="picker-split-error" class="field-error mt-2 hidden" role="alert"></p>
+  <div id="picker-split-result" class="mt-3 grid gap-3 sm:grid-cols-2"></div>
+</div>
+
+<section class="prose-tool mt-12">
+  <h2>Fair, verifiable randomness</h2>
+  <p>
+    Both operations use a cryptographically secure Fisher-Yates shuffle,
+    so every possible ordering of your list is equally likely — genuinely
+    fair for drawing raffle winners or assigning teams, not a
+    Math.random()-based approximation.
+  </p>
+</section>
