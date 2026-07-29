@@ -1,0 +1,24 @@
+{
+  "id": "markup-calculator",
+  "name": "Markup Calculator",
+  "slug": "markup-calculator",
+  "category": "ecommerce",
+  "description": "Calculate a selling price from cost and a target markup percentage, or find the markup applied between a cost and selling price you already know.",
+  "keywords": ["markup calculator", "cost plus pricing", "markup percentage calculator", "price from cost and markup"],
+  "difficulty": "beginner",
+  "priority": "normal",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🏷️",
+  "related": ["profit-margin-calculator", "discount-calculator"],
+  "faq": [
+    {
+      "question": "Is markup the same as margin?",
+      "answer": "No. Markup is profit divided by cost; margin is profit divided by selling price. A 50% markup on a $40 item prices it at $60 — but that $20 profit is only a 33.3% margin, since margin divides by the larger selling price instead of the smaller cost. See the Profit Margin Calculator for the margin-first version of this math."
+    },
+    {
+      "question": "Why would I use markup instead of margin for pricing?",
+      "answer": "Cost-plus pricing (\"charge X% more than what I paid\") is a very common retail and wholesale strategy, and markup is the natural percentage for that workflow since you're starting from a known cost. Margin is more useful when you're working backward from a target profitability percentage of revenue, which is how most financial reporting talks about profitability."
+    }
+  ]
+}

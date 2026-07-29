@@ -1,0 +1,35 @@
+<div>
+  <label for="ean13-input" class="field-label">Digits</label>
+  <input
+    type="text"
+    id="ean13-input"
+    class="field-input font-mono"
+    value="400638133393"
+    inputmode="numeric"
+    maxlength="13"
+    placeholder="12 or 13 digits"
+  />
+  <p class="field-hint">Enter 12 digits to have the check digit calculated, or 13 to verify one you already have.</p>
+</div>
+
+<p id="ean13-error" class="field-error mt-2 hidden" role="alert"></p>
+
+<div class="card mt-4">
+  <div id="ean13-barcode" class="overflow-x-auto"></div>
+</div>
+
+<div class="mt-3 flex flex-wrap gap-2">
+  <button type="button" id="ean13-download" class="btn-secondary">Download SVG</button>
+</div>
+
+<section class="prose-tool mt-12">
+  <h2>How the check digit works</h2>
+  <p>
+    The 13th digit isn't part of the product code — it's calculated from
+    the other 12 so a scanner can detect a misread. Each of the first 12
+    digits is multiplied by 1 or 3 (alternating), summed, and the check
+    digit is whatever makes that sum a multiple of 10. This tool computes
+    and encodes a genuine, scannable EAN-13 barcode using the real ISO/IEC
+    15420 bar-pattern tables — not a decorative stand-in image.
+  </p>
+</section>

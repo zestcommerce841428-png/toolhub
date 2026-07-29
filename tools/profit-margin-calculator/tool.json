@@ -1,0 +1,24 @@
+{
+  "id": "profit-margin-calculator",
+  "name": "Profit Margin Calculator",
+  "slug": "profit-margin-calculator",
+  "category": "ecommerce",
+  "description": "Calculate profit, margin percentage, and markup percentage from cost and selling price, or find the price needed to hit a target margin.",
+  "keywords": ["profit margin calculator", "margin calculator", "gross margin calculator", "cost price selling price margin"],
+  "difficulty": "beginner",
+  "priority": "high",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "📊",
+  "related": ["markup-calculator", "discount-calculator"],
+  "faq": [
+    {
+      "question": "What's the difference between margin and markup?",
+      "answer": "Margin divides profit by the selling price; markup divides profit by the cost. Selling a $40-cost item for $60 is a 33.3% margin (20/60) but a 50% markup (20/40) — the same $20 profit, expressed against two different bases. Confusing the two is a common and costly pricing mistake."
+    },
+    {
+      "question": "How is the target-margin price calculated?",
+      "answer": "By solving margin = (price − cost) / price for price, which rearranges to price = cost / (1 − margin/100). This is the price you need to charge for a given cost to hit a specific margin percentage — not the same calculation as applying a markup percentage directly to cost."
+    }
+  ]
+}

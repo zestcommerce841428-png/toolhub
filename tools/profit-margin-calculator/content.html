@@ -1,0 +1,56 @@
+<div class="card">
+  <h2 class="mb-3 text-sm font-semibold text-text">Calculate margin from cost and price</h2>
+  <div class="grid gap-4 sm:grid-cols-2">
+    <div>
+      <label for="margin-cost" class="field-label">Cost price</label>
+      <input type="number" id="margin-cost" class="field-input" value="40" min="0" step="any" inputmode="decimal" />
+    </div>
+    <div>
+      <label for="margin-price" class="field-label">Selling price</label>
+      <input type="number" id="margin-price" class="field-input" value="60" min="0" step="any" inputmode="decimal" />
+    </div>
+  </div>
+
+  <div class="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-3">
+    <div>
+      <p class="text-sm text-text-muted">Profit</p>
+      <p id="margin-profit" class="text-2xl font-bold text-success">—</p>
+    </div>
+    <div>
+      <p class="text-sm text-text-muted">Margin (% of price)</p>
+      <p id="margin-percent" class="text-2xl font-bold text-primary">—</p>
+    </div>
+    <div>
+      <p class="text-sm text-text-muted">Markup (% of cost)</p>
+      <p id="margin-markup-percent" class="text-2xl font-bold text-text">—</p>
+    </div>
+  </div>
+</div>
+
+<div class="card mt-6">
+  <h2 class="mb-3 text-sm font-semibold text-text">Work backward: price for a target margin</h2>
+  <div class="grid gap-4 sm:grid-cols-2">
+    <div>
+      <label for="margin-target-cost" class="field-label">Cost price</label>
+      <input type="number" id="margin-target-cost" class="field-input" value="40" min="0" step="any" inputmode="decimal" />
+    </div>
+    <div>
+      <label for="margin-target-percent" class="field-label">Target margin (%)</label>
+      <input type="number" id="margin-target-percent" class="field-input" value="35" min="0" max="99" step="any" inputmode="decimal" />
+    </div>
+  </div>
+  <p class="mt-3 text-sm text-text-muted">Selling price needed</p>
+  <p id="margin-target-price" class="text-2xl font-bold text-text">—</p>
+</div>
+
+<section class="prose-tool mt-12">
+  <h2>Margin vs. markup — not the same number</h2>
+  <p>
+    Margin is profit as a percentage of your <strong>selling price</strong>;
+    markup is profit as a percentage of your <strong>cost</strong>. Selling
+    something for $60 that cost $40 is a 33.3% margin but a 50% markup —
+    the same sale, two genuinely different percentages depending which
+    base you divide by. See the <a href="/tools/markup-calculator/">Markup
+    Calculator</a> if you're pricing from a target markup instead.
+  </p>
+</section>

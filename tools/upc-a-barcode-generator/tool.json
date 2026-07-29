@@ -1,0 +1,24 @@
+{
+  "id": "upc-a-barcode-generator",
+  "name": "UPC-A Barcode Generator",
+  "slug": "upc-a-barcode-generator",
+  "category": "ecommerce",
+  "description": "Generate a real, scannable UPC-A barcode as downloadable SVG from 11 digits (check digit calculated) or 12 digits (check digit verified) — no upload, fully client-side.",
+  "keywords": ["upc-a generator", "upc barcode", "barcode generator", "upc check digit calculator", "product barcode"],
+  "difficulty": "intermediate",
+  "priority": "normal",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🏷️",
+  "related": ["ean13-barcode-generator", "sku-generator"],
+  "faq": [
+    {
+      "question": "What's the difference between UPC-A and EAN-13?",
+      "answer": "UPC-A (12 digits) is the standard in the US and Canada; EAN-13 (13 digits) is used almost everywhere else. They're not just similar — a UPC-A code is literally an EAN-13 code with an invisible leading 0, encoded with the exact same bar patterns, which is why most scanners read both without configuration."
+    },
+    {
+      "question": "Is this a real, scannable barcode?",
+      "answer": "Yes — it's built from the same standard bar-pattern tables real scanners expect (via the same encoder as this site's EAN-13 Barcode Generator, since UPC-A and EAN-13 share identical underlying encoding), not a decorative image. Downloaded as SVG, it should scan correctly when printed at a reasonable size."
+    }
+  ]
+}

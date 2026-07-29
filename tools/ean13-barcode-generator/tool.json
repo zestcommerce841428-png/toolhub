@@ -1,0 +1,28 @@
+{
+  "id": "ean13-barcode-generator",
+  "name": "EAN-13 Barcode Generator",
+  "slug": "ean13-barcode-generator",
+  "category": "ecommerce",
+  "description": "Generate a real, scannable EAN-13 barcode as downloadable SVG from 12 digits (check digit calculated) or 13 digits (check digit verified) — no upload, fully client-side.",
+  "keywords": ["ean13 generator", "ean-13 barcode", "barcode generator", "product barcode", "check digit calculator"],
+  "difficulty": "intermediate",
+  "priority": "high",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🏷️",
+  "related": ["upc-a-barcode-generator", "sku-generator"],
+  "faq": [
+    {
+      "question": "Is this a real, scannable barcode or just a picture that looks like one?",
+      "answer": "It's a genuine EAN-13 encoding, built from the actual ISO/IEC 15420 bar-width tables (the same left/right digit patterns and guard bars every real EAN-13 scanner expects) — not a decorative striped image. Downloaded as SVG, it should scan correctly when printed at a reasonable size."
+    },
+    {
+      "question": "What are the 12 vs. 13 digit modes?",
+      "answer": "A finished EAN-13 code is always 13 digits, but the 13th is always derived from the first 12 via a checksum, never chosen freely. Enter 12 digits to have that check digit calculated for you, or paste a full 13-digit code you already have to verify it's correct — a wrong check digit means the code was mistyped or is invalid."
+    },
+    {
+      "question": "Where do the first 12 digits come from for a real product?",
+      "answer": "In practice, the country/company prefix and product code are assigned by GS1 (the organization that administers barcode standards) once you register — this tool handles the encoding and checksum math, not the registration/assignment process."
+    }
+  ]
+}
