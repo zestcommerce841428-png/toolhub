@@ -1,0 +1,24 @@
+{
+  "id": "user-agent-parser",
+  "name": "User Agent Parser",
+  "slug": "user-agent-parser",
+  "category": "web-utilities",
+  "description": "Parse any browser user-agent string into browser name/version, operating system, and device type — pre-filled with your own browser's user-agent.",
+  "keywords": ["user agent parser", "ua parser", "browser detection", "parse user agent string", "what is my user agent"],
+  "difficulty": "beginner",
+  "priority": "normal",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🕵️",
+  "related": ["http-status-code-lookup", "query-string-parser"],
+  "faq": [
+    {
+      "question": "Why does an Edge or Chrome user-agent also contain the word Safari?",
+      "answer": "Both are built on WebKit-derived rendering engines and keep the historical \"Safari\" and \"AppleWebKit\" tokens in their user-agent for website compatibility — many older sites checked for that substring to decide whether to serve WebKit-friendly content. This tool checks for Edge's and Chrome's own more-specific tokens first, so it correctly reports \"Edge\" or \"Chrome\" rather than misreading them as Safari."
+    },
+    {
+      "question": "Can this tell Windows 10 apart from Windows 11?",
+      "answer": "No — both versions report the identical \"Windows NT 10.0\" in their user-agent string, so there's no way to distinguish them from this data alone. This is a real limitation of user-agent strings, not something a better parser could fix."
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "query-string-parser",
+  "name": "Query String Parser / Builder",
+  "slug": "query-string-parser",
+  "category": "web-utilities",
+  "description": "Parse a URL or query string into a readable key/value table, or build a query string from scratch with automatic encoding — including correct handling of repeated keys.",
+  "keywords": ["query string parser", "url query parser", "query string builder", "parse url parameters", "querystring to json"],
+  "difficulty": "beginner",
+  "priority": "normal",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🔍",
+  "related": ["url-encoder-decoder", "utm-link-builder"],
+  "faq": [
+    {
+      "question": "Can I paste a full URL, not just the query string?",
+      "answer": "Yes — the parser looks for the first \"?\" and ignores everything before it (the scheme, domain, and path), and also strips a trailing #fragment if there is one, so pasting the whole address bar contents works fine."
+    },
+    {
+      "question": "What happens with a repeated key like ?tag=a&tag=b?",
+      "answer": "Both entries are shown, in order, rather than merged into one — some frameworks use repeated keys to represent a list (e.g. multiple selected filter values), and collapsing them into a single key/value pair would lose that information."
+    }
+  ]
+}

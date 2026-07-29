@@ -1,0 +1,24 @@
+{
+  "id": "http-status-code-lookup",
+  "name": "HTTP Status Code Lookup",
+  "slug": "http-status-code-lookup",
+  "category": "web-utilities",
+  "description": "Search every HTTP status code (1xx-5xx) — official name, meaning, and category — including the less-common WebDAV and rate-limiting codes.",
+  "keywords": ["http status codes", "status code lookup", "404 meaning", "http error codes", "what is status code 429"],
+  "difficulty": "beginner",
+  "priority": "high",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "📡",
+  "related": ["user-agent-parser", "query-string-parser"],
+  "faq": [
+    {
+      "question": "What does the first digit of a status code mean?",
+      "answer": "It tells you the response's class before you read anything else: 1xx is informational, 2xx is success, 3xx is redirection, 4xx is a client error (something about the request was wrong), and 5xx is a server error (the request was valid but the server failed to fulfill it)."
+    },
+    {
+      "question": "Is 418 \"I'm a Teapot\" a real status code?",
+      "answer": "Yes, technically — it originated as an April Fools' joke in RFC 2324 (and was later kept alive in RFC 7168) but is a real, registered code some servers and frameworks implement for fun or as an easter egg. It's not something you'd design an API around."
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+<div>
+  <label for="utm-base-url" class="field-label">Website URL</label>
+  <input type="url" id="utm-base-url" class="field-input" placeholder="https://example.com/landing-page" />
+</div>
+
+<div class="mt-4 grid gap-4 sm:grid-cols-2">
+  <div>
+    <label for="utm-source" class="field-label">Campaign Source <span class="text-danger">*</span></label>
+    <input type="text" id="utm-source" class="field-input" placeholder="newsletter, google, twitter" />
+  </div>
+  <div>
+    <label for="utm-medium" class="field-label">Campaign Medium <span class="text-danger">*</span></label>
+    <input type="text" id="utm-medium" class="field-input" placeholder="email, cpc, social" />
+  </div>
+  <div>
+    <label for="utm-campaign" class="field-label">Campaign Name <span class="text-danger">*</span></label>
+    <input type="text" id="utm-campaign" class="field-input" placeholder="spring_sale" />
+  </div>
+  <div>
+    <label for="utm-term" class="field-label">Campaign Term (optional)</label>
+    <input type="text" id="utm-term" class="field-input" placeholder="running+shoes" />
+  </div>
+  <div class="sm:col-span-2">
+    <label for="utm-content" class="field-label">Campaign Content (optional)</label>
+    <input type="text" id="utm-content" class="field-input" placeholder="logolink, textlink — to A/B test ad variants" />
+  </div>
+</div>
+
+<p id="utm-error" class="field-error mt-3 hidden" role="alert"></p>
+
+<div class="mt-5">
+  <label for="utm-output" class="field-label">Generated URL</label>
+  <input type="text" id="utm-output" class="field-input font-mono" readonly />
+  <div class="mt-3">
+    <button type="button" id="utm-copy" class="btn-secondary">Copy URL</button>
+  </div>
+</div>
+
+<section class="prose-tool mt-12">
+  <h2>The three required parameters</h2>
+  <p>
+    Google Analytics (and most other tools that read UTM parameters)
+    treat <code>utm_source</code>, <code>utm_medium</code>, and
+    <code>utm_campaign</code> as the minimum needed to attribute traffic —
+    which platform sent the visitor, what kind of channel it was, and
+    which specific campaign. <code>utm_term</code> and
+    <code>utm_content</code> are optional extras for paid keyword tracking
+    and A/B testing different links within the same campaign.
+  </p>
+</section>

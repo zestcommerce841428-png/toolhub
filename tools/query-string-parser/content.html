@@ -1,0 +1,41 @@
+<div class="card">
+  <h2 class="mb-3 text-sm font-semibold text-text">Parse</h2>
+  <label for="qs-input" class="field-label">URL or query string</label>
+  <textarea id="qs-input" class="field-textarea font-mono" rows="3" spellcheck="false" placeholder="https://example.com/search?q=hello+world&page=2"></textarea>
+  <div class="mt-3 overflow-x-auto">
+    <table class="w-full text-left text-sm">
+      <thead class="text-text-muted">
+        <tr>
+          <th class="py-1 pr-3">Key</th>
+          <th class="py-1">Value</th>
+        </tr>
+      </thead>
+      <tbody id="qs-parsed-body" class="font-mono text-text"></tbody>
+    </table>
+    <p id="qs-parsed-empty" class="py-2 text-sm text-text-muted">No parameters yet.</p>
+  </div>
+</div>
+
+<div class="card mt-6">
+  <h2 class="mb-3 text-sm font-semibold text-text">Build</h2>
+  <div id="qs-build-rows" class="space-y-2"></div>
+  <button type="button" id="qs-add-row" class="btn-secondary mt-2">+ Add parameter</button>
+
+  <div class="mt-4">
+    <label for="qs-build-output" class="field-label">Query string</label>
+    <input type="text" id="qs-build-output" class="field-input font-mono" readonly />
+    <div class="mt-3">
+      <button type="button" id="qs-build-copy" class="btn-secondary">Copy</button>
+    </div>
+  </div>
+</div>
+
+<section class="prose-tool mt-12">
+  <h2>Why repeated keys aren't merged</h2>
+  <p>
+    A query string can legally repeat the same key — <code>?tag=red&amp;tag=blue</code>
+    is how many frameworks represent a multi-select filter. Parsing that
+    into a plain object would silently keep only one value; this tool
+    lists every key/value pair exactly as it appeared, in order.
+  </p>
+</section>

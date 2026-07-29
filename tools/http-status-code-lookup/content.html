@@ -1,0 +1,30 @@
+<div class="flex flex-wrap items-end gap-3">
+  <div class="min-w-0 flex-1">
+    <label for="status-search" class="field-label">Search by code, name, or keyword</label>
+    <input type="text" id="status-search" class="field-input" placeholder="404, not found, rate limit…" />
+  </div>
+  <div>
+    <label for="status-category" class="field-label">Category</label>
+    <select id="status-category" class="field-select w-48">
+      <option value="">All categories</option>
+    </select>
+  </div>
+</div>
+
+<p id="status-count" class="field-hint mt-2"></p>
+
+<div id="status-results" class="mt-4 space-y-2"></div>
+
+<section class="prose-tool mt-12">
+  <h2>The five status code classes</h2>
+  <p>
+    The first digit of every HTTP status code tells you its class before
+    you even read the rest: <strong>1xx</strong> informational,
+    <strong>2xx</strong> success, <strong>3xx</strong> redirection,
+    <strong>4xx</strong> client error (the request was wrong),
+    <strong>5xx</strong> server error (the server failed to fulfill a
+    valid request). This is a complete reference, including the
+    less-common WebDAV and rate-limiting codes, not just the handful of
+    codes any given API happens to use.
+  </p>
+</section>

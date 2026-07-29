@@ -1,0 +1,35 @@
+<div>
+  <label for="ua-input" class="field-label">User-agent string</label>
+  <textarea id="ua-input" class="field-textarea font-mono" rows="4" spellcheck="false"></textarea>
+  <div class="mt-2">
+    <button type="button" id="ua-use-mine" class="btn-secondary">Use my browser's user-agent</button>
+  </div>
+</div>
+
+<div class="card mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
+  <div>
+    <p class="text-sm text-text-muted">Browser</p>
+    <p id="ua-browser" class="text-xl font-bold text-text">—</p>
+  </div>
+  <div>
+    <p class="text-sm text-text-muted">Operating system</p>
+    <p id="ua-os" class="text-xl font-bold text-text">—</p>
+  </div>
+  <div>
+    <p class="text-sm text-text-muted">Device type</p>
+    <p id="ua-device" class="text-xl font-bold text-text">—</p>
+  </div>
+</div>
+
+<section class="prose-tool mt-12">
+  <h2>Why this can't always be perfectly precise</h2>
+  <p>
+    User-agent strings are inherently a moving target — every browser has
+    changed its format over the years, some deliberately mimic other
+    browsers' tokens for compatibility, and Windows 10 and 11 report the
+    identical "NT 10.0" version with no way to tell them apart from the
+    string alone. This tool covers the current mainstream browsers,
+    operating systems, and device types accurately, but treat unusual or
+    very old user-agent strings as a best-effort read.
+  </p>
+</section>

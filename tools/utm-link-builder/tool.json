@@ -1,0 +1,24 @@
+{
+  "id": "utm-link-builder",
+  "name": "UTM Link Builder",
+  "slug": "utm-link-builder",
+  "category": "web-utilities",
+  "description": "Build a campaign-tracking URL with UTM source, medium, campaign, term, and content parameters correctly appended and encoded.",
+  "keywords": ["utm builder", "utm link generator", "campaign url builder", "utm parameters", "google analytics utm"],
+  "difficulty": "beginner",
+  "priority": "high",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "📈",
+  "related": ["query-string-parser", "url-encoder-decoder"],
+  "faq": [
+    {
+      "question": "What happens if my URL already has query parameters?",
+      "answer": "They're preserved — UTM parameters are merged in alongside any existing ones (like ?ref=123) rather than replacing the whole query string."
+    },
+    {
+      "question": "Which parameters are actually required?",
+      "answer": "utm_source, utm_medium, and utm_campaign are the minimum Google Analytics and most other analytics platforms need to attribute traffic to a campaign. utm_term (for tracking paid search keywords) and utm_content (for distinguishing multiple links within the same campaign, e.g. an A/B test) are optional extras."
+    }
+  ]
+}
