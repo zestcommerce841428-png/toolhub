@@ -1,0 +1,24 @@
+{
+  "id": "lowercase-converter",
+  "name": "Lowercase Converter",
+  "slug": "lowercase-converter",
+  "category": "text",
+  "description": "Convert text to lowercase instantly — paste in, copy or download the result, entirely in your browser.",
+  "keywords": ["lowercase converter", "convert to lowercase", "small letters"],
+  "difficulty": "beginner",
+  "priority": "normal",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🔡",
+  "related": ["case-converter", "uppercase-converter", "sentence-case-converter"],
+  "faq": [
+    {
+      "question": "How is this different from the full Case Converter tool?",
+      "answer": "It's the same lowercase conversion, on its own dedicated page with no mode selector. The Case Converter tool covers all six case styles in one place if you want to compare them."
+    },
+    {
+      "question": "Is my text uploaded anywhere?",
+      "answer": "No — the conversion is a single JavaScript string operation that runs instantly in your browser. Nothing is sent to a server."
+    }
+  ]
+}

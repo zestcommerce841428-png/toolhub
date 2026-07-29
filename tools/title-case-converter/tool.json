@@ -1,0 +1,24 @@
+{
+  "id": "title-case-converter",
+  "name": "Title Case Converter",
+  "slug": "title-case-converter",
+  "category": "text",
+  "description": "Convert text to Title Case instantly — every word capitalized, the rest lowercased, entirely in your browser.",
+  "keywords": ["title case converter", "convert to title case", "capitalize each word"],
+  "difficulty": "beginner",
+  "priority": "normal",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🔤",
+  "related": ["case-converter", "capitalize-words", "sentence-case-converter"],
+  "faq": [
+    {
+      "question": "What exactly does Title Case do here?",
+      "answer": "It lowercases the whole string first, then capitalizes the first letter of every word — so 'hELLO wORLD' becomes 'Hello World'. It does not apply style-guide rules about skipping small words like 'a' or 'the'; every word's first letter is capitalized."
+    },
+    {
+      "question": "How is this different from Capitalize Words?",
+      "answer": "Title Case lowercases the rest of each word first. Capitalize Words only touches the first letter of each word and leaves the rest exactly as typed — see the dedicated Capitalize Words tool if that's what you need."
+    }
+  ]
+}

@@ -10,11 +10,11 @@
   "version": "1.0.0",
   "updated": "2026-07-29",
   "icon": "🔤",
-  "related": ["word-counter"],
+  "related": ["word-counter", "uppercase-converter", "title-case-converter", "capitalize-words"],
   "faq": [
     {
       "question": "What's the difference between Title Case and Capitalize Words?",
-      "answer": "Title Case first lowercases the whole string, then capitalizes the first letter of every word — so 'hELLO wORLD' becomes 'Hello World'. Capitalize Words only uppercases the first letter of each word and leaves the rest of each word untouched — so 'hELLO wORLD' becomes 'HELLO wORLD'."
+      "answer": "Title Case first lowercases the whole string, then capitalizes the first letter of every word — so 'heLLo woRLd' becomes 'Hello World'. Capitalize Words only uppercases the first letter of each word and leaves the rest of each word untouched — so 'heLLo woRLd' becomes 'HeLLo WoRLd'."
     },
     {
       "question": "Does Sentence case handle abbreviations correctly?",

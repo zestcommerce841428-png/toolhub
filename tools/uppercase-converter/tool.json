@@ -1,0 +1,24 @@
+{
+  "id": "uppercase-converter",
+  "name": "Uppercase Converter",
+  "slug": "uppercase-converter",
+  "category": "text",
+  "description": "Convert text to UPPERCASE instantly — paste in, copy or download the result, entirely in your browser.",
+  "keywords": ["uppercase converter", "convert to uppercase", "capital letters", "all caps"],
+  "difficulty": "beginner",
+  "priority": "normal",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🔠",
+  "related": ["case-converter", "lowercase-converter", "capitalize-words"],
+  "faq": [
+    {
+      "question": "How is this different from the full Case Converter tool?",
+      "answer": "It's the same UPPERCASE conversion, on its own dedicated page with no mode selector — useful if uppercase is the only thing you need and you'd rather not see the other case options. The Case Converter tool covers all six case styles in one place if you want to compare them."
+    },
+    {
+      "question": "Is my text uploaded anywhere?",
+      "answer": "No — the conversion is a single JavaScript string operation that runs instantly in your browser. Nothing is sent to a server."
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "capitalize-words",
+  "name": "Capitalize Words",
+  "slug": "capitalize-words",
+  "category": "text",
+  "description": "Capitalize the first letter of every word without changing anything else — entirely in your browser.",
+  "keywords": ["capitalize words", "capitalize first letter", "capitalize each word"],
+  "difficulty": "beginner",
+  "priority": "normal",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🔠",
+  "related": ["case-converter", "title-case-converter", "uppercase-converter"],
+  "faq": [
+    {
+      "question": "How is this different from Title Case?",
+      "answer": "Title Case lowercases the rest of each word before capitalizing the first letter. Capitalize Words only touches each word's first letter and leaves everything else exactly as you typed it — so 'heLLo woRLd' becomes 'HeLLo WoRLd', not 'Hello World'."
+    },
+    {
+      "question": "Is my text uploaded anywhere?",
+      "answer": "No — the conversion runs entirely in your browser with plain JavaScript. Nothing is sent to a server."
+    }
+  ]
+}

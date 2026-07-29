@@ -35,6 +35,27 @@ the reasoning behind the foundation itself.
   core interactions, Ctrl+K search, dark-mode toggle, keyboard radiogroup
   navigation, visible focus — zero console errors on any page.
 - 4 static pages: About, Privacy, Terms, Contact.
+- GitHub Actions CI (`.github/workflows/ci.yml`): `npm test` + `npm run
+  build` on every push/PR.
+
+**Phase 1.5 — shipped (proved the tool-family pattern):**
+
+- 6 more tools, all thin wrappers around `tools/case-converter/logic.js`
+  (Uppercase Converter, Lowercase Converter, Title Case Converter,
+  Sentence Case Converter, Toggle Case Converter, Capitalize Words) — see
+  `docs/CONTRIBUTING.md`'s "sharing logic.js across a tool family."
+  **12 tools total, 8 in Text.** This was previously documented as a
+  pattern but never actually built; it's now proven end-to-end (each page
+  reuses the shared, already-unit-tested transform functions, adds zero
+  new logic, and cross-links back to the full Case Converter).
+- Along the way, found and fixed a real content bug this pattern exposed:
+  `tools/case-converter/tool.json`'s own FAQ had an example
+  (`'hELLO wORLD'`) where Title Case and Capitalize Words happen to
+  produce visually similar-looking wrong output, so the "difference"
+  being explained wasn't actually demonstrated. Replaced with an example
+  (`'heLLo woRLd'`) that actually shows the two modes diverging — a good
+  reminder to eyeball FAQ examples against the real function output, not
+  just prose-review them.
 
 ## Deliberately deferred, and why
 
@@ -47,26 +68,30 @@ the reasoning behind the foundation itself.
   an SVG sprite (`assets/icons/sprite.svg`) with one symbol per tool/
   category, referenced via `<use>`, and switch `tool.json.icon` from an
   emoji string to a sprite symbol id.
-- **No Git repository.** Git isn't installed on the machine this was built
-  on. Everything here is otherwise ready to commit as-is — `.gitignore` is
-  already in place (`node_modules/`, `public/`). Initialize with
-  `git init && git add -A && git commit -m "Initial ToolHub foundation"`
-  once Git is available, ideally before the tool count grows much further.
+- ~~No Git repository~~ **Done.** Initialized and committed
+  (`0112e53`). Note: no global `user.name`/`user.email` was configured on
+  the build machine, so Git auto-derived a commit identity from the OS
+  account — verify `git config user.name`/`user.email` are what you want
+  before pushing anywhere, and `git commit --amend --reset-author` if not.
 - **`site.config.json` has placeholder values** (`siteUrl`, contact email).
   Every canonical URL, sitemap entry, and JSON-LD `@id` is derived from
   `siteUrl` at build time, so updating one file before launch fixes every
   page — but it must be updated before this goes live, or every canonical
   URL and structured-data block points at a domain that doesn't resolve.
-- **No CI.** `npm test` and `npm run build` are fast and deterministic
-  enough to be a trivial GitHub Actions (or equivalent) job — add one that
-  runs both on every PR before this project has many contributors, since
-  the whole "add tool #9" workflow in `CONTRIBUTING.md` depends on the
-  build failing loudly when a tool's metadata is wrong.
-- **No Lighthouse CI.** The design system and templates are built to hit
-  100/100/100/100, but that's a claim that needs continuous verification,
-  not a one-time check — wire in `lighthouse-ci` (or a simpler scripted
-  Lighthouse run against `npm run serve`) once there's a CI pipeline to
-  hang it off of.
+  Not done yet because it needs a real value only the site owner has.
+- ~~No CI~~ **Partially done.** `.github/workflows/ci.yml` runs `npm test`
+  and `npm run build` on every push/PR, so a malformed `tool.json`, a
+  missing `tool.css`/`tool.js`, or a broken template placeholder now fails
+  the build loudly in CI, not just locally. Unverified against a real
+  GitHub remote (none is configured yet) — check the Actions tab after the
+  first push.
+- **No Lighthouse CI yet.** The design system and templates are built to
+  hit 100/100/100/100, but that's a claim that needs continuous
+  verification, not a one-time check. Natural next step now that
+  test+build CI exists: add a job that runs `npm run build`, serves
+  `public/` (`npm run serve` or any static server), and runs
+  `@lhci/cli` against a few representative URLs (home, one category, one
+  tool) with asserted score thresholds.
 - **DOM-dependent modules aren't unit tested.** `clipboard.js`,
   `storage.js`, `toast.js`, `theme.js`, `search.js`, and `keyboard.js` all
   touch `document`/`window`/`navigator` directly, which plain `node:test`
@@ -100,14 +125,17 @@ Following the category weights from the original catalog target
 Ecommerce 150, SEO 150, Security 120, Web Utilities 120, File & Data 150,
 Date & Time 80, Random 100 ≈ 1,450 tools total):
 
-1. Fix the deferred items above that are cheap now and expensive later:
-   Git init, real `site.config.json` values, CI with test+build+Lighthouse.
+1. ~~Fix the deferred items above that are cheap now and expensive
+   later~~ **Git init and CI (test+build) done.** Still open: real
+   `site.config.json` values (needs the site owner), Lighthouse CI.
 2. Round out the 5 existing categories closer to their target counts,
    reusing the `logic.js`-sharing pattern from `CONTRIBUTING.md`
-   wherever a tool is a thin variant of one already built (e.g. Uppercase/
-   Lowercase/Sentence Case/Toggle Case/Capitalize Words as five thin
-   wrappers around `case-converter/logic.js`; SHA-256/SHA-512/MD5
-   generators as thin wrappers around a new `hash-generator` family).
+   wherever a tool is a thin variant of one already built — **proven**:
+   Uppercase/Lowercase/Title Case/Sentence Case/Toggle Case/Capitalize
+   Words now ship as six thin wrappers around `case-converter/logic.js`
+   (Text is at 8/100 tools). Same pattern applies well to, e.g., SHA-256/
+   SHA-512/MD5 generators as thin wrappers around a new `hash-generator`
+   family, once Security's first hash tool exists to wrap.
 3. Add the categories not yet represented: Unit Converters, Ecommerce,
    SEO, Web Utilities, File & Data, Date & Time, Random — one
    `category.json` plus a first tool each, proving the pattern extends

@@ -1,0 +1,24 @@
+{
+  "id": "sentence-case-converter",
+  "name": "Sentence Case Converter",
+  "slug": "sentence-case-converter",
+  "category": "text",
+  "description": "Convert text to Sentence case instantly — the first letter of every sentence capitalized, entirely in your browser.",
+  "keywords": ["sentence case converter", "convert to sentence case", "capitalize sentences"],
+  "difficulty": "beginner",
+  "priority": "normal",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🔡",
+  "related": ["case-converter", "title-case-converter", "lowercase-converter"],
+  "faq": [
+    {
+      "question": "How does it decide where a sentence starts?",
+      "answer": "It lowercases everything first, then capitalizes the first letter after the very start of the text and after each '.', '!', or '?' followed by whitespace. Heavy use of abbreviations (like 'e.g.' or 'Dr.') can occasionally cause an extra capital where a new sentence didn't really start — review the result for that kind of text."
+    },
+    {
+      "question": "Is my text uploaded anywhere?",
+      "answer": "No — the conversion runs entirely in your browser with plain JavaScript. Nothing is sent to a server."
+    }
+  ]
+}

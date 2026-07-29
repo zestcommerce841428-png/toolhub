@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      # Fails loudly on a malformed tool.json/category.json, a missing
+      # tool.css/tool.js, an unresolved {{TEMPLATE_TOKEN}}, or a broken
+      # category reference — see scripts/lib/content.js and
+      # scripts/lib/template.js. This is the safety net referenced in
+      # docs/CONTRIBUTING.md for adding new tools.
+      - run: npm test
+      - run: npm run build
+
+      - name: Upload build output
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-site
+          path: public/
+          retention-days: 7

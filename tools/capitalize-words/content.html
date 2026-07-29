@@ -1,0 +1,30 @@
+<div>
+  <label for="capitalize-words-input" class="field-label">Your text</label>
+  <textarea
+    id="capitalize-words-input"
+    class="field-textarea"
+    rows="8"
+    placeholder="Type or paste your text here…"
+  ></textarea>
+</div>
+
+<div class="mt-6">
+  <label for="capitalize-words-output" class="field-label">Capitalized result</label>
+  <textarea id="capitalize-words-output" class="field-textarea" rows="8" readonly></textarea>
+  <div class="mt-3 flex flex-wrap gap-2">
+    <button type="button" id="capitalize-words-copy" class="btn-secondary">Copy result</button>
+    <button type="button" id="capitalize-words-download" class="btn-secondary">Download .txt</button>
+    <button type="button" id="capitalize-words-clear" class="btn-ghost">Clear</button>
+  </div>
+</div>
+
+<section class="prose-tool mt-12">
+  <h2>About Capitalize Words</h2>
+  <p>
+    Only the first letter of each word is changed, to uppercase — the rest
+    of every word is left exactly as typed. If you'd rather have the whole
+    rest of each word lowercased too, use
+    <a href="/tools/title-case-converter/">Title Case Converter</a>
+    instead.
+  </p>
+</section>

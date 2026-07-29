@@ -1,0 +1,24 @@
+{
+  "id": "toggle-case-converter",
+  "name": "Toggle Case Converter",
+  "slug": "toggle-case-converter",
+  "category": "text",
+  "description": "Swap the case of every letter in your text — uppercase becomes lowercase and vice versa, entirely in your browser.",
+  "keywords": ["toggle case", "swap case", "invert case", "reverse capitalization"],
+  "difficulty": "beginner",
+  "priority": "normal",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🔀",
+  "related": ["case-converter", "uppercase-converter", "lowercase-converter"],
+  "faq": [
+    {
+      "question": "What does Toggle Case actually do?",
+      "answer": "Every individual letter's case is swapped — uppercase letters become lowercase and lowercase letters become uppercase. 'Hello World' becomes 'hELLO wORLD'. Numbers, spaces, and punctuation are unaffected."
+    },
+    {
+      "question": "Is my text uploaded anywhere?",
+      "answer": "No — the conversion runs entirely in your browser with plain JavaScript. Nothing is sent to a server."
+    }
+  ]
+}
