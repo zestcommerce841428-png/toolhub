@@ -1,0 +1,24 @@
+{
+  "id": "markdown-to-html-converter",
+  "name": "Markdown to HTML Converter",
+  "slug": "markdown-to-html-converter",
+  "category": "file-data",
+  "description": "Convert Markdown to HTML instantly with a live preview — headings, formatting, lists, links, images, code blocks, and blockquotes, safely escaped against raw HTML injection.",
+  "keywords": ["markdown to html", "markdown converter", "markdown preview", "md to html online"],
+  "difficulty": "beginner",
+  "priority": "high",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "📝",
+  "related": ["text-diff-checker", "json-formatter"],
+  "faq": [
+    {
+      "question": "Is it safe to paste Markdown from an untrusted source?",
+      "answer": "Yes — every character of your input is HTML-escaped before any Markdown syntax is turned into a real tag, so a stray <script> tag or an HTML event-handler attribute always ends up as inert, visible text rather than executable markup. Link and image URLs additionally reject the javascript: scheme."
+    },
+    {
+      "question": "What Markdown features aren't supported?",
+      "answer": "Tables, nested lists or blockquotes, footnotes, and reference-style links ([text][id] with a separate definition line) aren't implemented — this covers the common subset most everyday writing actually uses (headings, bold/italic, inline code, fenced code blocks, links, images, single-level lists and blockquotes, horizontal rules, hard line breaks), not the complete CommonMark specification."
+    }
+  ]
+}

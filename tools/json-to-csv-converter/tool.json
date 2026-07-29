@@ -1,0 +1,24 @@
+{
+  "id": "json-to-csv-converter",
+  "name": "JSON to CSV Converter",
+  "slug": "json-to-csv-converter",
+  "category": "file-data",
+  "description": "Convert a JSON array of objects to CSV instantly, with a header row built from every object's keys and correct quoting of commas, quotes, and newlines.",
+  "keywords": ["json to csv", "json to csv converter", "convert json to spreadsheet", "json array to csv"],
+  "difficulty": "beginner",
+  "priority": "normal",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "📊",
+  "related": ["csv-to-json-converter", "json-formatter"],
+  "faq": [
+    {
+      "question": "What if my objects have different keys from each other?",
+      "answer": "The header row is the union of every object's keys, so an object missing a field some others have simply gets an empty cell in that column, rather than the field being silently dropped from the output."
+    },
+    {
+      "question": "What happens with nested objects or arrays as values?",
+      "answer": "They're converted to a plain string with JavaScript's default stringification (a nested object becomes the not-very-useful \"[object Object]\"; an array becomes its values joined with commas) rather than automatically flattened into extra columns — flatten nested data into separate top-level fields before converting if you need each nested value in its own column."
+    }
+  ]
+}

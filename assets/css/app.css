@@ -190,11 +190,47 @@
   .prose-tool :where(p) {
     @apply mb-4 leading-relaxed text-text-muted;
   }
+  .prose-tool :where(h1) {
+    @apply mb-4 mt-8 text-2xl font-bold text-text;
+  }
   .prose-tool :where(h2) {
     @apply mb-3 mt-8 text-xl font-semibold text-text;
   }
   .prose-tool :where(h3) {
     @apply mb-2 mt-6 text-lg font-semibold text-text;
+  }
+  /* Tailwind's preflight resets ul/ol to list-style:none with no
+     indentation, which is correct for site chrome (nav lists, etc.) but
+     means content rendered *into* .prose-tool — like the Markdown
+     Converter's live preview — needs its own bullets/numbers restored
+     explicitly, or a generated <ul><li> list silently renders as
+     indistinguishable stacked lines with no marker at all. */
+  .prose-tool :where(ul) {
+    @apply mb-4 list-disc space-y-1 pl-6 text-text-muted;
+  }
+  .prose-tool :where(ol) {
+    @apply mb-4 list-decimal space-y-1 pl-6 text-text-muted;
+  }
+  .prose-tool :where(blockquote) {
+    @apply mb-4 border-l-4 border-border-strong pl-4 italic text-text-muted;
+  }
+  .prose-tool :where(pre) {
+    @apply mb-4 overflow-x-auto rounded-lg bg-surface p-4 text-sm;
+  }
+  .prose-tool :where(code) {
+    @apply rounded bg-surface px-1.5 py-0.5 font-mono text-sm text-text;
+  }
+  .prose-tool :where(pre code) {
+    @apply bg-transparent p-0;
+  }
+  .prose-tool :where(a) {
+    @apply text-primary underline-offset-2 hover:underline;
+  }
+  .prose-tool :where(img) {
+    @apply my-4 max-w-full rounded-lg;
+  }
+  .prose-tool :where(hr) {
+    @apply my-8 border-border;
   }
 
   /* Theme toggle icon swap — driven purely by CSS off the [data-theme]

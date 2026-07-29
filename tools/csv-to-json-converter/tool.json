@@ -1,0 +1,24 @@
+{
+  "id": "csv-to-json-converter",
+  "name": "CSV to JSON Converter",
+  "slug": "csv-to-json-converter",
+  "category": "file-data",
+  "description": "Convert CSV to JSON instantly, correctly handling quoted fields with embedded commas, quotes, and newlines — not a naive comma-split.",
+  "keywords": ["csv to json", "csv to json converter", "convert csv", "csv parser online"],
+  "difficulty": "beginner",
+  "priority": "high",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "📄",
+  "related": ["json-to-csv-converter", "json-formatter"],
+  "faq": [
+    {
+      "question": "Does this handle fields that contain commas?",
+      "answer": "Yes — a field properly quoted like \"Doe, Jane\" is parsed as one value, not split into two. This tool uses a real CSV parser (per the RFC 4180 convention: quoted fields, \"\" for an escaped quote, embedded newlines inside quotes) rather than a naive split on every comma, which breaks on exactly this kind of real-world data."
+    },
+    {
+      "question": "What happens if I uncheck \"First row is a header\"?",
+      "answer": "The output becomes an array of arrays (one array per CSV row) instead of an array of objects — useful when your CSV has no header row to derive property names from."
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "text-diff-checker",
+  "name": "Text Diff Checker",
+  "slug": "text-diff-checker",
+  "category": "file-data",
+  "description": "Compare two blocks of text line by line and see exactly what was added, removed, or unchanged — using a real longest-common-subsequence diff, not a naive line-count comparison.",
+  "keywords": ["text diff", "diff checker", "compare text online", "diff tool", "text comparison"],
+  "difficulty": "beginner",
+  "priority": "high",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🔀",
+  "related": ["json-formatter", "duplicate-line-remover"],
+  "faq": [
+    {
+      "question": "Why does a small edit to one line show as a whole removed line plus a whole added line?",
+      "answer": "This diff compares whole lines against each other, the same granularity git diff defaults to — if even one character in a line changes, that line no longer matches its old version, so it shows as removed (the old version) immediately followed by added (the new version), rather than highlighting the specific changed word or character."
+    },
+    {
+      "question": "How does it decide what counts as \"the same\" content that moved vs. genuinely different content?",
+      "answer": "Via the longest common subsequence (LCS) of lines between the two texts — the same underlying algorithm idea behind diff and git diff. Every line in that shared subsequence is shown as unchanged; everything else is a removal (only in the original) or an addition (only in the changed version)."
+    }
+  ]
+}

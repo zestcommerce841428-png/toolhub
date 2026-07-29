@@ -1,0 +1,29 @@
+<div class="grid gap-4 sm:grid-cols-2">
+  <div>
+    <label for="diff-input-a" class="field-label">Original</label>
+    <textarea id="diff-input-a" class="field-textarea font-mono" rows="10" spellcheck="false"></textarea>
+  </div>
+  <div>
+    <label for="diff-input-b" class="field-label">Changed</label>
+    <textarea id="diff-input-b" class="field-textarea font-mono" rows="10" spellcheck="false"></textarea>
+  </div>
+</div>
+
+<p id="diff-error" class="field-error mt-2 hidden" role="alert"></p>
+
+<p id="diff-summary" class="mt-3 text-sm text-text-muted"></p>
+
+<div id="diff-output" class="card mt-2 overflow-x-auto font-mono text-sm leading-relaxed"></div>
+
+<section class="prose-tool mt-12">
+  <h2>How lines are matched</h2>
+  <p>
+    This finds the longest common subsequence of lines between the two
+    texts — the same underlying idea behind <code>diff</code> and
+    <code>git diff</code> — then shows everything not in that shared
+    sequence as removed (from Original) or added (in Changed). A line
+    that changed even slightly shows as a removal immediately followed by
+    an addition, since line-level diffing compares whole lines, not
+    individual characters within them.
+  </p>
+</section>
