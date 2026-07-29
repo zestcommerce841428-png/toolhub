@@ -1,0 +1,28 @@
+{
+  "id": "robots-txt-generator",
+  "name": "Robots.txt Generator",
+  "slug": "robots-txt-generator",
+  "category": "seo",
+  "description": "Build a valid robots.txt with one or more user-agent rule groups, allow/disallow paths, crawl-delay, and sitemap references — download it ready to upload.",
+  "keywords": ["robots.txt generator", "robots txt generator", "disallow generator", "crawl delay", "sitemap directive"],
+  "difficulty": "beginner",
+  "priority": "normal",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🤖",
+  "related": ["xml-sitemap-generator", "og-tag-generator"],
+  "faq": [
+    {
+      "question": "What does an empty Disallow line mean?",
+      "answer": "Disallow: with nothing after it means \"block nothing\" — that user-agent may crawl the entire site. It's the standard way to explicitly allow full access, rather than omitting the directive entirely."
+    },
+    {
+      "question": "Does robots.txt stop a page from appearing in search results?",
+      "answer": "Not reliably. It asks crawlers not to fetch a path, but a URL that's linked to from elsewhere can still be indexed without ever being crawled — you'll sometimes see a listing with no description because of this. Use a noindex meta tag on the page itself if the goal is keeping it out of search results, or real access control if it needs to be actually private."
+    },
+    {
+      "question": "Where does this file need to go?",
+      "answer": "robots.txt must be placed at the root of your domain (https://example.com/robots.txt) — search engines don't check subdirectories."
+    }
+  ]
+}

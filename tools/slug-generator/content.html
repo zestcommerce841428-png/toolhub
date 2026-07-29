@@ -1,0 +1,41 @@
+<div>
+  <label for="slug-input" class="field-label">Text</label>
+  <textarea id="slug-input" class="field-textarea" rows="3" placeholder="My Blog Post Title — 2026 Edition!"></textarea>
+</div>
+
+<div class="mt-3 flex flex-wrap items-end gap-4">
+  <div>
+    <span class="field-label" id="slug-separator-label">Separator</span>
+    <div class="flex gap-2" role="radiogroup" aria-labelledby="slug-separator-label" id="slug-separator-group">
+      <button type="button" role="radio" aria-checked="true" tabindex="0" data-separator="-" class="btn-primary">Hyphen (-)</button>
+      <button type="button" role="radio" aria-checked="false" tabindex="-1" data-separator="_" class="btn-secondary">Underscore (_)</button>
+    </div>
+  </div>
+  <label class="flex items-center gap-2 pb-2 text-sm text-text">
+    <input type="checkbox" id="slug-lowercase" checked class="h-4 w-4 rounded border-border accent-primary" />
+    Lowercase
+  </label>
+  <div>
+    <label for="slug-max-length" class="field-label">Max length (0 = no limit)</label>
+    <input type="number" id="slug-max-length" class="field-input w-32" value="0" min="0" step="1" inputmode="numeric" />
+  </div>
+</div>
+
+<div class="mt-4">
+  <label for="slug-output" class="field-label">Slug</label>
+  <input type="text" id="slug-output" class="field-input font-mono" readonly />
+</div>
+
+<div class="mt-3">
+  <button type="button" id="slug-copy" class="btn-secondary">Copy slug</button>
+</div>
+
+<section class="prose-tool mt-12">
+  <h2>How accented characters are handled</h2>
+  <p>
+    Accented and non-Latin-adjacent characters (é, ñ, ü, and similar) are
+    converted to their closest plain-ASCII base letter via Unicode
+    normalization rather than stripped outright or left broken — "Café"
+    becomes "cafe", not "caf" or a mangled percent-encoded mess.
+  </p>
+</section>

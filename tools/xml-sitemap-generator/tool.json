@@ -1,0 +1,28 @@
+{
+  "id": "xml-sitemap-generator",
+  "name": "XML Sitemap Generator",
+  "slug": "xml-sitemap-generator",
+  "category": "seo",
+  "description": "Generate a valid sitemap.xml from a list of URLs, with optional priority, change frequency, and last-modified date per entry — download it ready to upload.",
+  "keywords": ["sitemap generator", "sitemap.xml generator", "xml sitemap", "sitemap creator"],
+  "difficulty": "beginner",
+  "priority": "normal",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🗺️",
+  "related": ["robots-txt-generator", "og-tag-generator"],
+  "faq": [
+    {
+      "question": "Do I need priority and changefreq for every URL?",
+      "answer": "No — a sitemap of bare URLs is completely valid. Both fields are optional hints that search engines weight lightly at best; they won't override how a page actually behaves or how often it's actually recrawled."
+    },
+    {
+      "question": "Why did some of my URLs get flagged as errors instead of just being generated?",
+      "answer": "Each line is validated rather than trusted as-is: URLs must be absolute (https://example.com/page, not /page), priority must be between 0.0 and 1.0, and changefreq must be one of the values the sitemap protocol defines. Catching typos here is better than shipping a sitemap.xml that search engines silently reject entries from."
+    },
+    {
+      "question": "Where does this file need to go once downloaded?",
+      "answer": "Typically at your domain root (https://example.com/sitemap.xml), then referenced from robots.txt with a Sitemap: line and optionally submitted directly to Google Search Console / Bing Webmaster Tools."
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "og-tag-generator",
+  "name": "Open Graph Tag Generator",
+  "slug": "og-tag-generator",
+  "category": "seo",
+  "description": "Generate complete Open Graph and Twitter Card meta tags for website, article, or product pages, with image-dimension hints for rich social previews.",
+  "keywords": ["open graph generator", "og tags", "twitter card generator", "social media preview tags", "og:image generator"],
+  "difficulty": "beginner",
+  "priority": "high",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🔖",
+  "related": ["meta-tag-generator", "slug-generator"],
+  "faq": [
+    {
+      "question": "How is this different from the Meta Tag Generator?",
+      "answer": "The Meta Tag Generator covers the basics every page needs (title, description, canonical URL, simple Open Graph tags). This tool goes deeper into the Open Graph protocol specifically: content-type-specific fields (an article's author and publish date, a product's price and currency), image dimensions, locale, and a selectable Twitter Card type — useful once you're optimizing how a specific piece of content previews when shared, not just covering baseline SEO."
+    },
+    {
+      "question": "Why do image width and height matter?",
+      "answer": "Social platforms use the declared og:image:width/height to lay out the preview card before fetching the image, so a missing or wrong size can mean a slower or broken-looking preview. Roughly 1.91:1 (e.g. 1200×630) is the widely recommended ratio for a large-image preview card."
+    }
+  ]
+}

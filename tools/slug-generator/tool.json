@@ -1,0 +1,24 @@
+{
+  "id": "slug-generator",
+  "name": "Slug Generator",
+  "slug": "slug-generator",
+  "category": "seo",
+  "description": "Convert any text into a clean, URL-safe slug — lowercase, hyphen- or underscore-separated, with accented characters properly transliterated instead of stripped or mangled.",
+  "keywords": ["slug generator", "url slug", "url friendly text", "slugify", "seo url generator"],
+  "difficulty": "beginner",
+  "priority": "high",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🔗",
+  "related": ["og-tag-generator", "url-encoder-decoder"],
+  "faq": [
+    {
+      "question": "What happens to accented characters like é or ñ?",
+      "answer": "They're converted to their closest plain-ASCII equivalent via Unicode normalization (\"café\" becomes \"cafe\"), rather than being deleted outright (which would silently corrupt a word) or left as-is (which would break in a plain hyphen-separated URL)."
+    },
+    {
+      "question": "Why would I limit the max length?",
+      "answer": "Very long slugs are harder to read, look worse in a URL bar, and some platforms truncate them anyway — often mid-word. Setting a max length here cuts at the nearest separator boundary near that limit rather than mid-word, so you get a clean \"my-blog-post\" instead of a truncated \"my-blog-po\"."
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+<div class="card">
+  <h2 class="mb-3 text-sm font-semibold text-text">Rule group 1</h2>
+  <label for="robots-agent-1" class="field-label">User-agent</label>
+  <input type="text" id="robots-agent-1" class="field-input font-mono" value="*" />
+  <div class="mt-3 grid gap-4 sm:grid-cols-2">
+    <div>
+      <label for="robots-disallow-1" class="field-label">Disallow (one path per line)</label>
+      <textarea id="robots-disallow-1" class="field-textarea font-mono" rows="4" placeholder="/admin/&#10;/cart/"></textarea>
+    </div>
+    <div>
+      <label for="robots-allow-1" class="field-label">Allow (one path per line)</label>
+      <textarea id="robots-allow-1" class="field-textarea font-mono" rows="4" placeholder="/admin/public/"></textarea>
+    </div>
+  </div>
+  <div class="mt-3">
+    <label for="robots-delay-1" class="field-label">Crawl-delay (seconds, optional)</label>
+    <input type="number" id="robots-delay-1" class="field-input w-32" min="0" step="1" inputmode="numeric" />
+  </div>
+</div>
+
+<details class="card mt-4">
+  <summary class="cursor-pointer text-sm font-semibold text-text">+ Add a second rule group (e.g. a specific bot)</summary>
+  <div class="mt-4">
+    <label for="robots-agent-2" class="field-label">User-agent</label>
+    <input type="text" id="robots-agent-2" class="field-input font-mono" placeholder="Googlebot-Image" />
+    <div class="mt-3 grid gap-4 sm:grid-cols-2">
+      <div>
+        <label for="robots-disallow-2" class="field-label">Disallow (one path per line)</label>
+        <textarea id="robots-disallow-2" class="field-textarea font-mono" rows="4"></textarea>
+      </div>
+      <div>
+        <label for="robots-allow-2" class="field-label">Allow (one path per line)</label>
+        <textarea id="robots-allow-2" class="field-textarea font-mono" rows="4"></textarea>
+      </div>
+    </div>
+    <div class="mt-3">
+      <label for="robots-delay-2" class="field-label">Crawl-delay (seconds, optional)</label>
+      <input type="number" id="robots-delay-2" class="field-input w-32" min="0" step="1" inputmode="numeric" />
+    </div>
+  </div>
+</details>
+
+<div class="mt-4">
+  <label for="robots-sitemaps" class="field-label">Sitemap URLs (one per line, optional)</label>
+  <textarea id="robots-sitemaps" class="field-textarea font-mono" rows="2" placeholder="https://example.com/sitemap.xml"></textarea>
+</div>
+
+<div class="mt-6">
+  <label for="robots-output" class="field-label">Generated robots.txt</label>
+  <textarea id="robots-output" class="field-textarea font-mono" rows="12" readonly spellcheck="false"></textarea>
+  <div class="mt-3 flex flex-wrap gap-2">
+    <button type="button" id="robots-copy" class="btn-secondary">Copy</button>
+    <button type="button" id="robots-download" class="btn-secondary">Download robots.txt</button>
+  </div>
+</div>
+
+<section class="prose-tool mt-12">
+  <h2>A couple of things robots.txt can't do</h2>
+  <p>
+    Disallowing a path only asks well-behaved crawlers not to fetch it —
+    it doesn't prevent access, and it doesn't remove a page that's already
+    indexed (a search engine can still list a URL it was linked to without
+    ever crawling it). For that, use a <code>noindex</code> meta tag on the
+    page itself, or actual access control if it needs to stay private.
+  </p>
+</section>
