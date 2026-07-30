@@ -10,12 +10,17 @@ name: Post-deploy smoke test
 # a deployment finishes) rather than on push/PR.
 #
 # Production only, deliberately: this project's Vercel deployment
-# protection (Standard/SSO Protection) covers every preview deployment by
-# design — a preview URL 302-redirecting to a Vercel login page is that
-# feature working correctly, not a bug to route around, and a smoke test
-# can't authenticate through it. The Vercel-assigned production alias is
-# the one URL meant to be genuinely public, so it's the one worth an
-# automated "is the live site actually broken" check.
+# protection (Standard/SSO Protection) covers every *deployment* URL by
+# design — including each individual production deployment's own unique
+# URL, which 302-redirects to a Vercel login page just like a preview
+# does (verified directly: curling the environment_url a real "Production"
+# deployment_status event reports returns 302, while the stable aliased
+# domain below returns 200). Only the stable production alias is exempt,
+# and there's no field in the deployment/deployment_status webhook payload
+# that reports it — GitHub's `environment_url`/`target_url` always point
+# at the ephemeral per-deployment URL — so it's a repo variable
+# (Settings > Secrets and variables > Actions > Variables >
+# PRODUCTION_URL) instead of anything derived from the event.
 on:
   deployment_status:
 
@@ -64,12 +69,15 @@ jobs:
         if: steps.playwright-cache.outputs.cache-hit == 'true'
         run: npx playwright install-deps chromium
 
+      - name: Fail loudly if PRODUCTION_URL isn't configured
+        if: vars.PRODUCTION_URL == ''
+        run: |
+          echo "::error::Repo variable PRODUCTION_URL is not set (Settings > Secrets and variables > Actions > Variables). Set it to the stable production alias — not a per-deployment URL, which Vercel's deployment protection blocks — before this check can run."
+          exit 1
+
       - name: Smoke test the live deployment
         env:
-          # environment_url is the current field; target_url is the older
-          # one some integrations still populate instead/as well — fall
-          # back rather than assuming which one Vercel's app sends.
-          BASE_URL: ${{ github.event.deployment_status.environment_url || github.event.deployment_status.target_url }}
+          BASE_URL: ${{ vars.PRODUCTION_URL }}
         run: npx playwright test tests/e2e/smoke.spec.js
 
       - uses: actions/upload-artifact@v4
