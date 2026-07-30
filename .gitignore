@@ -5,3 +5,9 @@ public/
 Thumbs.db
 
 .vercel
+
+# Playwright's own generated output (test-results/ holds per-run
+# screenshots/traces, playwright-report/ the HTML report) — reproducible
+# from `npm run test:e2e`, never meant to be committed.
+test-results/
+playwright-report/

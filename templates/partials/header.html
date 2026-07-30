@@ -1,8 +1,16 @@
 <header class="sticky top-0 z-40 border-b border-border bg-bg/95 backdrop-blur supports-[backdrop-filter]:bg-bg/80">
   <div class="mx-auto flex max-w-7xl items-center gap-3 px-4 py-3 sm:px-6 lg:px-8">
-    <a href="/" class="flex shrink-0 items-center gap-2 text-lg font-bold text-text">
+    <!--
+      aria-label on the link itself, not just the visible "ToolHub" span:
+      below the sm breakpoint that span is display:none (the brand mark
+      alone carries the logo at narrow widths) and the mark itself is
+      aria-hidden, so without this the link's accessible name was empty
+      on any screen narrower than 640px — a real bug a Lighthouse
+      accessibility audit caught, not a hypothetical one.
+    -->
+    <a href="/" class="flex shrink-0 items-center gap-2 text-lg font-bold text-text" aria-label="ToolHub home">
       <span class="flex h-8 w-8 brand-mark" aria-hidden="true">TH</span>
-      <span class="hidden sm:inline">ToolHub</span>
+      <span class="hidden sm:inline" aria-hidden="true">ToolHub</span>
     </a>
 
     <!--
@@ -53,7 +61,7 @@
         autocomplete="off"
         class="field-input pr-8"
       />
-      <kbd class="pointer-events-none absolute right-2 top-1/2 hidden -translate-y-1/2 rounded border border-border bg-surface px-1.5 py-0.5 text-[11px] text-text-subtle sm:block">Ctrl K</kbd>
+      <kbd class="pointer-events-none absolute right-2 top-1/2 hidden -translate-y-1/2 rounded border border-border bg-surface px-1.5 py-0.5 text-[11px] text-text-muted sm:block">Ctrl K</kbd>
       <ul id="site-search-results" hidden class="absolute z-50 mt-1 max-h-96 w-full overflow-auto rounded-lg border border-border bg-surface-raised p-1 shadow-lg"></ul>
     </div>
 

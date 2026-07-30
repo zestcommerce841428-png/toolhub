@@ -50,7 +50,13 @@
             <ul id="home-search-results" hidden class="absolute z-50 mt-1 max-h-96 w-full overflow-auto rounded-lg border border-border bg-surface-raised p-1 text-left shadow-lg"></ul>
           </div>
         </div>
-        <p class="mt-3 text-sm text-text-subtle">{{TOOL_TOTAL}} tools and counting — every one runs 100% in your browser.</p>
+        <!-- text-muted, not text-subtle: at text-sm (14px) this doesn't
+             qualify as WCAG "large text", so it needs the full 4.5:1 AA
+             contrast ratio — text-subtle only reaches ~2.6:1 (light) /
+             ~3.9:1 (dark), both real AA failures a Lighthouse
+             accessibility audit caught. text-subtle is fine for large
+             text or non-text UI (the 3:1 threshold), not body copy. -->
+        <p class="mt-3 text-sm text-text-muted">{{TOOL_TOTAL}} tools and counting — every one runs 100% in your browser.</p>
       </div>
     </section>
 

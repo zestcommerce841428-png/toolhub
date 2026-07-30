@@ -1,0 +1,68 @@
+name: Post-deploy smoke test
+
+# Fires from GitHub's native Deployments API, which Vercel's GitHub
+# integration uses to report each deployment's status (production and PR
+# previews alike) — no polling, no extra Vercel-specific action needed.
+# Deliberately a separate workflow from ci.yml: this checks the real,
+# already-live URL after Vercel has finished building and serving it,
+# which is a genuinely different thing from ci.yml's pre-merge checks
+# against a locally-built artifact, and runs on its own schedule (whenever
+# a deployment finishes) rather than on push/PR.
+on:
+  deployment_status:
+
+concurrency:
+  group: post-deploy-smoke-${{ github.event.deployment.id }}
+  cancel-in-progress: true
+
+jobs:
+  smoke:
+    if: github.event.deployment_status.state == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.deployment.sha }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+
+      # Built locally (from the exact commit Vercel deployed) purely so
+      # tests/e2e/helpers.js has a public/assets/data/search-index.json to
+      # read the expected tool count/slugs from — the smoke test itself
+      # still runs entirely against the live BASE_URL below, never the
+      # local server.
+      - run: npm run build
+
+      - name: Resolve installed Playwright version
+        id: playwright-version
+        run: echo "version=$(node -p "require('./package.json').devDependencies['@playwright/test']")" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-browsers-${{ runner.os }}-${{ steps.playwright-version.outputs.version }}
+      - name: Install Playwright's Chromium (only on a cache miss)
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps chromium
+      - name: Install just the OS-level Chromium deps (cache hit — browser binary already present)
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps chromium
+
+      - name: Smoke test the live deployment
+        env:
+          # environment_url is the current field; target_url is the older
+          # one some integrations still populate instead/as well — fall
+          # back rather than assuming which one Vercel's app sends.
+          BASE_URL: ${{ github.event.deployment_status.environment_url || github.event.deployment_status.target_url }}
+        run: npx playwright test tests/e2e/smoke.spec.js
+
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: post-deploy-smoke-report
+          path: playwright-report/
+          retention-days: 14

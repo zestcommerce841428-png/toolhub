@@ -5,30 +5,131 @@ on:
     branches: [main, master]
   pull_request:
 
+# Cancel a still-running run for the same branch/PR the moment a newer
+# push supersedes it — otherwise every "fix typo" push during review
+# queues a full duplicate pipeline behind the one it's about to replace.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: 24
+
 jobs:
-  test-and-build:
+  # Fails loudly on any unit test failure — the 655 tests in tests/unit/
+  # covering every tool's pure logic.js. Fast and has no build/browser
+  # dependency, so it reports back before the heavier jobs even start.
+  unit-tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: ${{ env.NODE_VERSION }}
           cache: npm
-
       - run: npm ci
-
-      # Fails loudly on a malformed tool.json/category.json, a missing
-      # tool.css/tool.js, an unresolved {{TEMPLATE_TOKEN}}, or a broken
-      # category reference — see scripts/lib/content.js and
-      # scripts/lib/template.js. This is the safety net referenced in
-      # docs/CONTRIBUTING.md for adding new tools.
       - run: npm test
-      - run: npm run build
 
-      - name: Upload build output
-        uses: actions/upload-artifact@v4
+  # Fails loudly on a malformed tool.json/category.json, a missing
+  # tool.css/tool.js, an unresolved {{TEMPLATE_TOKEN}}, or a broken
+  # category reference — see scripts/lib/content.js and
+  # scripts/lib/template.js. This is the safety net referenced in
+  # docs/CONTRIBUTING.md for adding new tools. The built public/ is
+  # uploaded once here and reused by every downstream job, rather than
+  # each job rebuilding it independently.
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/upload-artifact@v4
         with:
           name: public-site
           path: public/
           retention-days: 7
+
+  # Full browser-based regression against the real, minified, production-
+  # shaped build (see playwright.config.js's doc comment for why that
+  # matters specifically for this project) — smoke checks, one
+  # representative tool per UI pattern, the case-conversion family, a
+  # 12-viewport responsive sweep, and a crawl of every single tool page
+  # the catalog currently has, generated dynamically from the site's own
+  # search index rather than a hand-maintained, driftable list.
+  e2e:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          name: public-site
+          path: public/
+
+      - name: Resolve installed Playwright version
+        id: playwright-version
+        run: echo "version=$(node -p "require('./package.json').devDependencies['@playwright/test']")" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-browsers-${{ runner.os }}-${{ steps.playwright-version.outputs.version }}
+      - name: Install Playwright's Chromium (only on a cache miss)
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps chromium
+      - name: Install just the OS-level Chromium deps (cache hit — browser binary already present)
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps chromium
+
+      - run: npm run test:e2e
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 14
+
+  # Real Lighthouse audits (not @lhci/cli — see scripts/lighthouse.mjs's
+  # doc comment for the dependency-vetting reasoning) against the same
+  # built artifact, gated on this project's actual measured scores rather
+  # than an aspirational number nothing checks.
+  lighthouse:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          name: public-site
+          path: public/
+
+      - name: Resolve installed Playwright version
+        id: playwright-version
+        run: echo "version=$(node -p "require('./package.json').devDependencies['@playwright/test']")" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-browsers-${{ runner.os }}-${{ steps.playwright-version.outputs.version }}
+      - name: Install Playwright's Chromium (only on a cache miss)
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps chromium
+      - name: Install just the OS-level Chromium deps (cache hit — browser binary already present)
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps chromium
+
+      - run: npm run test:lighthouse

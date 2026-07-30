@@ -9,7 +9,11 @@
   <a class="btn-primary inline-flex" href="mailto:hello@example-toolhub.invalid">Email hello@example-toolhub.invalid</a>
 </p>
 
-<p class="mt-6 text-sm text-text-subtle">
+<!-- text-muted, not text-subtle: text-subtle fails WCAG AA contrast for
+     body-sized text (~2.6:1 light / ~3.9:1 dark, both below the 4.5:1
+     required outside "large text") — see templates/home.template.html
+     for the full explanation. -->
+<p class="mt-6 text-sm text-text-muted">
   Placeholder address — update this and <code>site.config.json</code> with
   real contact details before launch.
 </p>

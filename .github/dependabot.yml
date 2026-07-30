@@ -1,0 +1,35 @@
+version: 2
+updates:
+  # This project's own dependency-vetting practice (see scripts/lighthouse.mjs
+  # and docs/ARCHITECTURE.md for two real examples of rejecting a
+  # convenient package over a vulnerable transitive chain) only works
+  # ongoing if devDependencies actually get reviewed for updates — not
+  # installed once and left to drift. All 7 are build-time-only (nothing
+  # here ships to the browser), so an update PR here can be evaluated on
+  # its own schedule, not treated as urgent/production-facing.
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      # Playwright and Lighthouse/chrome-launcher each need their internal
+      # versions to stay in lockstep (see scripts/lighthouse.mjs's doc
+      # comment on why chrome-launcher is pinned to match what's bundled
+      # inside lighthouse) — grouping means a bump lands as one coherent
+      # PR to review, not several that could land out of order.
+      testing-tools:
+        patterns:
+          - "@playwright/test"
+          - "lighthouse"
+          - "chrome-launcher"
+
+  # Keeps the pinned action versions (actions/checkout@v4, etc.) in
+  # .github/workflows/*.yml current — the same "don't let build-time
+  # tooling silently drift" reasoning as the npm ecosystem entry above,
+  # just for the CI pipeline's own dependencies instead of the site's.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
