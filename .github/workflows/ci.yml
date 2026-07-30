@@ -132,4 +132,23 @@ jobs:
         if: steps.playwright-cache.outputs.cache-hit == 'true'
         run: npx playwright install-deps chromium
 
+      # Unlike the e2e job, scripts/lighthouse.mjs has no built-in
+      # webServer auto-start (that's a Playwright-test-specific feature —
+      # see playwright.config.js) — it just expects BASE_URL to already be
+      # reachable, so this job has to start and wait for its own server.
+      # A plain curl retry loop rather than pulling in an npx-installed
+      # wait-on package for one boolean check ubuntu-latest's built-in
+      # curl already answers.
+      - name: Start a local server for the built site
+        run: |
+          npm run serve &
+          for i in $(seq 1 30); do
+            if curl -sSf http://localhost:4173/ > /dev/null; then
+              echo "Server is up."
+              exit 0
+            fi
+            sleep 1
+          done
+          echo "::error::Server did not become reachable within 30s."
+          exit 1
       - run: npm run test:lighthouse
