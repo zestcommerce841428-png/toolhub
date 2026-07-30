@@ -34,11 +34,26 @@ logic," and "10-year lifespan" far worse than a 40-line Node build script
 would.
 
 The build script (`scripts/build.js`) uses **zero npm dependencies of its
-own** — just Node's `fs`/`path`. The only devDependency in the whole project
-is `tailwindcss`, used strictly as a CSS compiler at build time. If Tailwind
-is ever abandoned upstream, the hand-authored `tokens.css` (plain CSS custom
-properties) still works standalone — Tailwind utility classes are a
-convenience layer on top of the token system, not a replacement for it.
+own** — just Node's `fs`/`path`. Every devDependency in the whole project —
+`tailwindcss` (CSS compiler), `html-minifier-terser`/`terser`
+(minification), `sharp` (icon generation), `@playwright/test`/
+`chrome-launcher`/`lighthouse` (testing — see "Testing & CI/CD" below) — is
+build-time-only, evaluated at `npm run build`/`npm test` time and never
+shipped in `public/`. If Tailwind is ever abandoned upstream, the
+hand-authored `tokens.css` (plain CSS custom properties) still works
+standalone — Tailwind utility classes are a convenience layer on top of the
+token system, not a replacement for it.
+
+Each devDependency was chosen deliberately, not just installed for
+convenience — two were actively rejected in favor of a smaller, audited
+alternative after `npm audit` turned up a real vulnerable chain in the
+obvious choice: `to-ico` (jimp → request → 12 known vulnerabilities, 5
+critical) in favor of a ~40-line hand-written ICO packer
+(`scripts/generate-icons.mjs`), and `@lhci/cli` (an old, separately-pinned
+`chrome-launcher` via `inquirer`'s unused-in-CI interactive-editor
+dependency chain, 7 high-severity findings) in favor of the plain
+`lighthouse` package, whose own bundled `chrome-launcher` is current and
+clean (`scripts/lighthouse.mjs`).
 
 ## Why not React/Vue/Svelte/Next — confirmed, not reconsidered
 
@@ -242,6 +257,43 @@ or JS-recognized `type`, so `<script type="application/ld+json">`
 (structured data) is correctly left alone — minifying JSON-LD as if it
 were JavaScript would corrupt it. CSS doesn't need a separate step here;
 it's already minified by Tailwind's own `--minify` flag.
+
+## Testing & CI/CD
+
+Three layers, each catching a different class of bug — see
+`docs/CONTRIBUTING.md`'s "CI/CD" section for the full pipeline mechanics:
+
+1. **Unit tests** (`tests/unit/`, `node:test`, zero test-framework
+   dependency) — every tool's pure `logic.js` and the shared
+   `assets/js/core/*` modules. Fast, no browser, no build step. This is
+   where a wrong formula or a broken edge case gets caught.
+2. **E2E tests** (`tests/e2e/`, `@playwright/test`) — real-browser checks
+   against the actual built `public/` output: DOM wiring, keyboard
+   interaction, a 12-viewport responsive sweep, and a full crawl of every
+   tool page currently in the catalog. This is where a broken template
+   placeholder, a missing asset, or dead JS wiring gets caught — none of
+   which a unit test touching only `logic.js` in isolation can see. Every
+   test that needs to know "how many tools/categories exist" reads it
+   from the site's own build output (`tests/e2e/helpers.js`) rather than
+   a hardcoded number, specifically because that number went stale
+   repeatedly during this project's 50-tool batch (`docs/ROADMAP.md`'s
+   Phase 3 section) every time it was hand-maintained.
+3. **Lighthouse audits** (`scripts/lighthouse.mjs`) — performance,
+   accessibility, best-practices, and SEO scores against real thresholds,
+   not an assumed "we probably hit 100." Building this gate is what
+   actually caught two real accessibility bugs — a header link with no
+   accessible name below 640px, and a design token
+   (`--color-text-subtle`) that fails WCAG AA contrast for body-sized
+   text, silently in use in nine places sitewide — that had shipped
+   unnoticed until something actually measured for real.
+
+All three run in CI (`.github/workflows/ci.yml`) on every push and PR, in
+parallel where possible (e2e and lighthouse both depend only on the
+`build` job's uploaded artifact, not on each other). A separate workflow
+(`.github/workflows/post-deploy-smoke.yml`) checks the real, live
+production URL after each deploy — a genuinely different question from
+"did the local build pass," since it's the only check that would catch a
+Vercel-specific misconfiguration the local build can't see.
 
 ## Accessibility & SEO, enforced structurally, not by discipline alone
 

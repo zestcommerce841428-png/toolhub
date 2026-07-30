@@ -8,6 +8,14 @@ name: Post-deploy smoke test
 # which is a genuinely different thing from ci.yml's pre-merge checks
 # against a locally-built artifact, and runs on its own schedule (whenever
 # a deployment finishes) rather than on push/PR.
+#
+# Production only, deliberately: this project's Vercel deployment
+# protection (Standard/SSO Protection) covers every preview deployment by
+# design — a preview URL 302-redirecting to a Vercel login page is that
+# feature working correctly, not a bug to route around, and a smoke test
+# can't authenticate through it. The Vercel-assigned production alias is
+# the one URL meant to be genuinely public, so it's the one worth an
+# automated "is the live site actually broken" check.
 on:
   deployment_status:
 
@@ -17,7 +25,11 @@ concurrency:
 
 jobs:
   smoke:
-    if: github.event.deployment_status.state == 'success'
+    # Verified against this repo's actual deployment history (GitHub
+    # API), not assumed: Vercel's integration sets environment to the
+    # capitalized "Preview"/"Production", not lowercase — a lowercase
+    # comparison here would have silently never matched anything.
+    if: github.event.deployment_status.state == 'success' && github.event.deployment.environment == 'Production'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

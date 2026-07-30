@@ -10,17 +10,30 @@ Requires Node 20+ (built and tested on Node 24) and npm. No other global
 tooling.
 
 ```bash
-npm install       # installs the one devDependency: tailwindcss
-npm run build     # cleans public/, generates every page, compiles CSS
-npm run serve     # serves public/ at http://localhost:4173
-npm test          # runs tests/unit/**/*.test.js via node:test
-npm run watch:css # recompiles Tailwind on save, while iterating on markup
+npm install          # installs the build-time-only devDependencies (see below)
+npm run build        # cleans public/, generates every page, compiles CSS
+npm run serve        # serves public/ at http://localhost:4173
+npm test             # runs tests/unit/**/*.test.js via node:test
+npm run test:e2e     # runs tests/e2e/**/*.spec.js via Playwright — build+serve first
+npm run test:lighthouse # runs scripts/lighthouse.mjs — build+serve first
+npm run test:all     # test -> build -> test:e2e -> test:lighthouse, in that order
+npm run watch:css    # recompiles Tailwind on save, while iterating on markup
 ```
 
 There's no `watch` for the site generator itself — `scripts/build.js` runs
 in well under a second even at this project's current size, so re-running
 `npm run build:site` after an edit is fast enough not to need a watcher.
 Revisit that if per-build time becomes noticeable as the tool count grows.
+
+Every devDependency here is build-time-only — nothing in `devDependencies`
+ships to the browser (see `docs/ARCHITECTURE.md`'s "Runtime vs. build-time"
+section). Each one was chosen deliberately, not just installed for
+convenience: `to-ico` was rejected outright for a vulnerable transitive
+chain (a hand-written ICO packer replaced it, see
+`scripts/generate-icons.mjs`), and `@lhci/cli` was rejected the same way
+in favor of the plain `lighthouse` package (see `scripts/lighthouse.mjs`'s
+doc comment) — both are worth reading before reaching for a convenience
+wrapper around a real dependency.
 
 ## Adding a new tool
 
@@ -155,6 +168,48 @@ Add `categories/<slug>/category.json`:
 The header/footer nav, `/categories/`, and the homepage's category grid all
 regenerate from this directory — no other file to touch.
 
+## CI/CD
+
+`.github/workflows/ci.yml` runs on every push and pull request, as four
+jobs:
+
+- **unit-tests** — `npm test` (no build/browser dependency, so it reports
+  back fastest).
+- **build** — `npm run build`, then uploads `public/` as a shared artifact
+  the other two jobs below reuse rather than each rebuilding it.
+- **e2e** — the full `tests/e2e/` Playwright suite (see that directory's
+  files for what's covered) against the real, minified, production-shaped
+  build — not a dev-mode reconstruction of it.
+- **lighthouse** — `scripts/lighthouse.mjs` against the same build,
+  gated on this project's actual measured Lighthouse scores (currently
+  99-100 across performance/accessibility/best-practices/SEO on every
+  audited page — see that script's own doc comment for the thresholds
+  and the two real accessibility bugs measuring them for real, rather
+  than assuming a perfect score, actually caught).
+
+`master` requires all four to pass before a pull request can merge
+(branch protection, configured via the GitHub API — not committed to the
+repo, since branch protection is a GitHub setting, not a file). Direct
+pushes to `master` are unaffected — this only gates the PR merge button,
+which matters most for the automated Dependabot PRs described below.
+
+A separate workflow, `.github/workflows/post-deploy-smoke.yml`, fires
+from GitHub's native `deployment_status` event (which Vercel's GitHub
+integration uses to report every deployment) and runs a lightweight smoke
+check against the real, live **production** URL specifically — not
+preview deployments, which sit behind this project's Vercel deployment
+protection (a 302 to a Vercel login page there is that protection working
+correctly, not a bug). This is the check that answers "is the actually-
+deployed site broken," a genuinely different question from "did the local
+build pass," which is all `ci.yml` can see.
+
+`.github/dependabot.yml` opens a PR weekly for outdated devDependencies
+(grouped: Playwright/lighthouse/chrome-launcher move in lockstep — see
+`scripts/lighthouse.mjs`) and outdated pinned GitHub Actions versions,
+gated by the same required status checks — a major-version bump (e.g.
+Tailwind v3 → v4, which changes its config format entirely) will show as
+a failing PR rather than silently merging, which is exactly the point.
+
 ## Code conventions (enforced by review, not tooling, for now)
 
 - ES modules only, no globals, no inline `<script>`/`style="…"` in
@@ -178,5 +233,10 @@ regenerate from this directory — no other file to touch.
 - [ ] Works in both themes — check the dark-mode screenshot, don't just
       trust the tokens.
 - [ ] `npm test` passes; `npm run build` produces no warnings for your tool.
+- [ ] If your tool adds a new page pattern (not just a thin family
+      wrapper), consider adding it to `tests/e2e/tool-functionality.spec.js`
+      — the full-catalog crawl in `tests/e2e/site-crawl.spec.js` already
+      covers every tool's baseline page health automatically, with
+      nothing to update by hand.
 - [ ] FAQ entries are genuinely useful, not filler — see `docs/ROADMAP.md`
       re: why placeholder FAQ content is worse than none.

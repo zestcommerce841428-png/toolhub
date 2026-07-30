@@ -202,31 +202,28 @@ the reasoning behind the foundation itself.
   publish that specific build's output somewhere the resolver can't detect.
   Contact email in `pages/contact/content.html` is still a placeholder —
   that one can't be auto-detected from anything; update it directly.
-- ~~No CI~~ **Partially done.** `.github/workflows/ci.yml` runs `npm test`
-  and `npm run build` on every push/PR, so a malformed `tool.json`, a
-  missing `tool.css`/`tool.js`, or a broken template placeholder now fails
-  the build loudly in CI, not just locally. Unverified against a real
-  GitHub remote (none is configured yet) — check the Actions tab after the
-  first push.
-- **No Lighthouse CI yet.** The design system and templates are built to
-  hit 100/100/100/100, but that's a claim that needs continuous
-  verification, not a one-time check. Natural next step now that
-  test+build CI exists: add a job that runs `npm run build`, serves
-  `public/` (`npm run serve` or any static server), and runs
-  `@lhci/cli` against a few representative URLs (home, one category, one
-  tool) with asserted score thresholds.
-- **DOM-dependent modules aren't unit tested.** `clipboard.js`,
-  `storage.js`, `toast.js`, `theme.js`, `search.js`, and `keyboard.js` all
-  touch `document`/`window`/`navigator` directly, which plain `node:test`
-  can't exercise without a DOM shim. They *are* covered by the Playwright
-  pass (theme toggle, search, radiogroup keyboard nav all went through
-  real browser interactions), but that was a manual verification run, not
-  a checked-in test. **Next step**: either add `jsdom` as a devDependency
-  and unit-test these directly, or formalize the Playwright script used
-  for verification into `tests/e2e/` and run it in CI against
-  `npm run serve`. Either is a reasonable choice — jsdom is faster and
-  cheaper; Playwright is closer to what a real user experiences. Not doing
-  both — that's redundant coverage for a site this size.
+- ~~No CI~~ **Done.** `.github/workflows/ci.yml` runs four jobs on every
+  push/PR — `unit-tests`, `build`, `e2e` (the full Playwright suite below),
+  and `lighthouse` — with `master` branch-protected on all four passing
+  before a PR can merge. A malformed `tool.json`, a missing
+  `tool.css`/`tool.js`, a broken template placeholder, a broken page, or a
+  Lighthouse regression all now fail loudly in CI, not just locally.
+  Verified against the real GitHub remote — see the Actions tab.
+- ~~No Lighthouse CI yet~~ **Done.** `scripts/lighthouse.mjs` (hand-rolled
+  against the plain `lighthouse` package rather than `@lhci/cli`, which
+  pulls in a genuinely vulnerable dependency chain — see
+  `docs/ARCHITECTURE.md`'s "Runtime vs. build-time" section) runs in CI
+  against real thresholds. Building this gate is what actually caught two
+  real accessibility bugs that had shipped unnoticed — see
+  `docs/ARCHITECTURE.md`'s "Testing & CI/CD" section — not just a report
+  nobody acted on.
+- ~~DOM-dependent modules aren't unit tested~~ **Done, via the Playwright
+  path this section already called "a reasonable choice."**
+  `tests/e2e/` now formally covers `clipboard.js`, `theme.js`, `search.js`,
+  and `keyboard.js`'s real-browser behavior (theme toggle, Ctrl+K search,
+  radiogroup keyboard nav, visible focus), plus a full crawl of every tool
+  page and a 12-viewport responsive sweep — checked into the repo and run
+  in CI, not a manual verification run redone from scratch each session.
 - **Router.js, mentioned in earlier planning, is intentionally not built.**
   This is a multi-page static site by design (see `docs/ARCHITECTURE.md`)
   — every tool and category is its own real URL for SEO, so client-side
@@ -366,6 +363,20 @@ now resolve with zero dangling-reference build warnings, and the full
 Playwright regression suite (22+9+14 = 45 checks) stayed green throughout
 — rerun and reconfirmed after every batch, not just once at the end.
 
+**Shipped since the batch above:** a full CI/CD pipeline — see
+`docs/ARCHITECTURE.md`'s "Testing & CI/CD" section and
+`docs/CONTRIBUTING.md`'s "CI/CD" section for the details. Formalized
+`tests/e2e/` (140 Playwright tests, including a full catalog crawl and a
+12-viewport responsive sweep), real Lighthouse score gating
+(`scripts/lighthouse.mjs`), a four-job GitHub Actions pipeline with
+branch protection on `master`, a post-deploy smoke check against the live
+production URL, and weekly Dependabot updates. Building the Lighthouse
+gate also caught and fixed two real, previously-unnoticed accessibility
+bugs (a header link with no accessible name below 640px, and a design
+token failing WCAG AA contrast in nine places sitewide) — the whole
+reason to build a gate like this rather than just trusting the design was
+already correct.
+
 **Still open from here:**
 1. Round out every category further toward its target count — 69/1,450
    means there's a long way left, but the `logic.js`-sharing pattern is
@@ -374,13 +385,12 @@ Playwright regression suite (22+9+14 = 45 checks) stayed green throughout
 2. Build the SVG icon sprite now that the tool count (69) has cleared the
    "~50 tools" threshold flagged above as when emoji-as-icon stops being
    fine — genuinely due now, not just soon.
-3. Formalize automated browser testing (jsdom or `tests/e2e/`) instead of
-   ad-hoc Playwright scripts run from a scratchpad each session.
-4. Lighthouse CI, and real `site.config.json` values before treating any
-   deploy as final production output (auto-detected canonical URLs now
-   work correctly on Vercel/Netlify/Cloudflare Pages — see
-   `docs/ARCHITECTURE.md` — but the fallback placeholder is still what a
-   local build without one of those platforms sees).
+3. Real `site.config.json` values before treating any deploy as final
+   production output (auto-detected canonical URLs now work correctly on
+   Vercel/Netlify/Cloudflare Pages — see `docs/ARCHITECTURE.md` — but the
+   fallback placeholder is still what a local build without one of those
+   platforms sees). The contact page's placeholder email is the other
+   piece of this that needs a real value before launch.
 
 ## Phase 4+ — scale-out
 
