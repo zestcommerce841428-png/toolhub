@@ -278,40 +278,117 @@ report that cards "didn't look professional"):**
   toast notification, since the opacity-color fix touches every one of
   those. All clean.
 
-## Phase 3 — next up
+## Phase 3 — shipped (50-tool batch: 19 → 69 tools)
 
 Following the category weights from the original catalog target
 (Text 100, Developer 150, Color 60, Unit Converters 120, Calculators 150,
 Ecommerce 150, SEO 150, Security 120, Web Utilities 120, File & Data 150,
-Date & Time 80, Random 100 ≈ 1,450 tools total). Current: 19/1,450.
+Date & Time 80, Random 100 ≈ 1,450 tools total). Current: 69/1,450.
 
-1. ~~Fix the deferred items above that are cheap now and expensive
-   later~~ **Git init and CI (test+build) done.** Still open: real
-   `site.config.json` values (needs the site owner), Lighthouse CI.
-2. ~~Add the categories not yet represented~~ **Done — all 12 planned
-   categories exist**, each with at least one working tool. No more
-   categories to stand up; from here it's depth within each one.
-3. Round out every category toward its target count, reusing the
-   `logic.js`-sharing pattern from `CONTRIBUTING.md` wherever a tool is a
-   thin variant of one already built — **proven twice now**: the six
-   case-conversion tools sharing `case-converter/logic.js`, and
-   `random-number-generator`/`sku-generator`/`uuid-generator` sharing the
-   extracted `assets/js/core/random.js`. Same pattern applies well to,
-   e.g., SHA-256/SHA-512/MD5 generators as thin wrappers around a new
-   `hash-generator` family, or Weight/Temperature/Volume converters
-   sharing `length-converter`'s unit-table structure.
-4. Build the SVG icon sprite once there are enough *tool-catalog* icons
-   (the emoji shown on tool cards, not the favicon/brand system — see
-   above) that inconsistency actually shows, roughly ~50 tools.
-5. Formalize automated browser testing (jsdom or `tests/e2e/`, per above).
+Added 50 tools in one sitting, batched by category (each batch its own
+commit — `git log` for the individual messages, which each explain that
+batch's specific design decisions and any bugs found while building it)
+rather than one undifferentiated commit, per the "each batch = one
+reviewable PR" principle below:
+
+- **Developer** (+6): MD5/SHA-1/SHA-256/SHA-512 hash generators, URL
+  encoder/decoder, JWT decoder. MD5 is hand-implemented (RFC 1321) since
+  Web Crypto doesn't expose it; the SHA family shares a new
+  `assets/js/core/hash.js`.
+- **Unit Converters** (+6): weight, temperature, volume, area, speed,
+  data storage — all but temperature follow `length-converter`'s
+  factor-per-unit pattern exactly, as predicted below. Temperature needed
+  its own offset-aware formulas. Data storage deliberately keeps decimal
+  (KB) and binary (KiB) units separate rather than conflating them.
+- **Calculators** (+6): percentage, discount, tip, simple interest,
+  compound interest, loan/EMI (with a full amortization schedule).
+- **Ecommerce** (+4): profit margin, markup, and a real EAN-13/UPC-A
+  barcode family — genuine ISO/IEC 15420 bar-pattern encoding, not a
+  placeholder striped image, verified against real published barcodes.
+- **SEO** (+4): richer Open Graph tags (type-specific fields beyond the
+  existing Meta Tag Generator), robots.txt generator, XML sitemap
+  generator, slug generator (real Unicode NFKD transliteration).
+- **Security** (+4): password strength checker (pattern detection beyond
+  raw entropy), HMAC generator, genuine AES-256-GCM text encryption
+  (PBKDF2 + Web Crypto), Base32 codec (hand-implemented RFC 4648, no
+  browser built-in exists).
+- **Web Utilities** (+4): UTM builder, user-agent parser, HTTP status
+  code reference, query string parser/builder.
+- **File & Data** (+4): a new shared `assets/js/core/csv.js` (the module
+  this doc predicted would get built once two tools needed it) backing
+  CSV↔JSON converters, a real LCS text diff, and a hand-written Markdown
+  → HTML converter with a live preview.
+- **Date & Time** (+4): countdown timer, date difference calculator,
+  Unix timestamp converter, business days calculator — all following
+  `age-calculator`'s established local-date-parsing convention to avoid
+  reintroducing the timezone bug documented above.
+- **Random** (+3): random string generator, dice roller, random
+  picker/team-splitter — all on the existing secure-randomness core.
+- **Color** (+3): contrast checker (real WCAG luminance math), palette
+  generator (real HSL hue rotation), gradient generator — all three
+  reuse `hex-rgb-converter`'s parser rather than re-implementing it.
+- **Text** (+2): duplicate line remover, find & replace (real regex with
+  capture-group support).
+
+**The `logic.js`-sharing pattern predicted in the previous version of
+this section proved out repeatedly**, beyond the two cases already
+proven: `hash.js` (SHA family), `csv.js` (CSV↔JSON), and
+`hex-rgb-converter`'s parser (three Color tools) all followed the same
+"extract once 2-3 real call sites exist" rule from `CONTRIBUTING.md`.
+
+**Real bugs found and fixed while building, not just at the end** — each
+one caught by writing a test *before* trusting the implementation, or by
+a real-browser check that unit tests alone couldn't have caught:
+- A JWT-decoder-adjacent HMAC generator crashed on an empty secret
+  (`crypto.subtle.importKey` rejects a zero-length key) — found via
+  browser testing, not unit tests, since the unit tests always passed a
+  secret.
+- The Markdown converter's placeholder tokens (used to protect
+  already-rendered code spans and hard line breaks from further regex
+  passes) originally shared one numeric namespace and could collide, and
+  separately contained underscores that its own italic regex then matched
+  *inside its own placeholder text* — both required rewriting the
+  placeholder scheme to be letters-and-digits-only and non-colliding.
+- The query-string parser misread a full URL with no `?` at all (e.g.
+  `https://example.com/`) as one giant key with an empty value.
+- Find & Replace's `caseSensitive` option defaulted to falsy instead of
+  `true` (`options.caseSensitive ? "" : "i"` treats an omitted option the
+  same as an explicit `false`), so searches were silently
+  case-insensitive by default — the opposite of the documented and
+  UI-displayed default.
+- Tailwind's preflight reset (`list-style: none` on `ul`/`ol`) meant the
+  Markdown preview's generated lists rendered with no bullets/indentation
+  at all — `.prose-tool` only had `p`/`h2`/`h3` rules before this; now
+  covers `ul`/`ol`/`blockquote`/`pre`/`code`/`a`/`img`/`hr` too.
+
+655 unit tests total (up from 175), all 12 categories' `related` links
+now resolve with zero dangling-reference build warnings, and the full
+Playwright regression suite (22+9+14 = 45 checks) stayed green throughout
+— rerun and reconfirmed after every batch, not just once at the end.
+
+**Still open from here:**
+1. Round out every category further toward its target count — 69/1,450
+   means there's a long way left, but the `logic.js`-sharing pattern is
+   now proven across families, hash algorithms, unit converters, CSV
+   handling, and color math, so the next 50-tool batch should move faster.
+2. Build the SVG icon sprite now that the tool count (69) has cleared the
+   "~50 tools" threshold flagged above as when emoji-as-icon stops being
+   fine — genuinely due now, not just soon.
+3. Formalize automated browser testing (jsdom or `tests/e2e/`) instead of
+   ad-hoc Playwright scripts run from a scratchpad each session.
+4. Lighthouse CI, and real `site.config.json` values before treating any
+   deploy as final production output (auto-detected canonical URLs now
+   work correctly on Vercel/Netlify/Cloudflare Pages — see
+   `docs/ARCHITECTURE.md` — but the fallback placeholder is still what a
+   local build without one of those platforms sees).
 
 ## Phase 4+ — scale-out
 
-Once the pattern is proven across all planned categories: batch-add
-remaining tools in category-sized batches (each batch = one reviewable
-PR), keep `npm test` and the build's schema validation as the safety net
-that catches a malformed `tool.json` before it ships, and revisit
-performance (bundle-free by construction, but re-verify Lighthouse scores
+Batch-add remaining tools in category-sized batches (each batch = one
+reviewable PR/commit — proven at 50-tool scale in Phase 3 above), keep
+`npm test` and the build's schema validation as the safety net that
+catches a malformed `tool.json` before it ships, and revisit performance
+(bundle-free by construction, but re-verify Lighthouse scores
 periodically as the homepage's featured/category grids grow) and the
 search index's payload size (currently negligible; worth paginating or
 chunking well before 1,500 entries if it ever approaches ~500KB).
