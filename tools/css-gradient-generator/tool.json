@@ -1,0 +1,24 @@
+{
+  "id": "css-gradient-generator",
+  "name": "CSS Gradient Generator",
+  "slug": "css-gradient-generator",
+  "category": "color",
+  "description": "Build a linear or radial CSS gradient with any number of color stops, adjustable angle or shape, and a live preview — copy the ready-to-use CSS.",
+  "keywords": ["css gradient generator", "linear gradient generator", "radial gradient generator", "gradient maker"],
+  "difficulty": "beginner",
+  "priority": "high",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🌈",
+  "related": ["color-palette-generator", "hex-rgb-converter"],
+  "faq": [
+    {
+      "question": "What does the angle mean for a linear gradient?",
+      "answer": "It follows CSS's own convention: 0deg points from bottom to top, 90deg points from left to right, and it increases clockwise — matching exactly what you'd get pasting the generated CSS directly into a stylesheet."
+    },
+    {
+      "question": "Circle vs. ellipse for a radial gradient — what's the difference?",
+      "answer": "A circle radiates outward at an equal distance in every direction, which looks perfectly round regardless of the element's shape. An ellipse instead stretches to match the element's actual width and height, so it looks round only on a square element and oval otherwise."
+    }
+  ]
+}

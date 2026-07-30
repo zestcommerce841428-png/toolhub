@@ -1,0 +1,52 @@
+<div>
+  <span class="field-label" id="gradient-type-label">Type</span>
+  <div class="flex gap-2" role="radiogroup" aria-labelledby="gradient-type-label" id="gradient-type-group">
+    <button type="button" role="radio" aria-checked="true" tabindex="0" data-type="linear" class="btn-primary">Linear</button>
+    <button type="button" role="radio" aria-checked="false" tabindex="-1" data-type="radial" class="btn-secondary">Radial</button>
+  </div>
+</div>
+
+<div id="gradient-angle-field" class="mt-4">
+  <label for="gradient-angle" class="field-label">Angle: <span id="gradient-angle-value">90</span>°</label>
+  <input type="range" id="gradient-angle" min="0" max="360" step="1" value="90" class="w-full accent-primary" />
+</div>
+
+<div id="gradient-shape-field" class="mt-4 hidden">
+  <span class="field-label" id="gradient-shape-label">Shape</span>
+  <div class="flex gap-2" role="radiogroup" aria-labelledby="gradient-shape-label" id="gradient-shape-group">
+    <button type="button" role="radio" aria-checked="true" tabindex="0" data-shape="circle" class="btn-primary">Circle</button>
+    <button type="button" role="radio" aria-checked="false" tabindex="-1" data-shape="ellipse" class="btn-secondary">Ellipse</button>
+  </div>
+</div>
+
+<div class="card mt-4">
+  <div class="mb-3 flex items-center justify-between">
+    <h2 class="text-sm font-semibold text-text">Color stops</h2>
+    <button type="button" id="gradient-add-stop" class="btn-secondary">+ Add stop</button>
+  </div>
+  <div id="gradient-stops" class="space-y-2"></div>
+</div>
+
+<p id="gradient-error" class="field-error mt-3 hidden" role="alert"></p>
+
+<div id="gradient-preview" class="mt-6 h-40 rounded-xl border border-border"></div>
+
+<div class="mt-4">
+  <label for="gradient-output" class="field-label">CSS</label>
+  <input type="text" id="gradient-output" class="field-input font-mono" readonly />
+  <div class="mt-3">
+    <button type="button" id="gradient-copy" class="btn-secondary">Copy CSS</button>
+  </div>
+</div>
+
+<section class="prose-tool mt-12">
+  <h2>Linear vs. radial</h2>
+  <p>
+    A <strong>linear</strong> gradient transitions along a straight line
+    at the angle you choose (0° points up, 90° points right, matching
+    CSS's own convention). A <strong>radial</strong> gradient expands
+    outward from the center — a circle keeps equal distance in every
+    direction, while an ellipse stretches to fill the element's actual
+    width and height.
+  </p>
+</section>

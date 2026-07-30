@@ -1,0 +1,59 @@
+<div class="grid gap-4 sm:grid-cols-2">
+  <div>
+    <label for="contrast-fg" class="field-label">Text color</label>
+    <div class="flex gap-2">
+      <input type="color" id="contrast-fg-picker" value="#0f172a" class="h-10 w-12 shrink-0 cursor-pointer rounded-lg border border-border" />
+      <input type="text" id="contrast-fg" class="field-input font-mono" value="#0f172a" />
+    </div>
+  </div>
+  <div>
+    <label for="contrast-bg" class="field-label">Background color</label>
+    <div class="flex gap-2">
+      <input type="color" id="contrast-bg-picker" value="#ffffff" class="h-10 w-12 shrink-0 cursor-pointer rounded-lg border border-border" />
+      <input type="text" id="contrast-bg" class="field-input font-mono" value="#ffffff" />
+    </div>
+  </div>
+</div>
+
+<p id="contrast-error" class="field-error mt-3 hidden" role="alert"></p>
+
+<div id="contrast-preview" class="card mt-4 flex min-h-[8rem] flex-col items-center justify-center gap-1 text-center">
+  <p style="font-size: 1.5rem; font-weight: 700;">Sample text (large)</p>
+  <p style="font-size: 1rem;">Sample text (normal size)</p>
+</div>
+
+<div class="card mt-4">
+  <p class="text-sm text-text-muted">Contrast ratio</p>
+  <p id="contrast-ratio" class="text-3xl font-bold text-text">—</p>
+
+  <dl class="mt-4 grid grid-cols-2 gap-3 text-sm sm:grid-cols-4">
+    <div>
+      <dt class="text-text-muted">AA (normal text)</dt>
+      <dd id="contrast-aa-normal" class="font-semibold">—</dd>
+    </div>
+    <div>
+      <dt class="text-text-muted">AA (large text)</dt>
+      <dd id="contrast-aa-large" class="font-semibold">—</dd>
+    </div>
+    <div>
+      <dt class="text-text-muted">AAA (normal text)</dt>
+      <dd id="contrast-aaa-normal" class="font-semibold">—</dd>
+    </div>
+    <div>
+      <dt class="text-text-muted">AAA (large text)</dt>
+      <dd id="contrast-aaa-large" class="font-semibold">—</dd>
+    </div>
+  </dl>
+</div>
+
+<section class="prose-tool mt-12">
+  <h2>What AA and AAA mean</h2>
+  <p>
+    These are WCAG 2.x conformance levels. <strong>AA</strong> (4.5:1 for
+    normal text, 3:1 for large text — 18pt+, or 14pt+ bold) is the
+    baseline most accessibility guidelines and legal requirements target.
+    <strong>AAA</strong> (7:1 / 4.5:1) is a stricter, optional enhanced
+    level. The ratio itself is computed from each color's WCAG relative
+    luminance — the same formula browsers' own accessibility inspectors use.
+  </p>
+</section>

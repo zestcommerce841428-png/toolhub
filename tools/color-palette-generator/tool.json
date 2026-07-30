@@ -1,0 +1,24 @@
+{
+  "id": "color-palette-generator",
+  "name": "Color Palette Generator",
+  "slug": "color-palette-generator",
+  "category": "color",
+  "description": "Generate complementary, analogous, triadic, split-complementary, or monochromatic color palettes from any base color, with one-click copy for each swatch.",
+  "keywords": ["color palette generator", "color scheme generator", "complementary colors", "triadic color scheme", "monochromatic palette"],
+  "difficulty": "beginner",
+  "priority": "high",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🎨",
+  "related": ["hex-rgb-converter", "color-contrast-checker"],
+  "faq": [
+    {
+      "question": "How are these palettes actually generated?",
+      "answer": "By converting your base color to HSL and rotating its hue around the color wheel by a fixed amount for each scheme (180° for complementary, ±30° for analogous, and so on) — real color-wheel math, not a lookup table of preset combinations."
+    },
+    {
+      "question": "Which scheme should I use?",
+      "answer": "Complementary (opposite hues) gives high contrast and energy; analogous (neighboring hues) feels calm and cohesive; triadic (evenly spaced) is vibrant while staying balanced; split-complementary softens a complementary pair; monochromatic (one hue, varying lightness) is the safest choice for a clean, unified look."
+    }
+  ]
+}

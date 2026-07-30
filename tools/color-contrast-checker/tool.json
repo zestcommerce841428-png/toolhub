@@ -1,0 +1,24 @@
+{
+  "id": "color-contrast-checker",
+  "name": "Color Contrast Checker",
+  "slug": "color-contrast-checker",
+  "category": "color",
+  "description": "Check the WCAG contrast ratio between two colors and see whether they pass AA/AAA accessibility thresholds for normal and large text, with a live preview.",
+  "keywords": ["color contrast checker", "wcag contrast checker", "accessibility contrast", "aa aaa contrast ratio"],
+  "difficulty": "beginner",
+  "priority": "high",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🌓",
+  "related": ["hex-rgb-converter", "color-palette-generator"],
+  "faq": [
+    {
+      "question": "What contrast ratio do I actually need?",
+      "answer": "WCAG 2.x AA — 4.5:1 for normal text, 3:1 for large text (18pt+, or 14pt+ bold), and 3:1 for UI components/graphical objects — is the widely-referenced baseline for accessibility compliance. AAA (7:1 / 4.5:1) is a stricter, optional enhanced level most sites don't fully meet everywhere."
+    },
+    {
+      "question": "How is the ratio calculated?",
+      "answer": "From each color's WCAG relative luminance (a weighted, gamma-corrected combination of its red/green/blue channels — green contributes far more than blue, matching human perception), then (lighter + 0.05) / (darker + 0.05). Black on white is the maximum possible ratio, 21:1; identical colors are always 1:1."
+    }
+  ]
+}
