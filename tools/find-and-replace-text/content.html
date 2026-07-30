@@ -1,0 +1,59 @@
+<div>
+  <label for="findreplace-input" class="field-label">Text</label>
+  <textarea id="findreplace-input" class="field-textarea font-mono" rows="10" spellcheck="false"></textarea>
+</div>
+
+<div class="mt-4 grid gap-4 sm:grid-cols-2">
+  <div>
+    <label for="findreplace-find" class="field-label">Find</label>
+    <input type="text" id="findreplace-find" class="field-input font-mono" placeholder="cat" />
+  </div>
+  <div>
+    <label for="findreplace-replace" class="field-label">Replace with</label>
+    <input type="text" id="findreplace-replace" class="field-input font-mono" placeholder="dog" />
+  </div>
+</div>
+
+<div class="mt-3 flex flex-wrap gap-4">
+  <label class="flex items-center gap-2 text-sm text-text">
+    <input type="checkbox" id="findreplace-regex" class="h-4 w-4 rounded border-border accent-primary" />
+    Use regular expression
+  </label>
+  <label class="flex items-center gap-2 text-sm text-text">
+    <input type="checkbox" id="findreplace-case" checked class="h-4 w-4 rounded border-border accent-primary" />
+    Case-sensitive
+  </label>
+  <label class="flex items-center gap-2 text-sm text-text">
+    <input type="checkbox" id="findreplace-whole-word" class="h-4 w-4 rounded border-border accent-primary" />
+    Whole word only
+  </label>
+  <label class="flex items-center gap-2 text-sm text-text">
+    <input type="checkbox" id="findreplace-all" checked class="h-4 w-4 rounded border-border accent-primary" />
+    Replace all occurrences
+  </label>
+</div>
+
+<p id="findreplace-error" class="field-error mt-2 hidden" role="alert"></p>
+<p id="findreplace-summary" class="mt-2 text-sm text-text-muted"></p>
+
+<div class="mt-2">
+  <label for="findreplace-output" class="field-label">Result</label>
+  <textarea id="findreplace-output" class="field-textarea font-mono" rows="10" readonly spellcheck="false"></textarea>
+  <div class="mt-3 flex flex-wrap gap-2">
+    <button type="button" id="findreplace-copy" class="btn-secondary">Copy</button>
+    <button type="button" id="findreplace-download" class="btn-secondary">Download .txt</button>
+  </div>
+</div>
+
+<section class="prose-tool mt-12">
+  <h2>Using regular expressions</h2>
+  <p>
+    With "Use regular expression" enabled, <strong>Find</strong> is a real
+    JavaScript regex pattern (no need to wrap it in slashes), and
+    <strong>Replace with</strong> can reference capture groups —
+    <code>$1</code>, <code>$2</code>, and so on — from parentheses in the
+    pattern. For example, finding <code>(\d+)-(\d+)-(\d+)</code> and
+    replacing with <code>$2/$3/$1</code> reformats a YYYY-MM-DD date to
+    MM/DD/YYYY.
+  </p>
+</section>

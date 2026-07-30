@@ -1,0 +1,24 @@
+{
+  "id": "duplicate-line-remover",
+  "name": "Duplicate Line Remover",
+  "slug": "duplicate-line-remover",
+  "category": "text",
+  "description": "Remove duplicate lines from text while preserving the original order, with options for case sensitivity, whitespace trimming, and keeping the first or last occurrence.",
+  "keywords": ["remove duplicate lines", "duplicate line remover", "dedupe text", "unique lines"],
+  "difficulty": "beginner",
+  "priority": "normal",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🧹",
+  "related": ["text-diff-checker", "find-and-replace-text"],
+  "faq": [
+    {
+      "question": "Does this sort or reorder my lines?",
+      "answer": "No — every remaining line keeps its original relative position. Only exact (or, with the whitespace/case options, near-exact) duplicate lines are removed."
+    },
+    {
+      "question": "What's the difference between keeping the first vs. last occurrence?",
+      "answer": "Both preserve the original order of everything that survives — they only differ in which copy of a repeated line is the one that's kept. If a line's later version has more up-to-date content, \"keep last\" is usually what you want."
+    }
+  ]
+}

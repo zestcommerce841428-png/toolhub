@@ -1,0 +1,24 @@
+{
+  "id": "find-and-replace-text",
+  "name": "Find and Replace Text",
+  "slug": "find-and-replace-text",
+  "category": "text",
+  "description": "Find and replace text with support for regular expressions and capture groups, case sensitivity, whole-word matching, and replace-first vs. replace-all.",
+  "keywords": ["find and replace", "regex replace", "text replace tool", "search and replace online"],
+  "difficulty": "intermediate",
+  "priority": "high",
+  "version": "1.0.0",
+  "updated": "2026-07-29",
+  "icon": "🔍",
+  "related": ["duplicate-line-remover", "text-diff-checker"],
+  "faq": [
+    {
+      "question": "How do I use capture groups?",
+      "answer": "Enable \"Use regular expression\", wrap the parts of your pattern you want to reuse in parentheses, then reference them in the replacement as $1, $2, and so on in order. For example, (\\d+)-(\\d+)-(\\d+) replaced with $2/$3/$1 turns a YYYY-MM-DD date into MM/DD/YYYY."
+    },
+    {
+      "question": "What does \"whole word only\" do?",
+      "answer": "It wraps your search pattern in word boundaries (\\b), so searching for \"cat\" matches the standalone word \"cat\" but not the \"cat\" inside \"catalog\" — useful when a short search term would otherwise match unwanted substrings of longer words."
+    }
+  ]
+}
